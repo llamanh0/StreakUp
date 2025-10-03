@@ -113,12 +113,18 @@ StreakUp is a modern mobile application that helps users increase their motivati
 
 ### Color Palette
 ```
-🔵 Primary: #4A90E2 (Motivation Blue)
-🟢 Secondary: #7ED321 (Success Green)  
-🟠 Accent: #F5A623 (Energy Orange)
-⚪ Background: #FAFBFC (Clean White)
-⚫ Text: #2C3E50 (Dark Gray)
+🟦 Primary Color: #4A90E2 → Blue (trust, focus)
+🟧 Secondary Color: #FF9800 → Orange (energy, motivation)
+🟩 Accent Color: #43A047 → Green (success, approval, streak achievement)
+⚪ Background: #F5F5F5 → Light gray (clean appearance)
+⚫ Text: #212121 → Dark gray (for readability)
 ```
+
+### 🎨 Color Usage Guide
+- **Buttons:** Blue (#4A90E2) - Trust and focus
+- **Streak Indicator:** Green (#43A047) - Success and approval
+- **Alerts/Motivation Messages:** Orange (#FF9800) - Energy and motivation
+- **Combination:** Blue + Orange + Green = Energetic and motivating
 
 ### Core Components
 - **Cards**: Rounded corners, shadowed cards
@@ -255,12 +261,7 @@ Splash → Login/Register → Home → Add Study → Groups → Profile
 
 ### 📞 Academic Mentorship
 - **Course Instructor:** Prof. Dr. Mehmet Hacıbeyoğlu
-- **Department Academics:** NEU Computer Engineering Faculty Members
-- **Research Assistants:** Technical support and code review
 
-## 📄 License
-
-This project is developed for educational purposes. It is shared under the MIT License.
 
 ---
 
@@ -293,7 +294,6 @@ This project is developed for educational purposes. It is shared under the MIT L
 **🏷️ Project Type:** Final Project (Solo Development)
 
 ### 📞 Contact & Support
-- **Supervisor Office Hours:** Tuesday-Thursday 14:00-16:00
-- **NEU Computer Engineering Lab:** B Block 2nd Floor
-- **Flutter Turkey Discord:** [discord.gg/flutter-turkey](https://discord.gg/flutter-turkey)
+- **Email:** hbkilickan@gmail.com
+- **WhatsApp:** +905362096205
 - **GitHub Issues:** You can open issues for technical problems

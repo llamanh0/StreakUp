@@ -114,12 +114,18 @@ StreakUp, çalışma sürelerini ve streaklerini takip ederek kullanıcıların 
 
 ### Renk Paleti
 ```
-🔵 Primary: #4A90E2 (Motivasyon Mavisi)
-🟢 Secondary: #7ED321 (Başarı Yeşili)  
-🟠 Accent: #F5A623 (Enerji Turuncu)
-⚪ Background: #FAFBFC (Temiz Beyaz)
-⚫ Text: #2C3E50 (Koyu Gri)
+🟦 Ana Renk (Primary): #4A90E2 → Mavi (güven, odaklanma)
+🟧 İkincil Renk (Secondary): #FF9800 → Turuncu (enerji, motivasyon)
+🟩 Vurgu Renk (Accent): #43A047 → Yeşil (başarı, onay, streak kazanma)
+⚪ Arka Plan (Background): #F5F5F5 → Açık gri (temiz görünüm)
+⚫ Metin (Text): #212121 → Koyu gri (okunabilirlik için)
 ```
+
+### 🎨 Renk Kullanım Rehberi
+- **Butonlar:** Mavi (#4A90E2) - Güven ve odaklanma
+- **Streak Göstergesi:** Yeşil (#43A047) - Başarı ve onay
+- **Uyarı/Motivasyon Mesajı:** Turuncu (#FF9800) - Enerji ve motivasyon
+- **Kombinasyon:** Mavi + Turuncu + Yeşil = Enerjik ve motive edici
 
 ### Temel Bileşenler
 - **Cards**: Yumuşak köşeli, gölgeli kartlar
@@ -245,12 +251,7 @@ Splash → Login/Register → Home → Add Study → Groups → Profile
 
 ### 📞 Akademik Mentorluk
 - **Ders Sorumlusu:** Prof. Dr. Mehmet Hacıbeyoğlu
-- **Bölüm Akademisyenleri:** NEU Bilgisayar Mühendisliği Öğretim Üyeleri
-- **Araştırma Görevlileri:** Teknik destek ve kod review
 
-## 📄 Lisans
-
-Bu proje eğitim amaçlı geliştirilmiştir. MIT License altında paylaşılmaktadır.
 
 ---
 
@@ -283,7 +284,6 @@ Bu proje eğitim amaçlı geliştirilmiştir. MIT License altında paylaşılmak
 **🏷️ Proje Türü:** Bitirme Projesi (Solo Development)
 
 ### 📞 İletişim & Destek
-- **Danışman Ofis Saatleri:** Salı-Perşembe 14:00-16:00
-- **NEU Bilgisayar Mühendisliği Lab:** B Blok 2. Kat
-- **Flutter Turkey Discord:** [discord.gg/flutter-turkey](https://discord.gg/flutter-turkey)
+- **Email:** hbkilickan@gmail.com
+- **WhatsApp:** +905362096205
 - **GitHub Issues:** Teknik sorunlar için issue açabilirsiniz
