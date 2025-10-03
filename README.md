@@ -2,7 +2,11 @@
 
 > **Motivasyonunu artır, hedeflerine ulaş, arkadaşlarınla birlikte başarıya koş!**
 
-StreakUp, çalışma sürelerini ve streaklerini takip ederek kullanıcıların motivasyonlarını artıran, grup desteğiyle birlikte çalışmayı teşvik eden mobil bir uygulamadır.
+**Necmettin Erbakan Üniversitesi - Bilgisayar Mühendisliği Bölümü**  
+**Mobil Programlama Dersi - Bitirme Projesi (2025-2026)**  
+**Danışman:** Prof. Dr. Mehmet Hacıbeyoğlu
+
+StreakUp, çalışma sürelerini ve streaklerini takip ederek kullanıcıların motivasyonlarını artıran, grup desteğiyle birlikte çalışmayı teşvik eden modern bir mobil uygulamadır. Bu proje, 2025-2026 teknoloji stack'i kullanılarak Flutter framework'ü ile cross-platform mobil geliştirme yaklaşımıyla tasarlanmıştır.
 
 ## 📱 Uygulama Özeti
 
@@ -43,24 +47,31 @@ StreakUp, çalışma sürelerini ve streaklerini takip ederek kullanıcıların 
 - Günlük hedef takibi
 - Motivasyon mesajları
 
-## 🛠️ Teknoloji Stack'i
+## 🛠️ Teknoloji Stack'i (2025/2026 Güncel)
 
-### Frontend
-- **Flutter** - Cross-platform mobile development
-- **Dart** - Programming language
-- **Material Design** - UI components
-- **Provider** - State management
-- **Go Router** - Navigation management
+### 📱 Frontend (Mobile)
+- **Flutter 3.24+** - Cross-platform mobile development
+- **Dart 3.5+** - Modern programming language
+- **Material Design 3** - Google's latest design system
+- **Riverpod 2.4+** - Advanced state management (Provider'dan daha gelişmiş)
+- **Go Router 14+** - Declarative routing
+- **Flutter Hooks** - React-style hooks for Flutter
 
-### Backend
-- **Firebase Authentication** - User management
-- **Firestore Database** - Real-time NoSQL database
-- **Firebase Cloud Functions** - Server-side logic
-- **Firebase Cloud Messaging** - Push notifications
+### ☁️ Backend & Database
+- **Firebase 10.x** - Google's BaaS platform
+  - **Firebase Auth** - Multi-provider authentication
+  - **Firestore** - NoSQL real-time database
+  - **Cloud Functions** - Serverless backend logic
+  - **FCM** - Push notifications
+  - **Firebase Analytics** - User behavior tracking
+  - **Crashlytics** - Crash reporting
 
-### Design
-- **Figma** - UI/UX design and prototyping
-- **Material Design 3** - Design system guidelines
+### 🎨 Design & Development Tools
+- **Figma** - Collaborative UI/UX design
+- **VS Code** - Primary IDE with Flutter extensions
+- **Android Studio** - Android development & emulation
+- **Git & GitHub** - Version control
+- **Flutter DevTools** - Performance monitoring
 
 ## 📁 Proje Belgeleri
 
@@ -81,44 +92,23 @@ StreakUp, çalışma sürelerini ve streaklerini takip ederek kullanıcıların 
 | **Development Plan** | 12-week detailed roadmap | [`DEVELOPMENT_ROADMAP_EN.md`](docs/en/DEVELOPMENT_ROADMAP_EN.md) |
 | **README English** | Project overview in English | [`README_EN.md`](docs/en/README_EN.md) |
 
-## 🚀 Hızlı Başlangıç
 
-### 1. Tasarım Aşaması
-```bash
-1. Figma hesabı oluştur
-2. FIGMA_WIREFRAME_GUIDE.md dosyasını takip et
-3. Design system'i oluştur
-4. Ana ekranların wireframe'ini çiz
-```
+## 📅 Proje Takvimi (2025-2026 Akademik Yılı)
 
-### 2. Geliştirme Ortamı
-```bash
-1. Flutter SDK kur
-2. Android Studio kur
-3. VS Code Flutter extensions kur
-4. Firebase hesabı oluştur
-```
+| Faz | Süre | Aşama | Hedefler | Çıktılar |
+|-----|------|-------|----------|----------|
+| **I** | 2 hafta | Analiz ve Tasarım | Gereksinim analizi, sistem mimarisi, UI/UX tasarımı | Proje önerisi, teknik spesifikasyon, wireframe'ler |
+| **II** | 3 hafta | Altyapı Geliştirme | Flutter kurulumu, Firebase entegrasyonu, temel mimari | Proje iskeleti, authentication sistemi |
+| **III** | 4 hafta | Çekirdek Özellikler | Çalışma takibi, streak hesaplama, veri yönetimi | MVP uygulaması, temel fonksiyonellik |
+| **IV** | 3 hafta | Sosyal Özellikler | Grup sistemi, real-time senkronizasyon, bildirimler | Tam fonksiyonel uygulama |
+| **V** | 2 hafta | Test ve Optimizasyon | Performance testi, hata giderme, UI polish | Beta sürüm, test raporları |
+| **VI** | 1 hafta | Finalizasyon | Dökümantasyon, sunum hazırlığı, deployment | Final teslim, sunum malzemeleri |
 
-### 3. Proje Kurulumu
-```bash
-1. flutter create streak_up
-2. cd streak_up
-3. flutter pub add firebase_core
-4. flutter pub add firebase_auth
-5. flutter pub add cloud_firestore
-6. flutter pub add provider
-```
-
-## 📅 Geliştirme Takvimi
-
-| Hafta | Aşama | Hedef |
-|-------|--------|-------|
-| **1-2** | Hazırlık | Figma tasarım + Temel öğrenme |
-| **3-4** | Auth & DB | Firebase entegrasyonu |
-| **5-6** | Core Features | Çalışma takip sistemi |
-| **7-8** | Grup Sistemi | Sosyal özellikler |
-| **9-10** | Polish | UI/UX iyileştirmeleri |
-| **11-12** | Deploy | Yayın hazırlığı |
+### 📅 Kritik Kilometre Taşları
+- **Proje Önerisi Sunumu:** Dönem başı (TBD)
+- **Ara Değerlendirme:** Dönem ortası (TBD)
+- **Beta Sürüm Teslimi:** Final öncesi 2 hafta
+- **Final Proje Sunumu:** Final dönemi (TBD)
 
 ## 🎨 Tasarım Sistemi
 
@@ -152,21 +142,30 @@ Splash → Login/Register → Home → Add Study → Groups → Profile
 
 ## 🔥 MVP Özellikleri
 
-### ✅ Temel Özellikler (Mutlaka Olması Gerekenler)
-- [ ] Kullanıcı kayıt/giriş sistemi
-- [ ] Günlük çalışma süresi ekleme
-- [ ] Streak hesaplama ve gösterimi
-- [ ] Basit profil sayfası
-- [ ] Grup oluşturma/katılma
-- [ ] Grup üyelerinin streaklerini görme
+### ✅ Temel Fonksiyonellik
+- [ ] **Kimlik Doğrulama Sistemi** - Çoklu sağlayıcı destekli güvenli giriş
+- [ ] **Çalışma Takip Modülü** - Günlük aktivite kaydı ve yönetimi
+- [ ] **Streak Hesaplama Algoritması** - Otomatik süreklilik analizi ve görüntüleme
+- [ ] **Kullanıcı Profil Yönetimi** - Kişisel veri yönetimi ve istatistikler
+- [ ] **Grup Yönetim Sistemi** - Dinamik grup oluşturma ve üyelik yönetimi
+- [ ] **Gerçek Zamanlı Senkronizasyon** - Canlı veri paylaşımı ve güncelleme
+- [ ] **Veri Kalıcılığı** - NoSQL veritabanı entegrasyonu
 
-### 🎁 Gelişmiş Özellikler (İsteğe Bağlı)
-- [ ] Push bildirimleri
-- [ ] Dark mode desteği
-- [ ] Offline çalışma desteği
-- [ ] Sosyal paylaşım
-- [ ] Achievement sistemi
-- [ ] Leaderboard
+### 📈 Gelişmiş Özellikler
+- [ ] **Push Bildirim Sistemi** - Akıllı hatırlatma ve bilgilendirme
+- [ ] **Dinamik Tema Sistemi** - Kullanıcı tercihli arayüz özelleştirmesi
+- [ ] **Veri Görselleştirme** - İnteraktif grafik ve analitik panelleri
+- [ ] **Başarı Yönetim Sistemi** - Gamification ve milestone takibi
+- [ ] **Çevrimdışı Destek** - Lokal veri senkronizasyonu
+- [ ] **Veri Dışa Aktarma** - Çoklu format desteği
+
+### 🚀 İleri Teknoloji Entegrasyonları
+- [ ] **Yapay Zeka Entegrasyonu** - Kişiselleştirilmiş öneri sistemi
+- [ ] **Ses Tanıma Sistemi** - Voice-to-action fonksiyonellik
+- [ ] **Native Widget Desteği** - Platform-specific widget'lar
+- [ ] **Sosyal Medya Entegrasyonu** - Başarı paylaşım sistemi
+- [ ] **Gelişmiş Analitik** - Kullanıcı davranış analizi
+- [ ] **Çoklu Dil Desteği** - Uluslararasılaştırma (i18n)
 
 ## 🎯 Başarı Kriterleri
 
@@ -201,17 +200,41 @@ Splash → Login/Register → Home → Add Study → Groups → Profile
 
 ## ❓ SSS (Sıkça Sorulan Sorular)
 
-### Q: 0 bilgiyle bu projeyi tamamlayabilir miyim?
-**A:** Evet! 12 haftalık planlı roadmap ile adım adım öğrenebilir ve tamamlayabilirsin.
+### Q: Projenin teknik gereksinimleri nelerdir?
+**A:** Minimum sistem gereksinimleri:
+- **Flutter SDK:** 3.24+ sürümü
+- **Dart:** 3.5+ language support
+- **Android:** API Level 21+ (Android 5.0)
+- **iOS:** iOS 12.0+ (opsiyonel)
+- **Firebase:** 10.x servis entegrasyonu
 
-### Q: Hangi platform için geliştirmeli?
-**A:** Flutter ile hem Android hem iOS için tek kod yazabilirsin. Başlangıç için Android'e odaklan.
+### Q: Hangi geliştirme ortamları desteklenmektedir?
+**A:** Önerilen geliştirme araçları:
+- **IDE:** VS Code (Flutter extensions) / Android Studio
+- **Version Control:** Git & GitHub
+- **Design Tools:** Figma (UI/UX prototyping)
+- **Testing:** Flutter Test Framework + Firebase Test Lab
 
-### Q: Firebase kullanmak zorunda mıyım?
-**A:** Firebase en kolay backend çözümü. Alternatif olarak local storage da kullanabilirsin ama grup özelliği zorlaşır.
+### Q: Projenin deployment stratejisi nedir?
+**A:** Çoklu platform deployment yaklaşımı:
+- **Android:** Google Play Console (internal testing)
+- **Web:** Firebase Hosting (demo purposes)
+- **Repository:** GitHub Pages (documentation)
+- **CI/CD:** GitHub Actions (automated builds)
 
-### Q: Tasarım konusunda deneyimim yok, ne yapmalıyım?
-**A:** Figma rehberini takip et ve Material Design 3 guidelines'ı kullan. Flutter'ın hazır widget'ları ile başla.
+### Q: Veri güvenliği nasıl sağlanacak?
+**A:** Comprehensive güvenlik yaklaşımı:
+- **Authentication:** Firebase Auth (multi-provider)
+- **Data Encryption:** Firestore security rules
+- **API Security:** Cloud Functions authentication
+- **Privacy:** GDPR compliant data handling
+
+### Q: Projenin ölçeklenebilirlik stratejisi nedir?
+**A:** Enterprise-ready architecture:
+- **Microservices:** Firebase Cloud Functions
+- **Database:** Firestore (NoSQL, auto-scaling)
+- **Caching:** Local storage + cloud synchronization
+- **Performance:** Lazy loading, pagination, optimization
 
 ## 🤝 Destek ve İletişim
 
@@ -220,10 +243,10 @@ Splash → Login/Register → Home → Add Study → Groups → Profile
 - **Discord**: Flutter Turkey community
 - **GitHub**: Açık kaynak projeler ve örnekler
 
-### 📞 Mentorluk
-- Üniversite hocaları ve asistanları
-- Senior developer arkadaşlar
-- Online coding mentorship platformları
+### 📞 Akademik Mentorluk
+- **Ders Sorumlusu:** Prof. Dr. Mehmet Hacıbeyoğlu
+- **Bölüm Akademisyenleri:** NEU Bilgisayar Mühendisliği Öğretim Üyeleri
+- **Araştırma Görevlileri:** Teknik destek ve kod review
 
 ## 📄 Lisans
 
@@ -231,13 +254,36 @@ Bu proje eğitim amaçlı geliştirilmiştir. MIT License altında paylaşılmak
 
 ---
 
-**🎯 Hedef:** Finallere kadar tamamlamak  
-**⏰ Süre:** 10-12 hafta  
-**🚀 Başarı İhtimali:** %95+ (Flutter'ın mükemmel dokümantasyonu sayesinde)
+## 🎯 Proje Hedefleri ve Kapsamı
 
-**Başarılar! Sen yaparsın! 💪🔥**
+### 📝 Akademik Hedefler
+- Modern mobil uygulama geliştirme becerilerinin kazanılması
+- Cross-platform development yaklaşımlarının öğrenilmesi
+- Cloud-based backend servislerinin entegre edilmesi
+- Real-time veri senkronizasyonu tekniklerinin uygulanması
+- Kullanıcı deneyimi ve arayüz tasarım prensiplerinin kavranması
 
-## 👨‍💻 Geliştirici
+### 📊 Teknik Hedefler
+- Performanslı ve ölçeklenebilir mobil uygulama mimarisi
+- Güvenli kimlik doğrulama ve veri koruma
+- Responsive ve erişilebilir kullanıcı arayüzü
+- Etkili state management ve veri akışı
+- Comprehensive test coverage ve kalite güvencesi
 
-**Hasan Batuhan Kılıçkan**  
-Solo Developer - Mobil Programlama Dersi Projesi
+---
+
+## 👨‍💻 Proje Bilgileri
+
+**🎓 Öğrenci:** Hasan Batuhan Kılıçkan  
+**🏫 Üniversite:** Necmettin Erbakan Üniversitesi  
+**🏢 Bölüm:** Bilgisayar Mühendisliği (3. Sınıf)  
+**📚 Ders:** Mobil Programlama  
+**👨‍🏫 Danışman:** Prof. Dr. Mehmet Hacıbeyoğlu  
+**📅 Dönem:** 2025-2026 Akademik Yılı  
+**🏷️ Proje Türü:** Bitirme Projesi (Solo Development)
+
+### 📞 İletişim & Destek
+- **Danışman Ofis Saatleri:** Salı-Perşembe 14:00-16:00
+- **NEU Bilgisayar Mühendisliği Lab:** B Blok 2. Kat
+- **Flutter Turkey Discord:** [discord.gg/flutter-turkey](https://discord.gg/flutter-turkey)
+- **GitHub Issues:** Teknik sorunlar için issue açabilirsiniz
