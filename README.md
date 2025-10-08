@@ -1,289 +1,348 @@
-# 🔥 StreakUp - Motivasyon Takip Uygulaması
-
-> **Motivasyonunu artır, hedeflerine ulaş, arkadaşlarınla birlikte başarıya koş!**
+# StreakUp - Motivasyon Takip Uygulaması
 
 **Necmettin Erbakan Üniversitesi - Bilgisayar Mühendisliği Bölümü**  
 **Mobil Programlama Dersi - Bitirme Projesi (2025-2026)**  
 **Danışman:** Prof. Dr. Mehmet Hacıbeyoğlu
 
-StreakUp, çalışma sürelerini ve streaklerini takip ederek kullanıcıların motivasyonlarını artıran, grup desteğiyle birlikte çalışmayı teşvik eden modern bir mobil uygulamadır. Bu proje, 2025-2026 teknoloji stack'i kullanılarak Flutter framework'ü ile cross-platform mobil geliştirme yaklaşımıyla tasarlanmıştır.
+StreakUp, pomodoro timer ve görev yönetimiyle çalışma takibi yapan, grup leaderboard sistemiyle rekabet ve motivasyon sağlayan productivity uygulamasıdır. Flutter framework'ü ile geliştirilmiş cross-platform bir projedir.
 
-## 📱 Uygulama Özeti
+## Proje Özeti
 
-### 🎯 Amaç
-- Kullanıcıların günlük çalışma alışkanlıklarını takip etmek
-- Streak sistemiyle motivasyonu sürekli kılmak  
-- Grup desteğiyle sosyal motivasyon sağlamak
-- Kişisel gelişim hedeflerini desteklemek
+### Amaç
+Pomodoro timer ve görev yönetimiyle çalışma verimliliğini artırmak, streak sistemiyle motivasyon sağlamak, grup leaderboard ile sağlıklı rekabet ortamı yaratmak.
 
-### 👥 Hedef Kullanıcılar
-- Üniversite öğrencileri
-- Sınava hazırlananlar
-- Kişisel hedef takip edenler
-- Grup desteğiyle çalışmak isteyenler
+### Hedef Kullanıcılar
+Üniversite öğrencileri, sınava hazırlananlar, verimli çalışmak ve grup desteği isteyenler.
 
-## ✨ Temel Özellikler
+## Temel Özellikler
 
-### 🔐 Kullanıcı Yönetimi
-- Firebase Authentication ile güvenli giriş
-- Email/şifre ve Google ile giriş seçenekleri
-- Kişisel profil yönetimi
+### 1. Çalışma Takibi (Dual Mode)
+**Pomodoro Timer (Focus Session):**
+- Timer başlatmadan önce konu seçimi
+- Kaydedilmiş konular listesi (otomatik)
+- Son kullanılanlar
+- Özelleştirilebilir süreler (25/5, 45/15, custom)
+- Başlat/Durdur/Sıfırla
+- Konu değiştirme (session restart)
+- Otomatik kayıt (timer bitince)
+- Maksimum mola limiti (60 dk)
+- **Premium Timer UI:** Flip clock animasyonu, circular progress
 
-### 📊 Çalışma Takibi
-- Günlük çalışma süresi kaydı
-- Otomatik streak hesaplama
-- Kişisel istatistikler ve grafikler
-- Haftalık/aylık progress tracking
+**Manuel Kayıt:**
+- Yedek yöntem
+- Konu, süre girişi
+- Sadece bugün (hile engelleme)
+- Manuel badge (🖊️) liste'de gösterilir
 
-### 👥 Grup Sistemi
-- Arkadaşlarla grup oluşturma
-- Davet kodu ile gruba katılma
-- Grup üyelerinin streaklerini görme
-- Grup içi motivasyon feed'i
+### 2. Görev Yönetimi
+**Kişisel Görevler:**
+- Görev ekleme/düzenleme/silme
+- Checkbox ile tamamlama
+- Deadline tarihi
 
-### 🏆 Motivasyon Sistemi
-- Streak milestone'ları
-- Başarı rozetleri
-- Günlük hedef takibi
-- Motivasyon mesajları
+**Grup Görevleri:**
+- Grup üyeleri ortak görev oluşturabilir
+- Herkes kendi görevini tamamlar (checkbox)
+- Tüm üyeler tamamladığında görev "completed"
 
-## 🛠️ Teknoloji Stack'i (2025/2026 Güncel)
+**Görev Atama:**
+- Grup içinde başkasına görev atama
+- Atanan kişi onaylar/reddeder
+- Tamamlama takibi
 
-### 📱 Frontend (Mobile)
-- **Flutter 3.24+** - Cross-platform mobile development
-- **Dart 3.5+** - Modern programming language
-- **Material Design 3** - Google's latest design system
-- **Riverpod 2.4+** - Advanced state management (Provider'dan daha gelişmiş)
-- **Go Router 14+** - Declarative routing
-- **Flutter Hooks** - React-style hooks for Flutter
+### 3. Grup Sistemi ve Rekabet
+- Grup oluşturma, davet kodu, katılma
+- **Leaderboard:** Toplam çalışma süresine + Tamamlanan görevlere göre sıralama
+- **Grup istatistikleri:** Toplam süre, ortalama, tamamlanan görevler
+- Üye listesi ve performans
 
-### ☁️ Backend & Database
-- **Firebase 10.x** - Google's BaaS platform
-  - **Firebase Auth** - Multi-provider authentication
-  - **Firestore** - NoSQL real-time database
-  - **Cloud Functions** - Serverless backend logic
-  - **FCM** - Push notifications
-  - **Firebase Analytics** - User behavior tracking
-  - **Crashlytics** - Crash reporting
+### 4. Streak ve İstatistikler
+- Günlük streak (pomodoro veya manuel)
+- Kişisel: Toplam süre, streak, tamamlanan görevler
+- Grup: Leaderboard, grup performansı
 
-### 🎨 Design & Development Tools
-- **Figma** - Collaborative UI/UX design
-- **VS Code** - Primary IDE with Flutter extensions
-- **Android Studio** - Android development & emulation
+### 5. Dark Mode
+- Light/Dark tema toggle
+- Tüm ekranlarda destek
+
+## Teknoloji Stack
+
+### Frontend
+- **Flutter 3.24+** - Cross-platform framework
+- **Dart 3.5+** - Programming language
+- **Material Design 3** - UI design system
+- **Provider** - State management
+- **Timer API** - Pomodoro implementation
+
+### Backend
+- **Firebase Authentication** - Email/şifre
+- **Cloud Firestore** - Users, Groups, WorkLogs, Tasks
+
+### Araçlar
+- **Figma** - Tasarım (10 ekran)
+- **VS Code / Android Studio** - IDE
 - **Git & GitHub** - Version control
-- **Flutter DevTools** - Performance monitoring
 
-## 📁 Proje Belgeleri
+## Proje Belgeleri
 
 | Belge | Açıklama | Dosya |
 |-------|----------|-------|
-| **Teknik Gereksinimler** | Detaylı teknik spesifikasyonlar ve veri modeli | [`TECHNICAL_REQUIREMENTS.md`](docs/tr/TECHNICAL_REQUIREMENTS.md) |
+| **Teknik Gereksinimler** | Veri modeli, algoritma, test stratejisi | [`TECHNICAL_REQUIREMENTS.md`](docs/tr/TECHNICAL_REQUIREMENTS.md) |
 | **Tasarım Belgesi** | UI/UX tasarım rehberi ve renk paleti | [`DESIGN_DOCUMENT.md`](docs/tr/DESIGN_DOCUMENT.md) |
-| **Figma Rehberi** | Wireframe ve prototype oluşturma kılavuzu | [`FIGMA_WIREFRAME_GUIDE.md`](docs/tr/FIGMA_WIREFRAME_GUIDE.md) |
-| **Geliştirme Planı** | 12 haftalık detaylı roadmap | [`DEVELOPMENT_ROADMAP.md`](docs/tr/DEVELOPMENT_ROADMAP.md) |
-
-## 📄 İngilizce Belgeler / English Documents
-
-| Document | Description | File |
-|----------|-------------|------|
-| **Technical Requirements** | Detailed technical specifications and data model | [`TECHNICAL_REQUIREMENTS_EN.md`](docs/en/TECHNICAL_REQUIREMENTS_EN.md) |
-| **Design Document** | UI/UX design guide and color palette | [`DESIGN_DOCUMENT_EN.md`](docs/en/DESIGN_DOCUMENT_EN.md) |
-| **Figma Guide** | Wireframe and prototype creation guide | [`FIGMA_WIREFRAME_GUIDE_EN.md`](docs/en/FIGMA_WIREFRAME_GUIDE_EN.md) |
-| **Development Plan** | 12-week detailed roadmap | [`DEVELOPMENT_ROADMAP_EN.md`](docs/en/DEVELOPMENT_ROADMAP_EN.md) |
-| **README English** | Project overview in English | [`README_EN.md`](docs/en/README_EN.md) |
+| **Figma Rehberi** | Wireframe ve tasarım kılavuzu | [`FIGMA_WIREFRAME_GUIDE.md`](docs/tr/FIGMA_WIREFRAME_GUIDE.md) |
+| **Geliştirme Planı** | 10 haftalık detaylı roadmap | [`DEVELOPMENT_ROADMAP.md`](docs/tr/DEVELOPMENT_ROADMAP.md) |
 
 
-## 📅 Proje Takvimi (2025-2026 Akademik Yılı)
+## Proje Takvimi (10 Hafta)
 
-| Faz | Süre | Aşama | Hedefler | Çıktılar |
-|-----|------|-------|----------|----------|
-| **I** | 2 hafta | Analiz ve Tasarım | Gereksinim analizi, sistem mimarisi, UI/UX tasarımı | Proje önerisi, teknik spesifikasyon, wireframe'ler |
-| **II** | 3 hafta | Altyapı Geliştirme | Flutter kurulumu, Firebase entegrasyonu, temel mimari | Proje iskeleti, authentication sistemi |
-| **III** | 4 hafta | Çekirdek Özellikler | Çalışma takibi, streak hesaplama, veri yönetimi | MVP uygulaması, temel fonksiyonellik |
-| **IV** | 3 hafta | Sosyal Özellikler | Grup sistemi, real-time senkronizasyon, bildirimler | Tam fonksiyonel uygulama |
-| **V** | 2 hafta | Test ve Optimizasyon | Performance testi, hata giderme, UI polish | Beta sürüm, test raporları |
-| **VI** | 1 hafta | Finalizasyon | Dökümantasyon, sunum hazırlığı, deployment | Final teslim, sunum malzemeleri |
+**Ön Hazırlık (3-4 gün):**
+- Figma wireframe (10 ekran, light + dark = 20 tasarım)
+- Flip clock animasyon mockup (showcase)
+- Component library (timer widget, task card, leaderboard item)
 
-### 📅 Kritik Kilometre Taşları
-- **Proje Önerisi Sunumu:** Dönem başı (TBD)
-- **Ara Değerlendirme:** Dönem ortası (TBD)
-- **Beta Sürüm Teslimi:** Final öncesi 2 hafta
-- **Final Proje Sunumu:** Final dönemi (TBD)
+|   Hafta   |              Odak Alan              |                  Çıktı                  |
+|:---------:|:-----------------------------------:|:---------------------------------------:|
+|  **1-2**  |   Flutter Temelleri + Firebase Auth |      Giriş/kayıt sistemi               |
+|   **3**   | Firestore + Collections Setup       | Users, Groups, Tasks veri yapısı       |
+|   **4**   | Pomodoro Timer + Manuel Kayıt       | Dual mode çalışma takibi               |
+|   **5**   | Kişisel Görev Sistemi               | Görev ekleme/tamamlama                 |
+|   **6**   | Streak + Grup CRUD                  | Streak + Grup oluştur/katıl            |
+|   **7**   | Grup Görevleri + Atama              | Grup görevleri, görev atama            |
+|   **8**   | Grup Leaderboard + İstatistikleri   | Rekabet sistemi (süre + görev)         |
+|   **9**   | İstatistikler + Profil + Dark Mode  | Kişisel stats, profil, dark theme      |
+|  **10**   | Test + Deployment                   | APK hazır                              |
 
-## 🎨 Tasarım Sistemi
+## Renk Sistemi
 
-### Renk Paleti
+### Light Mode (Ana Tema)
 ```
-🟦 Ana Renk (Primary): #4A90E2 → Mavi (güven, odaklanma)
-🟧 İkincil Renk (Secondary): #FF9800 → Turuncu (enerji, motivasyon)
-🟩 Vurgu Renk (Accent): #43A047 → Yeşil (başarı, onay, streak kazanma)
-⚪ Arka Plan (Background): #F5F5F5 → Açık gri (temiz görünüm)
-⚫ Metin (Text): #212121 → Koyu gri (okunabilirlik için)
+Primary (Mavi):    #5B9BD5 - Sakin, profesyonel, göz yormayan
+Success (Yeşil):   #66BB6A - Yumuşak, motivasyon verici
+Accent (Turuncu):  #FFA726 - Enerji verici ama yumuşak
+
+Background:        #F8F9FA - Çok açık gri
+Surface:           #FFFFFF - Kartlar
+Text Primary:      #2D3748 - Yumuşak siyah
+Text Secondary:    #718096 - Yumuşak gri
+Divider:           #E2E8F0
+
+Leaderboard:
+  1. Altın:        #FFD700
+  2. Gümüş:        #C0C0C0
+  3. Bronz:        #CD7F32
 ```
 
-### 🎨 Renk Kullanım Rehberi
-- **Butonlar:** Mavi (#4A90E2) - Güven ve odaklanma
-- **Streak Göstergesi:** Yeşil (#43A047) - Başarı ve onay
-- **Uyarı/Motivasyon Mesajı:** Turuncu (#FF9800) - Enerji ve motivasyon
-- **Kombinasyon:** Mavi + Turuncu + Yeşil = Enerjik ve motive edici
+### Dark Mode
+```
+Primary:           #7DAFEA - Daha açık mavi (gece uyumlu)
+Success:           #81C784 - Daha açık yeşil
+Accent:            #FFB74D - Daha açık turuncu
+
+Background:        #121212 - Material dark standard
+Surface:           #1E1E1E - Kartlar
+Card Elevated:     #2D2D2D
+Text Primary:      #E2E8F0 - Yumuşak beyaz
+Text Secondary:    #A0AEC0 - Yumuşak gri
+Divider:           #3A3A3A
+
+Leaderboard (Dark):
+  1. Altın:        #FFD700 (aynı)
+  2. Gümüş:        #C0C0C0 (aynı)
+  3. Bronz:        #CD7F32 (aynı)
+```
+
+### Renk Psikolojisi ve Kullanım
+- **Mavi (#5B9BD5):** Güven, odaklanma, uzun süre kullanım
+- **Yeşil (#66BB6A):** Başarı, büyüme, pozitif feedback
+- **Turuncu (#FFA726):** Enerji, aksiyon, dikkat
+- **Tüm tonlar:** Pastel-benzeri, göz yormayan, rahatlatıcı
 
 ### Temel Bileşenler
-- **Cards**: Yumuşak köşeli, gölgeli kartlar
-- **Buttons**: Gradient arka plan, smooth animasyonlar
-- **Icons**: Modern, minimalist ikonlar
-- **Typography**: SF Pro (iOS) / Roboto (Android)
+- **Cards**: 16px border radius, elevation shadows
+- **Buttons**: Solid color (#5B9BD5), 12px radius
+- **Icons**: Outline style, Material Icons
+- **Typography**: Roboto (Android) / SF Pro (iOS)
+- **Leaderboard**: Rank badges (altın/gümüş/bronz), renkli highlight
 
-## 📱 Ekran Yapısı
+## Ekran Yapısı
 
-### Ana Navigasyon
-1. **🏠 Ana Sayfa** - Günlük streak ve çalışma takibi
-2. **📊 İstatistikler** - Kişisel veriler ve grafikler  
-3. **👥 Gruplar** - Grup listesi ve aktiviteler
-4. **👤 Profil** - Kullanıcı ayarları ve başarılar
+### Ana Navigasyon (Bottom Navigation Bar - 4 Tab)
+1. **Ana Sayfa** - Pomodoro timer ve streak
+2. **Görevler** - Kişisel ve grup görevleri
+3. **Gruplar** - Grup listesi ve leaderboard
+4. **Profil** - İstatistikler, ayarlar, dark mode
 
 ### Temel Akış
 ```
-Splash → Login/Register → Home → Add Study → Groups → Profile
+Login → Home (Timer/Manuel) → Görevler → Groups → Leaderboard → Profile → Stats
 ```
 
-## 🔥 MVP Özellikleri
+## MVP Kapsamı (10 Hafta)
 
-### ✅ Temel Fonksiyonellik
-- [ ] **Kimlik Doğrulama Sistemi** - Çoklu sağlayıcı destekli güvenli giriş
-- [ ] **Çalışma Takip Modülü** - Günlük aktivite kaydı ve yönetimi
-- [ ] **Streak Hesaplama Algoritması** - Otomatik süreklilik analizi ve görüntüleme
-- [ ] **Kullanıcı Profil Yönetimi** - Kişisel veri yönetimi ve istatistikler
-- [ ] **Grup Yönetim Sistemi** - Dinamik grup oluşturma ve üyelik yönetimi
-- [ ] **Gerçek Zamanlı Senkronizasyon** - Canlı veri paylaşımı ve güncelleme
-- [ ] **Veri Kalıcılığı** - NoSQL veritabanı entegrasyonu
+### Core Özellikler
 
-### 📈 Gelişmiş Özellikler
-- [ ] **Push Bildirim Sistemi** - Akıllı hatırlatma ve bilgilendirme
-- [ ] **Dinamik Tema Sistemi** - Kullanıcı tercihli arayüz özelleştirmesi
-- [ ] **Veri Görselleştirme** - İnteraktif grafik ve analitik panelleri
-- [ ] **Başarı Yönetim Sistemi** - Gamification ve milestone takibi
-- [ ] **Çevrimdışı Destek** - Lokal veri senkronizasyonu
-- [ ] **Veri Dışa Aktarma** - Çoklu format desteği
+**1. Çalışma Takibi**
+- [ ] Pomodoro timer (özelleştirilebilir: 25/5, 45/15, custom)
+- [ ] Timer: Başlat/Durdur/Sıfırla
+- [ ] Otomatik kayıt (timer bitince)
+- [ ] Manuel kayıt (yedek, sadece bugün)
+- [ ] Çalışma geçmişi listeleme
 
-### 🚀 İleri Teknoloji Entegrasyonları
-- [ ] **Yapay Zeka Entegrasyonu** - Kişiselleştirilmiş öneri sistemi
-- [ ] **Ses Tanıma Sistemi** - Voice-to-action fonksiyonellik
-- [ ] **Native Widget Desteği** - Platform-specific widget'lar
-- [ ] **Sosyal Medya Entegrasyonu** - Başarı paylaşım sistemi
-- [ ] **Gelişmiş Analitik** - Kullanıcı davranış analizi
-- [ ] **Çoklu Dil Desteği** - Uluslararasılaştırma (i18n)
+**2. Görev Sistemi**
+- [ ] Kişisel görevler (ekleme, düzenleme, silme)
+- [ ] Görev tamamlama (checkbox)
+- [ ] Deadline tarihi
+- [ ] Grup görevleri (ortak görev oluşturma)
+- [ ] Görev atama (grup içinde başkasına atama)
+- [ ] Atama onaylama/reddetme
 
-## 🎯 Başarı Kriterleri
+**3. Streak Sistemi**
+- [ ] Günlük streak (çalışma yaptıysa +1)
+- [ ] En uzun streak takibi
+- [ ] Otomatik hesaplama
 
-### Teknik Kriterler
-- ✅ Uygulama stabil çalışıyor
-- ✅ Firebase entegrasyonu başarılı
-- ✅ Real-time data synchronization
-- ✅ Responsive ve user-friendly UI
+**4. Grup Sistemi**
+- [ ] Grup oluşturma, davet kodu, katılma
+- [ ] Üye listesi
+- [ ] Gruptan ayrılma
+
+**5. Grup Leaderboard ve Rekabet**
+- [ ] Toplam çalışma süresine göre sıralama
+- [ ] Tamamlanan görev sayısına göre sıralama
+- [ ] Kombinasyon sıralaması (süre + görev)
+- [ ] Renkli badge'ler (altın/gümüş/bronz)
+
+**6. İstatistikler**
+- [ ] Kişisel: Toplam süre, streak, tamamlanan görevler
+- [ ] Grup: Toplam süre, ortalama, tamamlanan görevler
+
+**7. Dark Mode**
+- [ ] Light/Dark tema toggle
+- [ ] Tüm ekranlarda destek
+
+**8. Profil**
+- [ ] Bilgi görüntüleme/düzenleme
+- [ ] İstatistik özeti
+- [ ] Dark mode toggle
+- [ ] Logout
+
+### Kapsam Dışı (Zaman Kazanmak İçin)
+- ~~Background app tracking (15 saniye kontrolü)~~ → Çok kompleks
+- ~~Real-time aktivite feed'i~~ → Sadece leaderboard
+- ~~Grafik görselleştirme~~ → Sadece sayılar
+- ~~Google Sign-In~~ → Sadece email/şifre
+- ~~Push bildirimleri~~
+- ~~Profil fotoğrafı upload~~
+- ~~Başarı rozetleri~~
+- ~~Grup sohbet~~
+
+### Gelecek Versiyonlar İçin
+- Background tracking ve otomatik durdurma
+- Real-time aktivite feed'i
+- Grafik görselleştirme
+- Push notifications
+- Pomodoro istatistikleri (focus time analytics)
+- Görev önceliklendirme (high/medium/low)
+
+## Değerlendirme Kriterleri
+
+### Fonksiyonel Gereksinimler
+- Pomodoro timer çalışmalı (flip clock, focus session, konu seçimi)
+- Manuel kayıt sadece bugün için
+- Timer/Manuel badge'leri doğru gösterilmeli (⏱️/🖊️)
+- Kişisel görevler CRUD çalışmalı
+- Grup görevleri ve atama sistemi çalışmalı
+- Grup leaderboard skor hesaplaması doğru (70% süre + 30% görev)
+- Streak algoritması doğru
+- Dark mode tüm ekranlarda çalışmalı
+- Veriler Firebase'de kalıcı
+
+### Teknik Gereksinimler
+- Firebase entegrasyonu (Auth, Firestore: 4 collection)
+- Security rules (users, workLogs, tasks, groups)
+- Timer animasyonları smooth (flip clock 300ms)
+- Kod organize ve modüler
+- APK build başarılı (< 25 MB)
 
 ### Kullanıcı Deneyimi
-- ✅ Kolay ve anlaşılır arayüz
-- ✅ Smooth animasyonlar ve geçişler
-- ✅ Motivasyon artırıcı tasarım
-- ✅ Hızlı ve responsive performans
+- Timer UI premium ve etkileyici
+- Focus session akışı kolay (konu seçimi hızlı)
+- Görev sistemi kullanılabilir
+- Leaderboard motivasyon verici
+- Dark mode rahat
+- Navigasyon mantıklı
 
-## 📚 Öğrenme Kaynakları
+## Teknik Referanslar
 
-### 📹 Video Tutorials
-- [Flutter Official YouTube Channel](https://youtube.com/flutterdev)
-- [Firebase for Flutter](https://youtube.com)
-- [Figma UI Design Tutorial](https://youtube.com)
-
-### 📖 Dokümantasyon
 - [Flutter Documentation](https://docs.flutter.dev)
 - [Firebase Documentation](https://firebase.google.com/docs)
-- [Material Design 3 Guidelines](https://m3.material.io)
+- [Material Design 3](https://m3.material.io)
 
-### 🛠️ Pratik Projeler
-- Counter App (temel Flutter)
-- Weather App (API kullanımı)
-- Chat App (Firebase real-time)
+## Sistem Gereksinimleri
 
-## ❓ SSS (Sıkça Sorulan Sorular)
+**Geliştirme:**
+- Flutter SDK 3.24+
+- Android SDK (API 21+)
+- VS Code / Android Studio
 
-### Q: Projenin teknik gereksinimleri nelerdir?
-**A:** Minimum sistem gereksinimleri:
-- **Flutter SDK:** 3.24+ sürümü
-- **Dart:** 3.5+ language support
-- **Android:** API Level 21+ (Android 5.0)
-- **iOS:** iOS 12.0+ (opsiyonel)
-- **Firebase:** 10.x servis entegrasyonu
+**Deployment:**
+- Platform: Android (API 21+)
+- Build: `flutter build apk --release`
 
-### Q: Hangi geliştirme ortamları desteklenmektedir?
-**A:** Önerilen geliştirme araçları:
-- **IDE:** VS Code (Flutter extensions) / Android Studio
-- **Version Control:** Git & GitHub
-- **Design Tools:** Figma (UI/UX prototyping)
-- **Testing:** Flutter Test Framework + Firebase Test Lab
+**Gerekli Paketler:**
+- firebase_core, firebase_auth, cloud_firestore
+- provider (state management)
+- shared_preferences (dark mode, timer settings)
+- intl (date formatting)
+- flutter_local_notifications (timer bildirimleri - opsiyonel)
 
-### Q: Projenin deployment stratejisi nedir?
-**A:** Çoklu platform deployment yaklaşımı:
-- **Android:** Google Play Console (internal testing)
-- **Web:** Firebase Hosting (demo purposes)
-- **Repository:** GitHub Pages (documentation)
-- **CI/CD:** GitHub Actions (automated builds)
+## Kaynaklar ve Destek
 
-### Q: Veri güvenliği nasıl sağlanacak?
-**A:** Comprehensive güvenlik yaklaşımı:
-- **Authentication:** Firebase Auth (multi-provider)
-- **Data Encryption:** Firestore security rules
-- **API Security:** Cloud Functions authentication
-- **Privacy:** GDPR compliant data handling
+**Teknik Referanslar:**
+- Flutter: https://docs.flutter.dev
+- Firebase: https://firebase.google.com/docs
+- Material Design 3: https://m3.material.io
 
-### Q: Projenin ölçeklenebilirlik stratejisi nedir?
-**A:** Enterprise-ready architecture:
-- **Microservices:** Firebase Cloud Functions
-- **Database:** Firestore (NoSQL, auto-scaling)
-- **Caching:** Local storage + cloud synchronization
-- **Performance:** Lazy loading, pagination, optimization
+**Destek:**
+- Stack Overflow (Flutter, Firebase)
+- Flutter Discord community
 
-## 🤝 Destek ve İletişim
-
-### 🆘 Yardım Kaynakları
-- **Stack Overflow**: Flutter ve Firebase soruları
-- **Discord**: Flutter Turkey community
-- **GitHub**: Açık kaynak projeler ve örnekler
-
-### 📞 Akademik Mentorluk
-- **Ders Sorumlusu:** Prof. Dr. Mehmet Hacıbeyoğlu
+**Danışman:**
+- Prof. Dr. Mehmet Hacıbeyoğlu
 
 
 ---
 
-## 🎯 Proje Hedefleri ve Kapsamı
+## Proje Hedefleri
 
-### 📝 Akademik Hedefler
-- Modern mobil uygulama geliştirme becerilerinin kazanılması
-- Cross-platform development yaklaşımlarının öğrenilmesi
-- Cloud-based backend servislerinin entegre edilmesi
-- Real-time veri senkronizasyonu tekniklerinin uygulanması
-- Kullanıcı deneyimi ve arayüz tasarım prensiplerinin kavranması
+### Akademik Hedefler
+- Flutter framework'ü ile mobil uygulama geliştirme
+- Firebase backend servislerini kullanımı
+- Real-time veri yönetimi
+- UI/UX tasarım prensipleri
+- Proje yönetimi ve zaman planlaması
 
-### 📊 Teknik Hedefler
-- Performanslı ve ölçeklenebilir mobil uygulama mimarisi
-- Güvenli kimlik doğrulama ve veri koruma
-- Responsive ve erişilebilir kullanıcı arayüzü
-- Etkili state management ve veri akışı
-- Comprehensive test coverage ve kalite güvencesi
+### Teknik Hedefler
+- Fonksiyonel MVP uygulaması
+- Firebase entegrasyonu
+- Güvenli authentication sistemi
+- Responsive kullanıcı arayüzü
+- Clean code practices
 
 ---
 
-## 👨‍💻 Proje Bilgileri
+## Proje Bilgileri
 
-**🎓 Öğrenci:** Hasan Batuhan Kılıçkan  
-**🏫 Üniversite:** Necmettin Erbakan Üniversitesi  
-**🏢 Bölüm:** Bilgisayar Mühendisliği (3. Sınıf)  
-**📚 Ders:** Mobil Programlama  
-**👨‍🏫 Danışman:** Prof. Dr. Mehmet Hacıbeyoğlu  
-**📅 Dönem:** 2025-2026 Akademik Yılı  
-**🏷️ Proje Türü:** Bitirme Projesi (Solo Development)
+**Öğrenci:** Hasan Batuhan Kılıçkan  
+**Üniversite:** Necmettin Erbakan Üniversitesi  
+**Bölüm:** Bilgisayar Mühendisliği (3. Sınıf)  
+**Ders:** Mobil Programlama  
+**Danışman:** Prof. Dr. Mehmet Hacıbeyoğlu  
+**Dönem:** 2025-2026  
+**Süre:** 10 hafta  
+**Geliştirme Modu:** Solo
 
-### 📞 İletişim & Destek
-- **Email:** hbkilickan@gmail.com
-- **WhatsApp:** +905362096205
-- **GitHub Issues:** Teknik sorunlar için issue açabilirsiniz
+### İletişim
+- Email: hbkilickan@gmail.com
+- Telefon: +90 536 209 62 05
+- GitHub: Bu repository

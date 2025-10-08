@@ -1,231 +1,391 @@
 # StreakUp - Tasarım Belgesi
 
-## 🎨 Tasarım Felsefesi
+## Tasarım Felsefesi
 
-### Ana Tema: "Motivasyon ve Başarı"
+### Ana Tema: Motivasyon ve Başarı
 - **Renk Paleti:** Enerjik ama göz yormayan renkler
 - **Tipografi:** Modern, okunabilir fontlar
 - **Animasyonlar:** Smooth, motivasyon artırıcı geçişler
 - **Genel Yaklaşım:** Minimalist ama etkili, kullanıcı dostu
 
-## 🌈 Renk Paleti
+## Renk Paleti (Profesyonel ve Göz Dostu)
 
-### Ana Renkler
+### Light Mode - Ana Renkler
 ```
-Primary (Ana Mavi): #4A90E2
-Primary Dark: #357ABD
-Primary Light: #6BA3E8
+Primary (Mavi):    #5B9BD5
+  - Kullanım: Ana butonlar, aktif tab, linkler
+  - Psikoloji: Güven, sakinlik, odaklanma
+  - Özellik: Yumuşak ton, göz yormaz, profesyonel
+  - Kontrast: 3.94:1 (WCAG AA - büyük text için uygun)
 
-Secondary (Başarı Yeşili): #7ED321
-Secondary Dark: #6BB91C
-Secondary Light: #95DC4A
+Success (Yeşil):   #66BB6A
+  - Kullanım: Streak kartı, başarı mesajları
+  - Psikoloji: Büyüme, başarı, pozitif enerji
+  - Özellik: Doğal yeşil, rahatlatıcı
+  - Kontrast: 3.24:1
 
-Accent (Enerji Turuncu): #F5A623
-Accent Dark: #E0941F
-Accent Light: #F7B84A
-```
-
-### Nötr Renkler
-```
-Background Light: #FAFBFC
-Background Dark: #F5F7FA
-Card Background: #FFFFFF
-Text Primary: #2C3E50
-Text Secondary: #7F8C8D
-Text Light: #BDC3C7
-Border: #E1E8ED
-Error: #E74C3C
-Warning: #F39C12
+Accent (Turuncu):  #FFA726
+  - Kullanım: FAB, CTA butonları, dikkat öğeleri
+  - Psikoloji: Enerji, aksiyon, heyecan
+  - Özellik: Soft orange, yumuşak vurgu
+  - Kontrast: 2.93:1
 ```
 
-### Gradient Kombinasyonları
+### Light Mode - Nötr Renkler
 ```
-Success Gradient: #7ED321 → #6BB91C
-Energy Gradient: #F5A623 → #E0941F
-Cool Gradient: #4A90E2 → #357ABD
-Neutral Gradient: #F5F7FA → #E1E8ED
+Background:        #F8F9FA - Çok açık gri (göz yormuyor)
+Surface:           #FFFFFF - Kartlar
+Text Primary:      #2D3748 - Yumuşak siyah (16.8:1 kontrast)
+Text Secondary:    #718096 - Yumuşak gri (4.64:1 kontrast)
+Divider:           #E2E8F0 - Çok açık gri
+Error:             #EF5350 - Yumuşak kırmızı
+Disabled:          #CBD5E0 - Açık gri
 ```
 
-## 📱 UI Bileşenleri
+### Dark Mode - Ana Renkler
+```
+Primary:           #7DAFEA - Açık mavi (gece gözü yormuyor)
+Success:           #81C784 - Açık yeşil
+Accent:            #FFB74D - Açık turuncu
+
+Background:        #121212 - Material Dark standard
+Surface:           #1E1E1E - Kartlar
+Card Elevated:     #2D2D2D - Yükseltilmiş kartlar
+
+Text Primary:      #E2E8F0 - Yumuşak beyaz (gece okunur)
+Text Secondary:    #A0AEC0 - Yumuşak gri
+Divider:           #3A3A3A - Koyu gri
+Error:             #EF5350 - Aynı (dark uyumlu)
+```
+
+### Leaderboard Badge (Her İki Tema)
+```
+1. Altın:          #FFD700
+2. Gümüş:          #C0C0C0
+3. Bronz:          #CD7F32
+Diğer:             #718096 (light) / #A0AEC0 (dark)
+```
+
+### Renk Kullanım Stratejisi
+- **Uzun süreli kullanım:** Yumuşak tonlar, pastel benzeri
+- **Kontrast yeterli:** WCAG AA standardı (minimum 3:1)
+- **Dark mode:** Daha açık tonlar (göz yormaması için)
+- **Tutarlılık:** Her iki temada aynı anlam (mavi = aksiyon, yeşil = başarı)
+
+## UI Bileşenleri
 
 ### 1. Buttons
 ```
-Primary Button:
-- Background: Primary renk gradient
-- Text: Beyaz
+Primary Button (Light):
+- Background: #5B9BD5
+- Text: #FFFFFF
 - Border Radius: 12px
 - Padding: 16px 24px
-- Shadow: Soft drop shadow
+- Elevation: 2dp
 
-Secondary Button:
-- Background: Şeffaf
-- Border: 2px Primary
-- Text: Primary
-- Border Radius: 12px
+Primary Button (Dark):
+- Background: #7DAFEA
+- Text: #121212 (koyu text, contrast için)
+- Diğer aynı
 
-Floating Action Button:
-- Background: Accent renk
-- Icon: Beyaz
+FAB (Light):
+- Background: #FFA726
+- Icon: #FFFFFF
 - Size: 56px
-- Shadow: Elevated
+
+FAB (Dark):
+- Background: #FFB74D
+- Icon: #121212
 ```
 
 ### 2. Cards
 ```
-Standard Card:
-- Background: Beyaz
+Standard Card (Light):
+- Background: #FFFFFF
 - Border Radius: 16px
-- Shadow: 0 2px 8px rgba(0,0,0,0.1)
+- Elevation: 2dp
 - Padding: 20px
-- Margin: 12px
 
-Streak Card:
-- Background: Success gradient
+Standard Card (Dark):
+- Background: #1E1E1E
+- Elevation: 4dp
+- Diğer aynı
+
+Streak Card (Light):
+- Background: #FFFFFF
+- Border: 2px solid #66BB6A
 - Border Radius: 20px
-- Text: Beyaz
-- Icon: Flame emoji veya özel ikon
+- Streak number: #66BB6A (yeşil)
+- Icon: #66BB6A
+
+Streak Card (Dark):
+- Background: #1E1E1E
+- Border: 2px solid #81C784
+- Streak number: #81C784
+- Icon: #81C784
 ```
 
 ### 3. Input Fields
 ```
-Text Input:
-- Border: 2px #E1E8ED
-- Focus Border: 2px Primary
+Text Input (Light):
+- Border: 1px solid #E2E8F0
+- Focus Border: 2px solid #5B9BD5
 - Border Radius: 12px
 - Padding: 16px
-- Background: #FAFBFC
+- Background: #FFFFFF
+- Text: #2D3748
+- Placeholder: #718096
+
+Text Input (Dark):
+- Border: 1px solid #3A3A3A
+- Focus Border: 2px solid #7DAFEA
+- Background: #1E1E1E
+- Text: #E2E8F0
+- Placeholder: #A0AEC0
 ```
 
-## 📊 İkon Sistemi
+## İkon Sistemi
 
 ### Ana İkonlar
-- **Streak:** 🔥 (Flame) - Kırmızı-turuncu gradient
-- **Study:** 📚 (Books) - Mavi ton
-- **Group:** 👥 (People) - Yeşil ton
-- **Timer:** ⏱️ (Stopwatch) - Turuncu ton
-- **Statistics:** 📈 (Chart) - Mavi gradient
-- **Achievement:** 🏆 (Trophy) - Altın renk
+- **Timer:** Circular timer - Mavi (#5B9BD5)
+- **Streak:** Flame ikonu - Yeşil (#66BB6A)
+- **Task:** Checkbox ikonu - Turuncu (#FFA726)
+- **Group:** People ikonu - Mavi
+- **Leaderboard:** Trophy ikonu - Altın
 
-### Navigasyon İkonları
-- Home: House outline
-- Stats: Bar chart outline
-- Groups: People outline  
+### Navigasyon İkonları (Bottom Nav - 4 Tab)
+- Home: Timer outline (#5B9BD5 aktif, #718096 pasif)
+- Tasks: Checkbox outline
+- Groups: People outline
 - Profile: Person outline
 
-## 🖼️ Ekran Tasarım Rehberi
+### Leaderboard Badge Renkleri
+- 1. Sıra: #FFD700 (Altın)
+- 2. Sıra: #C0C0C0 (Gümüş)
+- 3. Sıra: #CD7F32 (Bronz)
+- Diğer: #718096 (Light) / #A0AEC0 (Dark)
 
-### 1. Splash Screen
+## Ekran Tasarım Rehberi
+
+
+### 1. Login/Register Screen
 ```
 Layout:
-- Merkezi logo (StreakUp)
-- Alt yazı: "Motivasyonunu Artır"
-- Background: Primary gradient
-- Logo animasyonu: Fade in + scale
-```
-
-### 2. Login/Register Screen
-```
-Layout:
-- Üst kısım: Logo ve başlık
-- Orta kısım: Form alanları
-- Alt kısım: Sosyal giriş seçenekleri
-
-Design Elements:
-- Yumuşak köşeli input'lar
-- Primary button'lar
-- Google giriş butonu
-- "Hesabın yok mu?" link'i
-```
-
-### 3. Ana Sayfa (Home Screen)
-```
-Header:
-- Kullanıcı adı ve profil fotoğrafı
-- Bildirim ikonu
-- Günün tarihi
-
-Main Content:
-- Günlük Streak Kartı (Büyük, merkezi)
-  - Streak sayısı (büyük font)
-  - Flame ikonu animasyonlu
-  - "Günlük hedefin" progress bar
-  
-- Hızlı Çalışma Butonu (FAB tarzı)
-- Son çalışmalar listesi (küçük kartlar)
-
-Bottom:
-- Haftalık özet grafiği
-```
-
-### 4. Çalışma Ekleme Ekranı
-```
-Layout:
-- Timer/Manuel seçimi (Toggle)
-- Konu seçimi (Dropdown/Tags)
-- Süre girişi (Number picker)
-- Notlar (Text area)
-- Kaydet butonu (Primary)
+- Header: Logo ve başlık
+- Form: Email, Password input'ları
+- Action: Login butonu (#5B9BD5)
+- Footer: "Hesabın yok mu? Kayıt Ol" link
 
 Design:
-- Card tabanlı layout
-- Smooth geçişler
-- Validasyon feedback'leri
+- Yumuşak köşeli input'lar (12px radius)
+- Primary button (#5B9BD5)
 ```
 
-### 5. İstatistikler Ekranı
-```
-Content:
-- Genel özet kartları (4 adet)
-  - Toplam çalışma
-  - En uzun streak
-  - Bu hafta
-  - Bu ay
-  
-- Grafik seçimi (Tabs)
-  - Günlük
-  - Haftalık  
-  - Aylık
-  
-- İnteraktif grafikler
-```
-
-### 6. Gruplar Ekranı
+### 2. Ana Sayfa (Home Screen)
 ```
 Header:
-- "Gruplarım" başlığı
-- Grup oluştur butonu (+)
+- "Merhaba, [İsim]"
+- Tarih
 
-Content:
-- Grup kartları listesi
-  - Grup adı ve üye sayısı
-  - Son aktivite
-  - Grup streak ortalaması
-  
-- Gruba katıl butonu (Alt kısım)
+Focus Session Selector (80px):
+- Konu dropdown
+  * Kaydedilmiş konular
+  * "Yeni Konu Ekle"
+  * Son kullanılan (⭐ işaretli)
+- Timer preset (25/5, 45/15)
+
+Premium Timer Widget (320px):
+Layout 1 - Flip Clock (Öncelikli):
+- 4 parçalı flip card: [00]:[25]:[00]
+- Her saniye flip animasyonu
+- Smooth transitions (300ms cubic)
+- Gölge efekti
+
+Layout 2 - Circular Progress:
+- Dış ring progress (0-100%)
+- Renk: #5B9BD5 (çalışma), #66BB6A (mola)
+- İç kısımda kalan süre (25:00)
+- Glow effect (aktif)
+
+Durum ve Kontroller:
+- Durum label: "Çalışma" / "Mola"
+- Başlat/Durdur butonu (büyük)
+- Sıfırla ikonu
+- Ayarlar ikonu
+- Session değiştir (konu değiştir)
+
+Streak Card (100px):
+- Border: 2px yeşil
+- Streak sayısı
+- Flame icon
+
+Son Çalışmalar (200px):
+- Liste
+- Her kart:
+  * Badge: ⏱️ (timer) veya 🖊️ (manuel)
+  * Konu
+  * Süre
+  * Saat (örn: 14:30)
+- Swipe to delete
+
+Manuel Kayıt FAB:
+- Turuncu (#FFA726)
+- Sağ alt
+
+Bottom Nav: 4 tab (Home, Tasks, Groups, Profile)
 ```
 
-### 7. Profil Ekranı
+### 3. Manuel Kayıt Dialog
 ```
 Header:
-- Profil fotoğrafı (büyük, yuvarlak)
-- Kullanıcı adı
-- Düzenle butonu
+- "Manuel Kayıt"
 
-Stats Section:
-- Achievement kartları
-- Kişisel rekorlar
+Form:
+- Konu (TextField)
+- Süre (Number, dakika)
+- Tarih: Bugün (değiştirilemez)
 
-Settings:
-- Liste formatında ayarlar
-- Toggle'lar ve arrow'lar
+Actions:
+- İptal
+- Kaydet (#5B9BD5)
+
+Not: "Geçmiş tarih eklenemez - hile önleme"
 ```
 
-## 🎭 Animasyonlar ve Geçişler
+### 4. Pomodoro Settings Dialog
+```
+Header:
+- "Pomodoro Ayarları"
+
+Preset Seçimi:
+- 25/5 (Klasik Pomodoro) ← Chip button
+- 45/15 (Uzun Focus)
+- 50/10 (Dengeli)
+- Custom
+
+Custom Ayarlar (açılır):
+- Çalışma (slider: 15-90 dk)
+- Mola (slider: 5-60 dk)
+
+Timer Görünümü:
+- Flip Clock (default) ← Radio
+- Circular Progress
+- Minimal (sadece sayı)
+
+Kaydedilmiş Konular:
+- Liste
+- Silme ikonu
+- Yeni ekle
+
+Actions:
+- Kaydet
+```
+
+### 5. Görevler Ekranı (Tasks Screen)
+```
+Tabs (2):
+- Kişisel Görevler
+- Grup Görevleri
+
+Kişisel Tab:
+- Görev listesi
+  * Checkbox
+  * Başlık
+  * Deadline badge (opsiyonel)
+  * Düzenle/Sil
+- Completed section (접기 가능)
+- Add FAB
+
+Grup Görevleri Tab:
+- Grup görevleri
+  * Görev başlığı
+  * Tamamlama: 3/5
+  * Kendi checkbox
+  * Grup adı badge
+- Atanan görevler section
+  * Onay/Red butonları
+  * Atayan: [Ad]
+```
+
+### 6. Gruplar Listesi
+```
+Header:
+- "Gruplarım"
+- Grup oluştur (+)
+- Gruba katıl (code)
+
+Grup Kartları:
+- Grup adı
+- Üye sayısı
+- Tamamlanan görevler / Toplam görevler
+- Arrow
+
+Empty:
+- "Henüz grubun yok"
+- Butonlar
+```
+
+### 7. Grup Detay (Leaderboard + Stats + Görevler)
+```
+Tabs (3):
+- Leaderboard
+- İstatistikler
+- Grup Görevleri
+
+Leaderboard Tab:
+- Üye kartları (skor sıralı):
+  * Rank badge (1🥇 2🥈 3🥉)
+  * Ad
+  * Toplam süre
+  * Tamamlanan görev
+  * Skor (70% süre + 30% görev)
+
+İstatistikler Tab (4 kart):
+- Toplam çalışma
+- Ortalama streak
+- Tamamlanan görevler
+- Bu hafta toplam
+
+Grup Görevleri Tab:
+- Grup görevleri listesi
+- Tamamlama durumu her görev için
+- Görev ekle butonu (herkes ekleyebilir)
+
+Footer:
+- Gruptan ayrıl
+```
+
+### 8. Profil Ekranı
+```
+Header:
+- Profil circle
+- Ad
+- Email
+
+İstatistik Özeti (4 kart):
+- Toplam çalışma
+- Güncel streak
+- Tamamlanan görevler
+- Bu hafta
+
+Ayarlar:
+- Pomodoro Ayarları
+  * Çalışma süresi: 25 dk
+  * Mola süresi: 5 dk
+  * Düzenle ikonu
+- Dark Mode Toggle
+
+Actions:
+- Profil düzenle
+- Logout
+```
+
+## Animasyonlar ve Geçişler
 
 ### Sayfa Geçişleri
 ```
 Stack Navigation:
-- Slide from right (iOS style)
+- Slide from right
 - Duration: 250ms
 - Easing: ease-out
 
@@ -243,12 +403,32 @@ Button Press:
 Card Appear:
 - Fade in + Slide up
 - Duration: 300ms
-- Stagger: 50ms
 
 Streak Counter:
-- Number change: Count up animation
+- Count up animation
 - Duration: 500ms
-- Easing: bounce
+```
+
+### Timer Animasyonları (Özel)
+```
+Flip Clock Animation:
+- Üst kart aşağı flip (180°)
+- Alt kart yukarı gelir
+- Duration: 300ms
+- Easing: cubic-bezier(0.4, 0.0, 0.2, 1)
+- Shadow effect (flip sırasında)
+
+Circular Progress:
+- Smooth sweep (her saniye)
+- Duration: 1000ms
+- Linear animation
+- Glow pulse (working state)
+
+Session Start:
+- Scale up: 0.8 → 1.0
+- Fade in
+- Duration: 400ms
+- Easing: ease-out-back
 ```
 
 ### Loading States
@@ -263,7 +443,7 @@ Pull to Refresh:
 - Color: Primary
 ```
 
-## 📐 Layout Sistemi
+## Layout Sistemi
 
 ### Grid System
 ```
@@ -284,20 +464,47 @@ Body Medium: 14px, Regular
 Caption: 12px, Regular
 ```
 
-## 🌙 Dark Mode Desteği
+## Dark Mode Implementation
 
-### Dark Theme Colors
+### Dark Theme Renkleri
 ```
-Background: #1A1A1A
-Surface: #2D2D2D
-Card: #3A3A3A
-Text Primary: #FFFFFF
-Text Secondary: #B0B0B0
-Primary: #5BA3F5 (Lighter blue)
-Secondary: #90E33A (Lighter green)
+Primary:           #7DAFEA - Açık mavi (gece uyumlu, göz yormayan)
+Success:           #81C784 - Açık yeşil
+Accent:            #FFB74D - Açık turuncu
+
+Background:        #121212 - Material Dark standard
+Surface:           #1E1E1E - Kartlar
+Card Elevated:     #2D2D2D - Elevated kartlar
+
+Text Primary:      #E2E8F0 - Yumuşak beyaz (okunabilir)
+Text Secondary:    #A0AEC0 - Yumuşak gri
+Divider:           #3A3A3A - Koyu gri
+
+Streak Card (Dark): #1E1E1E (arka plan) + #81C784 (border + text)
+Leaderboard Badges: Aynı (altın, gümüş, bronz değişmez)
 ```
 
-## 📱 Responsive Tasarım
+### Theme Toggle Implementation
+```dart
+// Profil sayfasında
+SwitchListTile(
+  title: Text('Dark Mode'),
+  value: isDarkMode,
+  onChanged: (value) {
+    // Provider ile tema değiştir
+    // Shared Preferences'a kaydet
+  },
+)
+```
+
+### Dark Mode Stratejisi
+- Parlak renkler daha açık tonlara çevrilir (#5B9BD5 → #7DAFEA)
+- Background çok koyu (#121212) - göz yormaz
+- Surface biraz daha açık (#1E1E1E) - derinlik hissi
+- Text kontrast oranları korunur
+- Leaderboard badge'leri aynı kalır (belirgin olmalı)
+
+## Responsive Tasarım
 
 ### Breakpoints
 ```
@@ -312,7 +519,7 @@ Tablet: > 768px
 - Büyük ekranlarda grid layout kullan
 - Tablet'te side navigation düşün
 
-## 🎯 Kullanıcı Deneyimi (UX) Prensipleri
+## Kullanıcı Deneyimi (UX) Prensipleri
 
 ### 1. Motivasyon Odaklı
 - Streak'leri görsel olarak vurgula
@@ -325,17 +532,19 @@ Tablet: > 768px
 - Minimum tıklama ile hedeflere ulaşım
 - Açık ve net bilgi hiyerarşisi
 
-### 3. Sosyal Motivasyon
-- Grup aktivitelerini öne çıkar
-- Arkadaş başarılarını göster
-- Sağlıklı rekabet ortamı
+### 3. Rekabet ve Motivasyon
+- Leaderboard ile sağlıklı rekabet
+- Sıralama badge'leri (altın, gümüş, bronz)
+- Grup istatistikleri ile gelişim takibi
+- Görsel feedback
 
-### 4. Habit Formation
-- Günlük hatırlatmalar
-- Kolay erişim (widget'lar)
-- Streak korunması için uyarılar
+### 4. Basitlik ve Netlik
+- Her ekranda tek odak noktası
+- Minimal tıklama
+- Açık bilgi hiyerarşisi
+- Anlaşılır navigasyon
 
-## 🔧 Figma Tasarım Önerileri
+## Figma Tasarım Önerileri
 
 ### Artboard Boyutları
 ```
@@ -359,4 +568,23 @@ Android (Generic): 360 x 800px
 - Color styles
 - Text styles
 
-Bu tasarım belgesi ile modern, kullanıcı dostu ve motivasyon artırıcı bir uygulama tasarlayabilirsin. Figma'da bu rehberi takip ederek tutarlı bir tasarım sistemi oluşturabilirsin.
+## Tasarım Öncelikleri
+
+### Timer UI (En Önemli)
+- **Flip clock animasyonu:** Projenin showcase özelliği
+- **Smooth ve premium:** Apple/Google kalitesinde
+- **Kullanıcı seçimi:** 3 farklı görünüm modu
+- **Dikkat çekici ama yorucu değil**
+
+### Renk Stratejisi
+- Yumuşak tonlar (göz yormaz)
+- Pastel-benzeri (rahatlatıcı)
+- Profesyonel görünüm
+- Light + Dark mode tam destek
+
+### Kullanıcı Deneyimi
+- Focus session akışı akıcı olmalı
+- Konu seçimi hızlı (dropdown, 2 tıklama)
+- Timer kontrolleri büyük ve kolay
+- Manuel/Timer badge'leri net görünür
+- Grup görevleri collaborative hissi vermeli

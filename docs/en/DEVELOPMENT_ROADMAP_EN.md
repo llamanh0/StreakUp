@@ -1,613 +1,311 @@
-# StreakUp - Development Roadmap and Timeline
+# StreakUp - Development Plan
 
-## 🎯 Project Overview
-**Developer:** Hasan Batuhan Kılıçkan (Solo Developer)  
-**Total Duration:** 10-12 weeks (Until final exams)  
+## Project Overview
+**Duration:** 10 weeks  
 **Technology:** Flutter + Firebase  
-**Difficulty Level:** Beginner-Intermediate  
-**Learning Curve:** Gradual (starting from zero)  
-**Success Probability:** 95+ (Thanks to Flutter's excellent documentation)
+**Scope:** Pomodoro Timer + Task Management + Group Competition  
+**Approach:** Iterative development, weekly milestones
 
-## 📅 Weekly Timeline
+## Pre-Development (Before Project Starts - 3-4 Days)
 
-### 🏁 Week 1-2: Basic Preparation and Learning
-**Goal:** Set up development environment and learn basic concepts
-
-#### Week 1: Setup and Fundamentals
+### Figma Designs
 ```
-Daily Work: 2-3 hours
-Total: 15-20 hours
+Color Palette (Light + Dark):
+Light: #5B9BD5, #66BB6A, #FFA726, #F8F9FA
+Dark:  #7DAFEA, #81C784, #FFB74D, #121212
 
-Monday-Tuesday: Figma Design
-- Create Figma account
-- Build design system
-- Wireframe main screens
-- Start component library
+10 Screen Wireframes (Each with Light + Dark):
+  1. Login, Register
+  2. Home (Pomodoro timer + streak + list)
+  3. Tasks (personal + group tabs)
+  4. Groups (group list)
+  5. Group Detail (leaderboard + stats + tasks)
+  6. Profile (stats + pomodoro settings + dark toggle)
 
-Wednesday-Thursday: Technology Research
-- What is Flutter? Introduction to Dart language
-- What is Firebase? (Basic concepts)
-- Flutter YouTube channel and tutorials
-- Development environment research
+Component Library:
+- Button, Card, Input, Streak Card
+- Pomodoro Timer Widget (circular progress)
+- Task Checkbox Item
+- Leaderboard Item (score + badge)
+- Theme Toggle Switch
 
-Friday-Saturday: Environment Setup
-- Flutter SDK installation
-- Dart SDK (comes with Flutter)
-- Android Studio installation
-- VS Code Flutter extensions
-- Firebase account creation
-
-Sunday: Planning and Review
-- First week evaluation
-- Next week planning
-- Identify missing topics
+Output: 10 screens x 2 themes = 20 designs ready
 ```
 
-#### Week 2: First Steps
+## 10-Week Development Plan
+
+### Week 1-2: Flutter + Firebase Auth
+**Goal:** Basic setup and user system
+
 ```
-Daily Work: 2-3 hours
-Total: 15-20 hours
+Week 1:
+- Flutter SDK, Dart basics
+- StatelessWidget, StatefulWidget
+- Basic widgets (Scaffold, Container, Column, Row, Button)
+- Navigator
 
-Monday-Tuesday: Flutter and Dart Fundamentals
-- "Hello World" Flutter application
-- Understanding widget structure (StatelessWidget, StatefulWidget)
-- Dart language basics (variables, functions, classes)
-- Basic styling and Material Design
-
-Wednesday-Thursday: Navigation and State Management
-- Go Router setup and usage
-- Navigator 2.0 basics
-- Provider state management
-- Basic page transitions
-
-Friday-Saturday: UI Widgets
-- Material Design widgets
-- Using basic components (Button, Card, TextField)
-- Theme system setup (ThemeData)
-- Fast development with Hot Reload
-
-Sunday: First Prototype
-- Simple 3-4 page Flutter application
-- Test navigation
-- Try UI widgets
-- Discover the power of Hot Reload
+Week 2:
+- Firebase setup
+- firebase_auth, firebase_core
+- Email/password authentication
+- Login/Register UI
+- AuthState management
 ```
 
-### 🚀 Week 3-4: Firebase Integration and Auth
-**Goal:** User system and database connection
+### Week 3: Firestore + Collections
+**Goal:** Database setup and data models
 
-#### Week 3: Firebase Setup
 ```
-Daily Work: 3-4 hours
-Total: 20-25 hours
-
-Monday-Tuesday: Firebase Project
-- Create project in Firebase Console
-- FlutterFire CLI installation
-- Android/iOS configuration (google-services.json/plist)
-- First connection test
-
-Wednesday-Thursday: Authentication
-- firebase_auth package installation
-- Email/Password registration system
-- Login/Logout functions
-- Auth state management with StreamBuilder
-
-Friday-Saturday: Auth UI
-- Login screen design
-- Register screen design
-- Form validation
-- Loading states
-
-Sunday: Test and Debug
-- Test auth system
-- Handle error cases
-- UI improvements
+- cloud_firestore package
+- 4 Collections: users, workLogs, tasks, groups
+- CRUD operations
+- Security rules (users, workLogs, tasks, groups)
+- Model classes (User, WorkLog, Task, Group)
+- toMap(), fromMap()
 ```
 
-#### Week 4: Firestore Database
+### Week 4: Pomodoro Timer (Focus Session)
+**Goal:** Premium timer system
+
 ```
-Daily Work: 3-4 hours
-Total: 20-25 hours
+Focus Session Logic (3 days):
+- Subject selection (before starting)
+- Saved subjects list
+- Last used highlight
+- Session start/stop
+- Subject change (restart)
+- Auto workLog save
 
-Monday-Tuesday: Firestore Fundamentals
-- cloud_firestore package installation
-- Collection and Document structure
-- Learn CRUD operations (add, get, update, delete)
-- Basic security rules
+Timer UI (3 days):
+- Flip clock animation (numbers flip)
+  * 00:25:00 format
+  * Flip effect every second
+  * 4-part card design
+- Circular progress ring
+- State display (Working/Break)
+- Start/Pause/Reset buttons
+- Settings icon
+- Smooth animations (300ms cubic)
 
-Wednesday-Thursday: User Profile
-- Create User collection
-- Save profile information
-- Profile screen design
-- Profile update system
-
-Friday-Saturday: Data Model
-- WorkLogs collection design
-- Groups collection design
-- Relational data structures
-- Indexing strategies
-
-Sunday: Data Testing
-- Create sample data
-- Test data read/write operations
-- Performance check
-```
-
-### 💪 Week 5-6: Core Features (Study Tracking)
-**Goal:** Develop the main feature of study tracking system
-
-#### Week 5: Study Recording System
-```
-Daily Work: 3-4 hours
-Total: 20-25 hours
-
-Monday-Tuesday: Home Screen UI
-- Home screen design
-- Streak card component
-- Progress bar component
-- Quick action buttons
-
-Wednesday-Thursday: Add Study Session
-- Add study session screen
-- Form validation
-- Duration picker component
-- Subject selection
-
-Friday-Saturday: Data Processing
-- Implement WorkLog data model
-- Save to Firestore
-- Real-time data listening
-- Error handling
-
-Sunday: Test and Improvement
-- Manual test scenarios
-- UI/UX improvements
-- Bug fixes
+Manual Entry (1 day):
+- Dialog form
+- Today limit
+- Manual badge (🖊️)
 ```
 
-#### Week 6: Streak System
+### Week 5: Personal Task System
+**Goal:** To-do functionality
+
 ```
-Daily Work: 3-4 hours
-Total: 20-25 hours
+Task CRUD (4 days):
+- Add task (title, description, deadline)
+- Task list (StreamBuilder)
+- Checkbox completion
+- Edit/delete tasks
+- Completed tasks list
 
-Monday-Tuesday: Streak Calculation
-- Daily streak algorithm
-- Longest streak calculation
-- Streak reset logic
-- Date handling (timezone)
-
-Wednesday-Thursday: Statistics
-- Statistics screen UI
-- Daily/weekly/monthly views
-- Simple chart integration (fl_chart)
-- Total study hours
-
-Friday-Saturday: Motivation Features
-- Streak milestone notifications
-- Achievement system (simple)
-- Motivation messages
-- Visual feedback
-
-Sunday: Core Feature Test
-- Test entire study tracking system
-- Check edge cases
-- Performance optimization
+Tasks Screen UI (3 days):
+- Personal tasks tab
+- Pending and completed tabs
+- Task card widget
+- Add task FAB
 ```
 
-### 👥 Week 7-8: Group System
-**Goal:** Social features and group management
+### Week 6: Streak + Group CRUD
+**Goal:** Streak and group system
 
-#### Week 7: Group Creation and Management
 ```
-Daily Work: 3-4 hours
-Total: 20-25 hours
+Streak (3 days):
+- calculateCurrentStreak()
+- calculateLongestStreak()
+- Auto update
+- Home page streak card
 
-Monday-Tuesday: Group UI
-- Groups screen design
-- Create group modal
-- Join group modal
-- Group card component
-
-Wednesday-Thursday: Group Functions
-- Group creation system
-- Invite code system
-- Join/leave group
-- Member management
-
-Friday-Saturday: Group Data
-- Group collection operations
-- Member management
-- Group statistics
-- Data synchronization
-
-Sunday: Group Testing
-- Multi-user test scenarios
-- Test group functions
-- Security testing
+Group (4 days):
+- Create group
+- Invite code (6 digits)
+- joinGroup()
+- Group list
+- Leave group
 ```
 
-#### Week 8: Group Activities
+### Week 7: Group Tasks + Assignment
+**Goal:** Collaborative tasks
+
 ```
-Daily Work: 3-4 hours
-Total: 20-25 hours
+Group Tasks (4 days):
+- Create task for group
+- Each member's own checkbox
+- Completion status (3/5)
+- "Completed" when all finish
 
-Monday-Tuesday: Activity Feed
-- Group activity feed design
-- Activity card component
-- Real-time activity updates
-- Activity types (study, milestone)
-
-Wednesday-Thursday: Group Statistics
-- Group detail screen
-- Show member streaks
-- Group average calculation
-- Leaderboard (simple)
-
-Friday-Saturday: Social Features
-- View member profiles
-- Group motivation messages
-- Group goals (optional)
-- Notification system (simple)
-
-Sunday: Social Testing
-- Test group interactions
-- Real-time sync testing
-- User experience testing
+Task Assignment (3 days):
+- Assign to group member
+- Accept/Reject system
+- Assigned tasks list
+- Notification (UI only, no push)
 ```
 
-### 🎨 Week 9-10: Polish and Optimization
-**Goal:** Make the application ready for release
+### Week 8: Group Leaderboard + Statistics
+**Goal:** Competition system
 
-#### Week 9: UI/UX Improvements
 ```
-Daily Work: 2-3 hours
-Total: 15-20 hours
+Leaderboard (4 days):
+- Score calculation (70% time + 30% tasks)
+- Sorting (by score)
+- Rank badges (gold/silver/bronze)
+- UI display
 
-Monday-Tuesday: Design System
-- Consistent color scheme
-- Typography optimization
-- Spacing standardization
-- Component refinement
-
-Wednesday-Thursday: Animations
-- Smooth transitions
-- Loading animations
-- Micro-interactions
-- Gesture handling
-
-Friday-Saturday: Responsive Design
-- Different screen sizes
-- Tablet support (optional)
-- Orientation handling
-- Accessibility improvements
-
-Sunday: Visual Polish
-- Icon optimization
-- Image handling
-- Dark mode (optional)
-- Visual consistency check
+Group Statistics (3 days):
+- Total study time
+- Average streak
+- Completed tasks
+- This week total
+- Auto update
 ```
 
-#### Week 10: Performance and Testing
+### Week 9: Personal Statistics + Profile + Dark Mode
+**Goal:** Personal features and theme
+
 ```
-Daily Work: 2-3 hours
-Total: 15-20 hours
+Statistics (2 days):
+- 4 cards: Total, streak, tasks, weekly
+- Calculations
 
-Monday-Tuesday: Performance
-- Bundle size optimization
-- Memory leak control
-- Database query optimization
-- Image optimization
+Profile (2 days):
+- User information
+- Pomodoro settings
+- Summary stats
 
-Wednesday-Thursday: Error Handling
-- Comprehensive error handling
-- Offline support (simple)
-- Network error management
-- User feedback mechanisms
+Dark Mode (2 days):
+- ThemeData (light + dark)
+- Provider
+- Shared Preferences
+- Toggle switch
 
-Friday-Saturday: Security
-- Firebase security rules
-- Data validation
-- Input sanitization
-- Privacy considerations
+UI Polish (1 day):
+- Color consistency
+- Animations
+```
 
-Sunday: Final Testing
-- End-to-end test scenarios
-- User acceptance testing
-- Bug fixing
+### Week 10: Comprehensive Test and Deployment
+**Goal:** Production ready APK
+
+```
+Test (4 days):
+- Pomodoro timer (start/stop/save)
+- Manual entry
+- Personal tasks
+- Group tasks + assignment
+- Leaderboard (score calculation)
+- Multi-user test
+- Light + Dark mode
+
+Bug Fix (2 days):
+- Fix errors
+- Validation
+- Edge cases
+
+Release (1 day):
+- flutter build apk --release
+- Screenshots
 - Documentation
 ```
 
-### 📱 Week 11-12: Deployment and Presentation Preparation
-**Goal:** Publish the application and prepare presentation
+## Risk Management
 
-#### Week 11: Build and Deploy
+### Potential Challenges
+
+#### 1. Timer UI Complexity
+**Risk:** Flip clock animation might be difficult
+**Solution:** 
+- Create good mockup in Figma
+- Use AnimatedSwitcher (Flutter built-in)
+- Research flip animation tutorials
+- Worst case: Simple circular progress is enough
+
+#### 2. Task Assignment System
+**Risk:** Accept/reject logic complex
+**Solution:**
+- Simple status field (pending/accepted/rejected)
+- Simple buttons in UI
+- Firestore update operations
+
+#### 3. Leaderboard Score Calculation
+**Risk:** Time + task combination
+**Solution:**
+```dart
+score = (totalMinutes * 0.7) + (completedTasks * 100 * 0.3)
 ```
-Daily Work: 2-3 hours
-Total: 15-20 hours
+- Simple formula
+- Client-side calculation
 
-Monday-Tuesday: Android Build
-- Release build configuration
-- APK generation
-- Testing on real device
-- Performance monitoring
+#### 4. Time Management
+**Risk:** 10 weeks intensive
+**Solution:**
+- 25-30 hours weekly
+- Special attention to Week 4 (timer) and Week 7-8 (group)
+- Don't deviate from plan
 
-Wednesday-Thursday: App Store Preparation
-- App icons and splash screens
-- Store listing materials
-- Screenshots
-- App description
+### Alternative Plan
 
-Friday-Saturday: Documentation
-- README file
-- API documentation
-- User guide (simple)
-- Technical documentation
-
-Sunday: Final Polish
-- Last minute bug fixes
-- Final performance check
-- User experience validation
+#### If Task Assignment Doesn't Fit in Week 7:
 ```
-
-#### Week 12: Presentation Preparation
-```
-Daily Work: 2-3 hours
-Total: 15-20 hours
-
-Monday-Tuesday: Demo Preparation
-- Demo scenarios
-- Test data preparation
-- Video recording (optional)
-- Presentation slides
-
-Wednesday-Thursday: Project Documents
-- Final technical report
-- Design decisions documentation
-- Challenges and solutions
-- Future improvements
-
-Friday-Saturday: Presentation Practice
-- Presentation rehearsal
-- Q&A preparation
-- Demo flow optimization
-- Backup plans
-
-Sunday: Final Review
-- Final checks
-- Backup preparations
-- Prepare presentation materials
+Simplification:
+- Remove task assignment
+- Keep only group tasks
+- Still collaborative system
 ```
 
-## 📚 Weekly Learning Resources
+## Success Criteria
 
-### Week 1-2: Fundamentals
-```
-📹 Video Resources:
-- "Flutter Crash Course" (YouTube)
-- "Dart Programming Tutorial" (YouTube)
-- "Figma UI Design Tutorial" (YouTube)
+### Evaluation Metrics
 
-📖 Documentation:
-- Flutter Official Docs
-- Dart Language Tour
-- Figma Help Center
+**Functionality:**
+- Pomodoro timer (flip clock animation, focus session)
+- Manual entry (today limit, badge)
+- Personal tasks (CRUD, checkbox)
+- Group tasks (shared, assignment, acceptance)
+- Streak calculation
+- Group leaderboard (score: time + tasks)
+- Statistics (personal + group)
+- Dark mode
 
-🛠️ Practice Projects:
-- Counter App (simple)
-- Weather App
-- Calculator
-```
+**Technical:**
+- Firebase integration stable
+- Security rules (users, workLogs, tasks, groups)
+- Timer animations smooth
+- Code organized
 
-### Week 3-4: Backend Integration
-```
-📹 Video Resources:
-- "Firebase Auth Tutorial"
-- "Firestore Database Tutorial"
-- "Flutter Firebase Setup"
+**User Experience:**
+- Timer UI premium and impressive
+- Focus session flow easy
+- Task system usable
+- Leaderboard motivating
+- Dark mode comfortable
 
-📖 Article Resources:
-- Firebase best practices
-- Flutter state management
-- Authentication patterns
+## Critical Notes
 
-🛠️ Practice Projects:
-- Chat App (simple)
-- Note Taking App
-- User Profile App
-```
+### Before Starting (3-4 Days)
+- **10 screen Figma designs** (light + dark)
+- **Flip clock animation mockup** (showcase feature)
+- Color palette: Light (#5B9BD5, #66BB6A, #FFA726) + Dark (#7DAFEA, #81C784, #FFB74D)
 
-### Week 5-8: Feature Development
-```
-📹 Video Resources:
-- "Building Real-time Apps with Flutter"
-- "Flutter Charts and Graphs"
-- "Push Notifications in Flutter"
+### Development Priorities
+**Week 4 (Timer):** Most important - Timer UI must be premium
+**Week 5 (Tasks):** Must be usable, simple CRUD
+**Week 7 (Group Tasks):** Must feel collaborative
+**Week 8 (Leaderboard):** Score system must calculate correctly
 
-📖 Advanced Topics:
-- Real-time data synchronization
-- Performance optimization
-- User experience design
+### For Success
+- 25-30 hours weekly (3-4 weekdays, 5-6 weekend)
+- Special focus on Week 4 (timer showcase)
+- Design flip clock well in Figma
+- Create 2-3 test accounts for multi-user test
+- Don't add background tracking (too difficult, unnecessary)
 
-🛠️ Practice Projects:
-- Habit Tracker
-- Social Feed
-- Group Chat
-```
-
-## ⚠️ Risk Management and Alternative Plans
-
-### Potential Challenges and Solutions
-
-#### 1. Time Management Issues
-```
-Risk: Time shortage due to classes and other assignments
-Solution: 
-- Focus on minimum viable product (MVP)
-- Save time for optional features later
-- Even 1-2 hours daily can be sufficient
-```
-
-#### 2. Technical Difficulties
-```
-Risk: Difficulty learning Flutter/Firebase
-Solution:
-- Choose simpler technology (e.g., local storage)
-- Get mentor/friend support
-- Join online communities
-```
-
-#### 3. Scope Creep
-```
-Risk: Desire to add too many features
-Solution:
-- Stay loyal to MVP list
-- Distinguish "Nice to have" vs "Must have"
-- Keep feature list for version 2
-```
-
-### Alternative Technology Options
-
-#### Plan A (Recommended): Flutter + Firebase
-```
-Advantages: Modern, scalable, abundant learning resources
-Disadvantages: Learning curve exists
-Duration: 10-12 weeks
-```
-
-#### Plan B (Simpler): Flutter + Local Storage
-```
-Advantages: Less dependencies, works offline
-Disadvantages: Group features difficult, no sync
-Duration: 8-10 weeks
-```
-
-#### Plan C (Simplest): Native Android + SQLite
-```
-Advantages: Fewer dependencies, works offline
-Disadvantages: Group features difficult, Android only
-Duration: 8-10 weeks
-```
-
-## 🎯 Success Metrics
-
-### Weekly Control Questions
-```
-✅ Were the planned features for this week completed?
-✅ Is code quality at standards?
-✅ Are test scenarios working?
-✅ Does UI/UX follow design guidelines?
-✅ Am I ready for next week?
-```
-
-### Final Evaluation Criteria
-```
-Technical (40%):
-- Application working and stable
-- Code quality and organization
-- Successful Firebase integration
-- Error handling implemented
-
-Design (30%):
-- UI/UX design principles
-- Consistent design system
-- User-friendly interface
-- Mobile-first approach
-
-Features (20%):
-- Core features working
-- Group system functional
-- Data persistence
-- Real-time updates
-
-Presentation (10%):
-- Clear presentation
-- Demo effectiveness
-- Technical explanation
-- Q&A handling
-```
-
-## 💡 Pro Tips and Recommendations
-
-### Time Management
-```
-🕐 Daily Routines:
-- Morning 1 hour (theory/learning)
-- Evening 1-2 hours (practice/coding)
-- Weekend 3-4 hours (big features)
-
-📅 Milestone Tracking:
-- Progress review at end of each week
-- Move delayed topics to next week
-- Realistic goal setting
-```
-
-### Learning Strategies
-```
-📚 Active Learning:
-- Take notes while following tutorials
-- Try code examples in your own project
-- Research similar problems on Stack Overflow
-
-🤝 Community Support:
-- Flutter Discord/Slack groups
-- Firebase community forums
-- Local developer meetups
-```
-
-### Debugging and Problem Solving
-```
-🐛 Common Issues:
-- Android emulator performance
-- Firebase configuration errors
-- State management complexity
-- Navigation stack issues
-
-🔧 Solutions:
-- Keep error logs
-- Use debugging tools (Flutter Inspector)
-- Break down complex problems
-- Ask for help when stuck 2+ hours
-```
-
-## 🚀 Flutter-Specific Tips
-
-### Development Workflow
-```
-# Create new project
-flutter create streak_up
-
-# Run in debug mode
-flutter run
-
-# Hot reload (save file to see changes)
-# Hot restart (r in terminal)
-
-# Build for release
-flutter build apk
-```
-
-### Essential Packages
-```
-dependencies:
-  flutter:
-    sdk: flutter
-  firebase_core: ^2.15.0
-  firebase_auth: ^4.9.0
-  cloud_firestore: ^4.8.4
-  provider: ^6.0.5
-  go_router: ^10.1.2
-  fl_chart: ^0.63.0
-```
-
-### Performance Tips
-```
-- Use const constructors where possible
-- Implement proper dispose methods
-- Avoid rebuilding unnecessary widgets
-- Use ListView.builder for long lists
-- Optimize images and assets
-```
-
-With this roadmap, you can successfully complete the StreakUp application from zero knowledge to finals. The key is to work regularly and stick to the plan! 🚀
+### Technical Tips
+- Timer: CircularProgressIndicator + AnimatedBuilder
+- Flip clock: AnimatedSwitcher + RotationTransition
+- Focus session: Provider + Timer class
+- Tasks: simple CRUD, don't overcomplicate

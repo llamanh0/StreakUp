@@ -1,6 +1,6 @@
 # StreakUp - Figma Tasarım ve Wireframe Rehberi
 
-## 🎨 Figma Proje Kurulumu
+## Figma Proje Kurulumu
 
 ### 1. Yeni Proje Oluşturma
 ```
@@ -12,38 +12,58 @@ Açıklama: Motivasyon ve çalışma takip uygulaması
 ### 2. Artboard Organizasyonu
 ```
 📁 01 - Design System
-   - Colors
+   - Colors (Light + Dark)
    - Typography
    - Components
    - Icons
+   - Timer Widget (Flip Clock Mockup)
 
 📁 02 - Wireframes
-   - User Flow
+   - User Flow (Tasks ekranı dahil)
    - Low-fi Wireframes
 
-📁 03 - UI Screens
-   - Auth Screens
-   - Main Screens
-   - Secondary Screens
+📁 03 - UI Screens (Light + Dark)
+   - Auth Screens (Login, Register)
+   - Timer Screen (Home + Focus Session)
+   - Tasks Screen (Kişisel + Grup)
+   - Groups Screen (Liste + Detail)
+   - Profile Screen (Stats + Settings)
 
 📁 04 - Prototypes
    - User Journey
+   - Flip Clock Animation
    - Interactions
 ```
 
-## 🎯 Design System Oluşturma
+## Design System Oluşturma
 
 ### Adım 1: Renk Paleti Oluşturma
 ```
-1. Yeni frame oluştur: "Color Palette" (1200x800)
+1. İki frame oluştur: "Light Theme" ve "Dark Theme" (1200x800)
 2. Her renk için daire şekiller çiz (80x80)
 3. Renk kodlarını alt kısma yaz
-4. Color Styles oluştur:
-   - Primary/Blue → #4A90E2
-   - Secondary/Green → #7ED321
-   - Accent/Orange → #F5A623
-   - Neutral/Gray-100 → #F5F7FA
-   - Text/Dark → #2C3E50
+
+Light Theme Color Styles:
+   - Primary → #5B9BD5
+   - Success → #66BB6A
+   - Accent → #FFA726
+   - Background → #F8F9FA
+   - Surface → #FFFFFF
+   - Text/Primary → #2D3748
+   - Text/Secondary → #718096
+   - Badge/Gold → #FFD700
+   - Badge/Silver → #C0C0C0
+   - Badge/Bronze → #CD7F32
+
+Dark Theme Color Styles:
+   - Primary/Dark → #7DAFEA
+   - Success/Dark → #81C784
+   - Accent/Dark → #FFB74D
+   - Background/Dark → #121212
+   - Surface/Dark → #1E1E1E
+   - Text/Primary/Dark → #E2E8F0
+   - Text/Secondary/Dark → #A0AEC0
+   - Badge renkleri aynı
 ```
 
 ### Adım 2: Typography Sistemi
@@ -60,41 +80,53 @@ Açıklama: Motivasyon ve çalışma takip uygulaması
 
 ### Adım 3: Component Library
 ```
-🔘 Buttons:
+Buttons:
 - Primary Button (160x48)
-- Secondary Button (160x48)
-- Icon Button (48x48)
+- Timer Start/Stop (200x56 - büyük)
 - FAB Button (56x56)
 
-📱 Cards:
+Cards:
 - Basic Card (320x120)
-- Streak Card (320x160)
+- Streak Card (320x140)
 - Group Card (320x100)
+- Task Card (320x80, checkbox)
+- Leaderboard Item (320x90)
 
-📝 Inputs:
+Timer Widgets (Özel!):
+- Flip Clock Digit (60x80, 4 parça)
+  * Üst yarı (30x80)
+  * Alt yarı (30x80)
+  * Flip animation mockup
+- Circular Progress Ring (280x280)
+- Timer Control Panel (320x80)
+
+Inputs:
 - Text Input (280x48)
-- Search Input (280x48)
-- Number Input (120x48)
+- Subject Dropdown (280x56)
+- Number Slider (280x40)
 
-🧭 Navigation:
-- Bottom Tab Bar (390x80)
-- Top App Bar (390x56)
+Navigation:
+- Bottom Tab Bar (390x80, 4 tab)
+
+Leaderboard:
+- Rank Badge (40x40)
+- Score Card (320x90)
 ```
 
-## 📱 Wireframe Tasarım Süreci
+## Wireframe Tasarım Süreci
 
 ### Adım 1: User Flow Diagramı
 ```
 Frame Size: 1920x1080 (Landscape)
 
 Flow Yapısı:
-[Splash] → [Login/Register] → [Home] → [Add Study] → [Groups] → [Profile]
+[Login/Register] → [Home/Timer] → [Tasks] → [Groups] → [Group Detail/Leaderboard] → [Profile]
 
 Bağlantılar:
 - Ok işaretleri ile akış yönü
-- Decision point'ler (diamond şekil)
-- Screen'ler (rectangle şekil)
-- Actions (oval şekil)
+- Decision points (Timer vs Manuel)
+- Screen'ler (rectangle)
+- Actions (oval)
 ```
 
 ### Adım 2: Low-Fidelity Wireframes
@@ -114,168 +146,191 @@ Her ekran için:
 4. Action buttons
 ```
 
-## 🖼️ Ekran Tasarımları
+## Ekran Tasarımları
 
-### 1. Splash Screen
+
+### 1. Login Screen
 ```
-Artboard: iPhone 14 (390x844)
-Background: Primary gradient (#4A90E2 → #357ABD)
+Header:
+- Logo
+- "Hoş Geldin"
 
-Elements:
-- Logo (merkezi, 120x120)
-- App name "StreakUp" (Display Large, beyaz)
-- Tagline "Motivasyonunu Artır" (Body Large, beyaz, 0.8 opacity)
-- Loading indicator (alt kısım)
-
-Figma İpuçları:
-- Gradient: Linear, 45° açı
-- Logo: SVG import et veya vector çiz
-- Animasyon için Smart Animate kullan
-```
-
-### 2. Login Screen
-```
-Layout Structure:
-Header (100px):
-- Logo (küçük, 60x60)
-- "Hoş Geldin" (Headline)
-
-Form Area (400px):
+Form:
 - Email input (280x48)
 - Password input (280x48)
-- "Şifremi Unuttum" link (Caption)
-- Login button (280x48, Primary)
+- "Şifremi Unuttum" link
+- Login button (280x48, #5B9BD5)
 
-Social Login (150px):
-- "veya" divider
-- Google button (280x48, beyaz bg)
+Footer:
+- "Hesabın yok mu? Kayıt Ol"
 
-Footer (100px):
-- "Hesabın yok mu? Kayıt Ol" (Body Medium)
-
-Spacing: 24px between sections, 16px between elements
+Spacing: 24px sections, 16px elements
 ```
 
-### 3. Ana Sayfa (Home Screen)
+### 2. Ana Sayfa - Focus Session
 ```
-Header (120px):
-- Profil fotoğrafı (40x40, sol)
-- "Merhaba, [İsim]" (Title)
-- Bildirim ikonu (24x24, sağ)
-- Tarih (Caption, gri)
+Header:
+- "Merhaba, [İsim]"
+- Tarih
 
-Streak Card (200px):
-- Background: Success gradient
-- Flame icon (48x48)
-- Streak number (Display Large)
-- "gün streak" text (Body Large)
-- Progress bar (günlük hedef)
+Subject Selector:
+- Dropdown (kaydedilmiş konular)
+- Yeni ekle ikonu
 
-Quick Actions (80px):
-- "Çalışma Ekle" FAB (56x56, Accent color)
+Flip Clock Timer:
+[00]:[25]:[00]
+- 4 flip card (her biri 60x80)
+- Flip animasyon mockup:
+  * Üst yarı aşağı döner
+  * Alt yarı yukarı gelir
+  * Shadow ve depth
+- Alt: "Çalışma" label
 
-Recent Sessions (300px):
-- "Son Çalışmalar" başlık
-- Session cards (320x60 each)
-  - Subject icon
-  - Konu adı
-  - Süre
-  - Tarih
+Timer Kontrolleri:
+- Başlat/Durdur (#5B9BD5, büyük)
+- Sıfırla, Ayarlar (küçük)
 
-Bottom Navigation (80px):
-- 4 tab (Home, Stats, Groups, Profile)
-```
+Streak Card:
+- Border: 2px #66BB6A (light) / #81C784 (dark)
+- Streak sayısı
 
-### 4. Çalışma Ekleme Ekranı
-```
-Header (80px):
-- Back button
-- "Çalışma Ekle" (Title)
-- Save button (text)
+Son Çalışmalar:
+- Liste
+- Badge: ⏱️ veya 🖊️
+- Konu, Süre, Saat
 
-Form Content (600px):
-- Mode selector (Timer/Manuel)
-- Subject input (dropdown)
-- Duration picker (number)
-- Notes textarea (optional)
-- Date picker (default today)
+FAB: Manuel kayıt (#FFA726)
 
-Action Area (100px):
-- Cancel button (Secondary)
-- Save button (Primary)
-
-Design Notes:
-- Card-based layout
-- Input focus states
-- Validation messages
-- Loading states
+Bottom Nav: 4 tab
 ```
 
-### 5. İstatistikler Ekranı
+### 3. Manuel Kayıt Dialog
 ```
-Header (80px):
-- "İstatistikler" (Title)
-- Date range selector
+Header:
+- "Manuel Kayıt"
 
-Stats Overview (200px):
-- 4 stat cards (2x2 grid)
-  - Toplam Saat
-  - En Uzun Streak
-  - Bu Hafta
-  - Bu Ay
+Form:
+- Konu (TextField)
+- Süre (Number input, dakika)
+- Tarih: Bugün (değiştirilemez)
 
-Chart Section (400px):
-- Tab selector (Günlük/Haftalık/Aylık)
-- Chart area (line/bar chart)
-- Legend
-
-Details (200px):
-- Subject breakdown
-- Time distribution
+Actions:
+- İptal
+- Kaydet (#5B9BD5)
 ```
 
-### 6. Gruplar Ekranı
+### 4. Pomodoro Settings Dialog
 ```
-Header (120px):
-- "Gruplarım" (Title)
-- Create group button (+)
-- Join group button
+Header:
+- "Pomodoro Ayarları"
 
-Group List (500px):
-- Group cards (320x100 each)
-  - Group name (Title)
-  - Member count (Caption)
-  - Group streak average
-  - Last activity
-  - Member avatars (overlap)
+Preset'ler:
+- 25/5, 45/15, 50/10, Custom
 
-Empty State:
-- Illustration
+Custom:
+- Çalışma slider (15-90 dk)
+- Mola slider (5-60 dk)
+
+Timer Modu:
+- Flip Clock, Circular, Minimal
+
+Kaydedilmiş Konular:
+- Liste + Silme
+
+Actions:
+- Kaydet
+```
+
+### 5. Görevler Ekranı
+```
+Tabs (2):
+- Kişisel Görevler
+- Grup Görevleri
+
+Kişisel Tab:
+- Task list (checkbox, başlık, deadline)
+- Completed section
+- Add task FAB
+
+Grup Tab:
+- Grup görevleri (tamamlama: 3/5)
+- Atanan görevler (Onay/Red)
+```
+
+### 6. Gruplar Listesi
+```
+Header:
+- "Gruplarım"
+- Grup oluştur (+)
+- Gruba katıl (code)
+
+Grup Kartları:
+- Grup adı
+- Üye sayısı
+- Görevler: 5/10
+- Arrow
+
+Empty:
 - "Henüz grubun yok"
-- "Grup Oluştur" button
 ```
 
-### 7. Profil Ekranı
+### 7. Grup Detay
 ```
-Header (200px):
-- Profile photo (100x100)
-- Name (Title)
-- Edit button
-- Stats summary (3 columns)
+Tabs (3):
+- Leaderboard
+- İstatistikler
+- Görevler
 
-Achievements (150px):
-- "Başarılar" section
-- Badge/trophy icons
-- Achievement titles
+Leaderboard:
+- Sıralı üyeler
+  * Badge (🥇🥈🥉)
+  * Ad
+  * Süre
+  * Görev sayısı
+  * Skor
 
-Settings (300px):
-- List items with icons
-- Toggle switches
-- Arrow indicators
-- Logout button (danger color)
+İstatistikler (4 kart):
+- Toplam çalışma
+- Ort. streak
+- Tamamlanan görevler
+- Bu hafta
+
+Görevler:
+- Grup görevleri listesi
+- Görev ekle
+
+Footer:
+- Gruptan ayrıl
 ```
 
-## 🎛️ Component Detayları
+### 8. Profil Ekranı
+```
+Header:
+- Profil circle
+- Ad
+- Email
+
+İstatistik (4 kart):
+- Toplam çalışma
+- Güncel streak
+- Tamamlanan görevler
+- Bu hafta
+
+Ayarlar:
+- Pomodoro Settings
+  * Çalışma: 25 dk
+  * Mola: 5 dk
+- Dark Mode Toggle
+
+Actions:
+- Profil düzenle
+- Logout
+```
+
+**Not:** Figma'da hem light hem dark versiyonlarını tasarla. Variant kullan.
+
+
+## Component Detayları
 
 ### Button Variants
 ```
@@ -302,38 +357,54 @@ FAB:
 
 ### Card Components
 ```
-Basic Card:
-- Fill: White
+Basic Card (Light):
+- Fill: #FFFFFF
 - Corner radius: 16px
 - Padding: 20px
 - Shadow: 0 2px 8px Black/8%
 
-Streak Card:
-- Fill: Success gradient
+Basic Card (Dark):
+- Fill: #1E1E1E
+- Shadow: 0 2px 8px Black/12%
+
+Streak Card (Light):
+- Fill: #FFFFFF
+- Border: 2px solid #66BB6A
 - Corner radius: 20px
-- Padding: 24px
-- Text: Beyaz
-- Icon: Flame (animated)
+- Text: #66BB6A
+
+Streak Card (Dark):
+- Fill: #1E1E1E
+- Border: 2px solid #81C784
+- Text: #81C784
 ```
 
 ### Input Fields
 ```
-Text Input:
-- Stroke: 2px #E1E8ED
-- Fill: #FAFBFC
+Text Input (Light):
+- Stroke: 1px #E2E8F0
+- Fill: #FFFFFF
 - Corner radius: 12px
 - Padding: 16px
-- Placeholder: Text Secondary
-- Focus: Stroke Primary
+- Placeholder: #718096
+- Focus: 2px #5B9BD5
 
-States:
-- Default
-- Focused
-- Error
-- Disabled
+Text Input (Dark):
+- Stroke: 1px #3A3A3A
+- Fill: #1E1E1E
+- Placeholder: #A0AEC0
+- Focus: 2px #7DAFEA
+
+Leaderboard Item:
+- Height: 90px
+- Rank badge (40x40)
+- User name + Skor
+- Background: #FFFFFF (light) / #1E1E1E (dark)
+- Border: 1px #E2E8F0 (light) / #3A3A3A (dark)
+- Top 3: Renkli border (altın/gümüş/bronz)
 ```
 
-## 🔄 Prototyping Rehberi
+## Prototyping Rehberi
 
 ### Interaction Tanımları
 ```
@@ -369,7 +440,7 @@ Success Feedback:
 - Easing: Bounce
 ```
 
-## 📋 Figma İpuçları ve Kısayollar
+## Figma İpuçları ve Kısayollar
 
 ### Yararlı Kısayollar
 ```
@@ -418,7 +489,7 @@ Accessibility:
    - Test on different sizes
 ```
 
-## 🎯 Tasarım Checklist
+## Tasarım Checklist
 
 ### Before Development
 ```
@@ -447,4 +518,20 @@ Assets:
 - Illustrations: SVG
 ```
 
-Bu rehber ile Figma'da profesyonel ve tutarlı bir tasarım sistemi oluşturabilir, uygulamanı geliştirmeye hazır hale getirebilirsin!
+## Önemli Notlar
+
+### Timer Widget (Showcase)
+- Flip clock animasyonu en önemli tasarım
+- Figma'da frame-by-frame mockup yap
+- Light ve Dark versiyonları
+- Smooth geçişleri göster
+
+### Renk Tutarlılığı
+- Tüm ekranlarda aynı renk kodları kullan
+- Light: #5B9BD5, #66BB6A, #FFA726
+- Dark: #7DAFEA, #81C784, #FFB74D
+
+### Variant Kullanımı
+- Component'lar için light/dark variant'ları
+- Button, Card, Input için variant oluştur
+- Kolayca tema değiştirme

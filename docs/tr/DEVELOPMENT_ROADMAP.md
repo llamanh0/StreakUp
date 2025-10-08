@@ -1,574 +1,312 @@
-# StreakUp - Geliştirme Roadmap'i ve Zaman Planı
+# StreakUp - Geliştirme Planı
 
-## 🎯 Proje Genel Özeti
-**Geliştirici:** Hasan Batuhan Kılıçkan (Solo Developer)  
-**Toplam Süre:** 10-12 hafta (Final sınavlarına kadar)  
+## Proje Özeti
+**Süre:** 10 hafta  
 **Teknoloji:** Flutter + Firebase  
-**Zorluk Seviyesi:** Başlangıç-Orta  
-**Öğrenme Eğrisi:** Kademeli (0'dan başlayarak)  
-**Başarı İhtimali:** %95+ (Flutter'ın mükemmel dokümantasyonu sayesinde)
+**Kapsam:** Pomodoro Timer + Görev Yönetimi + Grup Rekabeti  
+**Geliştirme Yaklaşımı:** Iterative development, haftalık milestone'lar
 
-## 📅 Haftalık Zaman Planı
+## Ön Hazırlık (Proje Başlamadan Önce - 3-4 Gün)
 
-### 🏁 Hafta 1-2: Temel Hazırlık ve Öğrenme
-**Hedef:** Geliştirme ortamını kurmak ve temel kavramları öğrenmek
-
-#### Hafta 1: Kurulum ve Temel Bilgiler
+### Figma Tasarımları
 ```
-Günlük Çalışma: 2-3 saat
-Toplam: 15-20 saat
+Renk Paleti (Light + Dark):
+Light: #5B9BD5, #66BB6A, #FFA726, #F8F9FA
+Dark:  #7DAFEA, #81C784, #FFB74D, #121212
 
-Pazartesi-Salı: Figma Tasarım
-- Figma hesabı açma
-- Design system oluşturma
-- Ana ekranların wireframe'i
-- Component library başlangıcı
+10 Ekran Wireframe (Her biri Light + Dark):
+  1. Login, Register
+  2. Home (Pomodoro timer + streak + liste)
+  3. Tasks (kişisel + grup tabs)
+  4. Groups (grup listesi)
+  5. Group Detail (leaderboard + stats + görevler)
+  6. Profile (stats + pomodoro settings + dark toggle)
 
-Çarşamba-Perşembe: Teknoloji Araştırması
-- Flutter nedir? Dart dili tanışma
-- Firebase nedir? (Temel kavramlar)
-- Flutter YouTube kanalı ve tutorial'ları
-- Geliştirme ortamı araştırması
+Component Library:
+- Button, Card, Input, Streak Card
+- Pomodoro Timer Widget (circular progress)
+- Task Checkbox Item
+- Leaderboard Item (skor + badge)
+- Theme Toggle Switch
 
-Cuma-Cumartesi: Ortam Kurulumu
-- Flutter SDK kurulumu
-- Dart SDK (Flutter ile birlikte gelir)
-- Android Studio kurulumu
-- VS Code Flutter extensions
-- Firebase hesabı açma
-
-Pazar: Planlama ve Review
-- İlk hafta değerlendirmesi
-- Gelecek hafta planlaması
-- Eksik konuları belirleme
+Çıktı: 10 ekran x 2 tema = 20 tasarım hazır
 ```
 
-#### Hafta 2: İlk Adımlar
+## 10 Haftalık Geliştirme Planı
+
+### Hafta 1-2: Flutter + Firebase Auth
+**Hedef:** Temel kurulum ve kullanıcı sistemi
+
 ```
-Günlük Çalışma: 2-3 saat
-Toplam: 15-20 saat
+Hafta 1:
+- Flutter SDK, Dart temelleri
+- StatelessWidget, StatefulWidget
+- Temel widget'lar (Scaffold, Container, Column, Row, Button)
+- Navigator
 
-Pazartesi-Salı: Flutter ve Dart Temelleri
-- "Hello World" Flutter uygulaması
-- Widget yapısını anlama (StatelessWidget, StatefulWidget)
-- Dart dili temelleri (variables, functions, classes)
-- Temel styling ve Material Design
-
-Çarşamba-Perşembe: Navigation ve State Management
-- Go Router kurulumu ve kullanımı
-- Navigator 2.0 temelleri
-- Provider state management
-- Temel sayfa geçişleri
-
-Cuma-Cumartesi: UI Widget'ları
-- Material Design widget'ları
-- Temel component'ları kullanma (Button, Card, TextField)
-- Theme sistemi kurulumu (ThemeData)
-- Hot Reload ile hızlı geliştirme
-
-Pazar: İlk Prototip
-- Basit 3-4 sayfalı Flutter uygulaması
-- Navigation test etme
-- UI widget'ları deneme
-- Hot Reload'un gücünü keşfetme
+Hafta 2:
+- Firebase setup
+- firebase_auth, firebase_core
+- Email/şifre authentication
+- Login/Register UI
+- AuthState management
 ```
 
-### 🚀 Hafta 3-4: Firebase Entegrasyonu ve Auth
-**Hedef:** Kullanıcı sistemi ve veritabanı bağlantısı
+### Hafta 3: Firestore + Collections
+**Hedef:** Database setup ve veri modelleri
 
-#### Hafta 3: Firebase Kurulumu
 ```
-Günlük Çalışma: 3-4 saat
-Toplam: 20-25 saat
-
-Pazartesi-Salı: Firebase Projesi
-- Firebase Console'da proje oluşturma
-- FlutterFire CLI kurulumu
-- Android/iOS konfigürasyonu (google-services.json/plist)
-- İlk bağlantı testi
-
-Çarşamba-Perşembe: Authentication
-- firebase_auth package kurulumu
-- Email/Password kayıt sistemi
-- Login/Logout fonksiyonları
-- StreamBuilder ile auth state yönetimi
-
-Cuma-Cumartesi: Auth UI
-- Login ekranı tasarımı
-- Register ekranı tasarımı
-- Form validasyonu
-- Loading states
-
-Pazar: Test ve Debug
-- Auth sistemini test etme
-- Hata durumlarını handle etme
-- UI iyileştirmeleri
+- cloud_firestore paketi
+- 4 Collection: users, workLogs, tasks, groups
+- CRUD operations
+- Security rules (users, workLogs, tasks, groups)
+- Model class'ları (User, WorkLog, Task, Group)
+- toMap(), fromMap()
 ```
 
-#### Hafta 4: Firestore Database
+### Hafta 4: Pomodoro Timer (Focus Session)
+**Hedef:** Premium timer sistemi
+
 ```
-Günlük Çalışma: 3-4 saat
-Toplam: 20-25 saat
+Focus Session Logic (3 gün):
+- Konu seçimi (başlatmadan önce)
+- Kaydedilmiş konular listesi
+- Son kullanılan highlight
+- Session başlatma/durdurma
+- Konu değiştirme (restart)
+- Otomatik workLog kaydetme
 
-Pazartesi-Salı: Firestore Temelleri
-- cloud_firestore package kurulumu
-- Collection ve Document yapısı
-- CRUD operasyonları öğrenme (add, get, update, delete)
-- Security rules temel bilgiler
+Timer UI (3 gün):
+- Flip clock animasyonu (sayılar döner)
+  * 00:25:00 formatı
+  * Her saniye flip effect
+  * 4 parçalı kart tasarımı
+- Circular progress ring
+- Durum gösterimi (Çalışma/Mola)
+- Başlat/Durdur/Sıfırla butonları
+- Ayarlar ikonu
+- Smooth animations (300ms cubic)
 
-Çarşamba-Perşembe: User Profile
-- User collection oluşturma
-- Profil bilgilerini kaydetme
-- Profil ekranı tasarımı
-- Profil güncelleme sistemi
-
-Cuma-Cumartesi: Veri Modeli
-- WorkLogs collection tasarımı
-- Groups collection tasarımı
-- İlişkisel veri yapıları
-- Index'leme stratejileri
-
-Pazar: Veri Test
-- Sample data oluşturma
-- Veri okuma/yazma testleri
-- Performance kontrolü
-```
-
-### 💪 Hafta 5-6: Core Features (Çalışma Takibi)
-**Hedef:** Ana özellik olan çalışma takip sistemini geliştirmek
-
-#### Hafta 5: Çalışma Kayıt Sistemi
-```
-Günlük Çalışma: 3-4 saat
-Toplam: 20-25 saat
-
-Pazartesi-Salı: Ana Sayfa UI
-- Home screen tasarımı
-- Streak card component'i
-- Progress bar component'i
-- Quick action button'ları
-
-Çarşamba-Perşembe: Çalışma Ekleme
-- Add study session ekranı
-- Form validation
-- Duration picker component
-- Subject selection
-
-Cuma-Cumartesi: Veri İşleme
-- WorkLog veri modelini implement etme
-- Firestore'a kaydetme
-- Real-time data listening
-- Error handling
-
-Pazar: Test ve İyileştirme
-- Manuel test senaryoları
-- UI/UX iyileştirmeleri
-- Bug fix'ler
+Manuel Kayıt (1 gün):
+- Dialog formu
+- Bugün limiti
+- Manuel badge (🖊️)
 ```
 
-#### Hafta 6: Streak Sistemi
+### Hafta 5: Kişisel Görev Sistemi
+**Hedef:** To-do functionality
+
 ```
-Günlük Çalışma: 3-4 saat
-Toplam: 20-25 saat
+Task CRUD (4 gün):
+- Görev ekleme (title, description, deadline)
+- Görev listesi (StreamBuilder)
+- Checkbox ile tamamlama
+- Görev düzenleme/silme
+- Completed tasks listesi
 
-Pazartesi-Salı: Streak Hesaplama
-- Günlük streak algoritması
-- En uzun streak hesaplama
-- Streak sıfırlama mantığı
-- Date handling (timezone)
-
-Çarşamba-Perşembe: İstatistikler
-- Statistics ekranı UI
-- Günlük/haftalık/aylık görünümler
-- Basit grafik entegrasyonu (Chart.js)
-- Toplam çalışma süreleri
-
-Cuma-Cumartesi: Motivasyon Features
-- Streak milestone notifications
-- Achievement system (basit)
-- Motivasyon mesajları
-- Visual feedback'ler
-
-Pazar: Core Feature Test
-- Tüm çalışma takip sistemini test etme
-- Edge case'leri kontrol etme
-- Performance optimizasyonu
+Tasks Screen UI (3 gün):
+- Kişisel görevler tab
+- Pending ve completed tabs
+- Task card widget
+- Add task FAB
 ```
 
-### 👥 Hafta 7-8: Grup Sistemi
-**Hedef:** Sosyal özellikler ve grup yönetimi
+### Hafta 6: Streak + Grup CRUD
+**Hedef:** Streak ve grup sistemi
 
-#### Hafta 7: Grup Oluşturma ve Yönetimi
 ```
-Günlük Çalışma: 3-4 saat
-Toplam: 20-25 saat
+Streak (3 gün):
+- calculateCurrentStreak()
+- calculateLongestStreak()
+- Otomatik güncelleme
+- Ana sayfa streak kartı
 
-Pazartesi-Salı: Grup UI
-- Groups ekranı tasarımı
-- Create group modal
-- Join group modal
-- Group card component
-
-Çarşamba-Perşembe: Grup Fonksiyonları
-- Grup oluşturma sistemi
-- Davet kodu sistemi
-- Gruba katılma/ayrılma
-- Üye yönetimi
-
-Cuma-Cumartesi: Grup Verileri
-- Group collection operations
-- Member management
-- Group statistics
-- Data synchronization
-
-Pazar: Grup Test
-- Multi-user test senaryoları
-- Grup fonksiyonlarını test etme
-- Security test'leri
+Grup (4 gün):
+- Grup oluşturma
+- Davet kodu (6 haneli)
+- joinGroup()
+- Grup listesi
+- Gruptan ayrılma
 ```
 
-#### Hafta 8: Grup Aktiviteleri
+### Hafta 7: Grup Görevleri + Atama
+**Hedef:** Collaborative tasks
+
 ```
-Günlük Çalışma: 3-4 saat
-Toplam: 20-25 saat
+Grup Görevleri (4 gün):
+- Grup için görev oluşturma
+- Her üye kendi checkbox'ı
+- Tamamlama durumu (3/5)
+- Tüm üyeler tamamladıysa "completed"
 
-Pazartesi-Salı: Activity Feed
-- Grup aktivite feed'i tasarımı
-- Activity card component'i
-- Real-time activity updates
-- Activity types (study, milestone)
-
-Çarşamba-Perşembe: Grup İstatistikleri
-- Grup detay ekranı
-- Üye streak'lerini gösterme
-- Grup ortalama hesaplama
-- Leaderboard (basit)
-
-Cuma-Cumartesi: Sosyal Features
-- Üye profil görüntüleme
-- Grup içi motivasyon mesajları
-- Grup hedefleri (opsiyonel)
-- Bildirim sistemi (basit)
-
-Pazar: Sosyal Test
-- Grup etkileşimlerini test etme
-- Real-time sync test'i
-- User experience test'i
+Görev Atama (3 gün):
+- Grup üyesine atama
+- Onaylama/Reddetme sistemi
+- Atanan görevler listesi
+- Bildirim (UI'da, push yok)
 ```
 
-### 🎨 Hafta 9-10: Polish ve Optimizasyon
-**Hedef:** Uygulamayı yayına hazır hale getirmek
+### Hafta 8: Grup Leaderboard + İstatistikleri
+**Hedef:** Rekabet sistemi
 
-#### Hafta 9: UI/UX İyileştirmeleri
 ```
-Günlük Çalışma: 2-3 saat
-Toplam: 15-20 saat
+Leaderboard (4 gün):
+- Skor hesaplama (süre 70% + görev 30%)
+- Sorting (skor'a göre)
+- Rank badge (altın/gümüş/bronz)
+- UI gösterimi
 
-Pazartesi-Salı: Design System
-- Tutarlı color scheme
-- Typography optimization
-- Spacing standardization
-- Component refinement
-
-Çarşamba-Perşembe: Animasyonlar
-- Smooth transitions
-- Loading animations
-- Micro-interactions
-- Gesture handling
-
-Cuma-Cumartesi: Responsive Design
-- Farklı ekran boyutları
-- Tablet support (opsiyonel)
-- Orientation handling
-- Accessibility improvements
-
-Pazar: Visual Polish
-- Icon optimizasyonu
-- Image handling
-- Dark mode (opsiyonel)
-- Visual consistency check
+Grup İstatistikleri (3 gün):
+- Toplam çalışma
+- Ortalama streak
+- Tamamlanan görevler
+- Bu hafta toplam
+- Otomatik güncelleme
 ```
 
-#### Hafta 10: Performance ve Test
+### Hafta 9: Kişisel İstatistikler + Profil + Dark Mode
+**Hedef:** Kişisel özellikler ve tema
+
 ```
-Günlük Çalışma: 2-3 saat
-Toplam: 15-20 saat
+İstatistikler (2 gün):
+- 4 kart: Toplam, streak, görevler, haftalık
+- Hesaplamalar
 
-Pazartesi-Salı: Performance
-- Bundle size optimization
-- Memory leak kontrolü
-- Database query optimization
-- Image optimization
+Profil (2 gün):
+- Kullanıcı bilgileri
+- Pomodoro settings
+- Özet stats
 
-Çarşamba-Perşembe: Error Handling
-- Comprehensive error handling
-- Offline support (basit)
-- Network error management
-- User feedback mechanisms
+Dark Mode (2 gün):
+- ThemeData (light + dark)
+- Provider
+- Shared Preferences
+- Toggle switch
 
-Cuma-Cumartesi: Security
-- Firebase security rules
-- Data validation
-- Input sanitization
-- Privacy considerations
-
-Pazar: Final Testing
-- End-to-end test scenarios
-- User acceptance testing
-- Bug fixing
-- Documentation
+UI Polish (1 gün):
+- Renk tutarlılığı
+- Animasyonlar
 ```
 
-### 📱 Hafta 11-12: Deployment ve Sunum Hazırlığı
-**Hedef:** Uygulamayı yayınlamak ve sunum hazırlamak
+### Hafta 10: Kapsamlı Test ve Deployment
+**Hedef:** Production ready APK
 
-#### Hafta 11: Build ve Deploy
 ```
-Günlük Çalışma: 2-3 saat
-Toplam: 15-20 saat
+Test (4 gün):
+- Pomodoro timer (başlat/durdur/kayıt)
+- Manuel kayıt
+- Kişisel görevler
+- Grup görevleri + atama
+- Leaderboard (skor hesaplama)
+- Multi-user test
+- Light + Dark mode
 
-Pazartesi-Salı: Android Build
-- Release build configuration
-- APK generation
-- Testing on real device
-- Performance monitoring
+Bug Fix (2 gün):
+- Hataları düzeltme
+- Validation
+- Edge cases
 
-Çarşamba-Perşembe: App Store Hazırlık
-- App icons ve splash screens
-- Store listing materials
+Release (1 gün):
+- flutter build apk --release
 - Screenshots
-- App description
-
-Cuma-Cumartesi: Documentation
-- README file
-- API documentation
-- User guide (basit)
-- Technical documentation
-
-Pazar: Final Polish
-- Last minute bug fixes
-- Performance final check
-- User experience validation
+- Dokümantasyon
 ```
 
-#### Hafta 12: Sunum Hazırlığı
+
+## Risk Yönetimi
+
+### Potansiyel Zorluklar
+
+#### 1. Timer UI Kompleksliği
+**Risk:** Flip clock animasyonu zor olabilir
+**Çözüm:** 
+- Figma'da iyi mockup yap
+- AnimatedSwitcher kullan (Flutter built-in)
+- Flip animation tutorial'ı araştır
+- En kötü: Basit circular progress yeterli
+
+#### 2. Görev Atama Sistemi
+**Risk:** Onaylama/reddetme logic karmaşık
+**Çözüm:**
+- Basit status field (pending/accepted/rejected)
+- UI'da simple button'lar
+- Firestore update işlemleri
+
+#### 3. Leaderboard Skor Hesaplama
+**Risk:** Süre + görev kombinasyonu
+**Çözüm:**
+```dart
+score = (totalMinutes * 0.7) + (completedTasks * 100 * 0.3)
 ```
-Günlük Çalışma: 2-3 saat
-Toplam: 15-20 saat
+- Basit formula
+- Client-side hesaplama
 
-Pazartesi-Salı: Demo Hazırlığı
-- Demo senaryoları
-- Test data preparation
-- Video recording (opsiyonel)
-- Presentation slides
+#### 4. Zaman Yönetimi
+**Risk:** 10 hafta yoğun
+**Çözüm:**
+- Haftalık 25-30 saat
+- Hafta 4 (timer) ve Hafta 7-8'e (grup) özel önem
+- Plan dışına çıkma
 
-Çarşamba-Perşembe: Proje Belgeleri
-- Final technical report
-- Design decisions documentation
-- Challenges and solutions
-- Future improvements
+### Alternatif Plan
 
-Cuma-Cumartesi: Sunum Pratiği
-- Presentation rehearsal
-- Q&A preparation
-- Demo flow optimization
-- Backup plans
-
-Pazar: Final Review
-- Son kontroller
-- Backup preparations
-- Sunum malzemelerini hazırlama
+#### Eğer Hafta 7'de Görev Atama Yetişmezse:
 ```
-
-## 📚 Haftalık Öğrenme Kaynakları
-
-### Hafta 1-2: Temel Bilgiler
-```
-📹 Video Kaynakları:
-- "React Native Crash Course" (YouTube)
-- "Firebase for Beginners" (YouTube)
-- "Figma UI Design Tutorial" (YouTube)
-
-📖 Dokümantasyon:
-- React Native Official Docs
-- Firebase Documentation
-- Figma Help Center
-
-🛠️ Pratik Projeler:
-- Todo App (basit)
-- Weather App
-- Calculator
+Basitleştirme:
+- Görev atamayı çıkar
+- Sadece grup görevleri kalsın
+- Yine de collaborative sistem olur
 ```
 
-### Hafta 3-4: Backend Entegrasyonu
-```
-📹 Video Kaynakları:
-- "Firebase Auth Tutorial"
-- "Firestore Database Tutorial"
-- "React Native Firebase Setup"
+## Başarı Kriterleri
 
-📖 Makale Kaynakları:
-- Firebase best practices
-- React Native state management
-- Authentication patterns
+### Değerlendirme Metrikleri
 
-🛠️ Pratik Projeler:
-- Chat App (basit)
-- Note Taking App
-- User Profile App
-```
+**Fonksiyonellik:**
+- Pomodoro timer (flip clock animasyonu, focus session)
+- Manuel kayıt (bugün limiti, badge)
+- Kişisel görevler (CRUD, checkbox)
+- Grup görevleri (ortak, atama, onaylama)
+- Streak hesaplama
+- Grup leaderboard (skor: süre + görev)
+- İstatistikler (kişisel + grup)
+- Dark mode
 
-### Hafta 5-8: Feature Development
-```
-📹 Video Kaynakları:
-- "Building Real-time Apps"
-- "React Native Charts"
-- "Push Notifications"
+**Teknik:**
+- Firebase entegrasyonu stabil
+- Security rules (users, workLogs, tasks, groups)
+- Timer animasyonları smooth
+- Kod düzenli
 
-📖 Advanced Topics:
-- Real-time data synchronization
-- Performance optimization
-- User experience design
+**Kullanıcı Deneyimi:**
+- Timer UI premium ve etkileyici
+- Focus session akışı kolay
+- Görev sistemi kullanılabilir
+- Leaderboard motivasyon verici
+- Dark mode rahat
 
-🛠️ Pratik Projeler:
-- Habit Tracker
-- Social Feed
-- Group Chat
-```
+## Kritik Notlar
 
-## ⚠️ Risk Yönetimi ve Alternatif Planlar
+### Başlamadan Önce (3-4 Gün)
+- **10 ekran Figma tasarımı** (light + dark)
+- **Flip clock animasyon mockup** (showcase özellik)
+- Renk paleti: Light (#5B9BD5, #66BB6A, #FFA726) + Dark (#7DAFEA, #81C784, #FFB74D)
 
-### Potansiyel Zorluklar ve Çözümleri
+### Geliştirme Öncelikleri
+**Hafta 4 (Timer):** En önemli hafta - Timer UI'ı premium olmalı
+**Hafta 5 (Görevler):** Kullanılabilir olmalı, basit CRUD
+**Hafta 7 (Grup Görevleri):** Collaborative hissi vermeli
+**Hafta 8 (Leaderboard):** Skor sistemi doğru hesaplanmalı
 
-#### 1. Zaman Yönetimi Sorunu
-```
-Risk: Dersler ve diğer ödevler nedeniyle zaman sıkıntısı
-Çözüm: 
-- Minimum viable product (MVP) odaklı çalışma
-- Opsiyonel özellikler için sonra zamanı ayırma
-- Günlük 1-2 saat bile yeterli olabilir
-```
+### Başarı İçin
+- Haftalık 25-30 saat (hafta içi 3-4, hafta sonu 5-6)
+- Hafta 4'e özel önem (timer showcase)
+- Flip clock animasyonunu Figma'da iyi tasarla
+- Multi-user test için 2-3 hesap
+- Background tracking ekleme (çok zor, gereksiz)
 
-#### 2. Teknik Zorluklar
-```
-Risk: Firebase/React Native öğrenme zorluğu
-Çözüm:
-- Daha basit teknoloji seçimi (örn: local storage)
-- Mentor/arkadaş desteği alma
-- Online community'lere katılma
-```
-
-#### 3. Scope Creep (Kapsam Genişlemesi)
-```
-Risk: Çok fazla özellik ekleme isteği
-Çözüm:
-- MVP listesine sadık kalma
-- "Nice to have" vs "Must have" ayrımı
-- Version 2 için feature listesi tutma
-```
-
-### Alternatif Teknoloji Seçenekleri
-
-#### Plan A (Önerilen): React Native + Firebase
-```
-Avantajlar: Modern, scalable, öğrenme kaynağı bol
-Dezavantajlar: Öğrenme eğrisi var
-Süre: 10-12 hafta
-```
-
-#### Plan B (Daha Basit): Flutter + Firebase
-```
-Avantajlar: Single codebase, good documentation
-Dezavantajlar: Dart öğrenmek gerekli
-Süre: 10-12 hafta
-```
-
-#### Plan C (En Basit): Native Android + SQLite
-```
-Avantajlar: Daha az bağımlılık, offline çalışır
-Dezavantajlar: Grup özelliği zor, sadece Android
-Süre: 8-10 hafta
-```
-
-## 🎯 Başarı Metrikleri
-
-### Haftalık Kontrol Soruları
-```
-✅ Bu hafta planlanan özellikler tamamlandı mı?
-✅ Kod quality standartlarda mı?
-✅ Test senaryoları çalışıyor mu?
-✅ UI/UX tasarım rehberine uygun mu?
-✅ Gelecek hafta için hazır mıyım?
-```
-
-### Final Değerlendirme Kriterleri
-```
-Teknik (40%):
-- Uygulama çalışıyor ve stabil
-- Kod quality ve organization
-- Firebase entegrasyonu başarılı
-- Error handling implemented
-
-Tasarım (30%):
-- UI/UX design principles
-- Consistent design system
-- User-friendly interface
-- Mobile-first approach
-
-Özellikler (20%):
-- Core features working
-- Group system functional
-- Data persistence
-- Real-time updates
-
-Sunum (10%):
-- Clear presentation
-- Demo effectiveness
-- Technical explanation
-- Q&A handling
-```
-
-## 💡 Pro Tips ve Öneriler
-
-### Zaman Yönetimi
-```
-🕐 Günlük Rutinler:
-- Sabah 1 saat (teori/öğrenme)
-- Akşam 1-2 saat (pratik/kodlama)
-- Hafta sonu 3-4 saat (büyük özellikler)
-
-📅 Milestone Tracking:
-- Her hafta sonunda progress review
-- Geciken konuları bir sonraki haftaya taşıma
-- Realistic goal setting
-```
-
-### Öğrenme Stratejileri
-```
-📚 Active Learning:
-- Tutorial takip ederken not alma
-- Kod örneklerini kendi projende deneme
-- Stack Overflow'da benzer sorunları araştırma
-
-🤝 Community Support:
-- React Native Discord/Slack grupları
-- Firebase community forums
-- Local developer meetup'lar
-```
-
-### Debugging ve Problem Solving
-```
-🐛 Common Issues:
-- Android emulator performance
-- Firebase configuration errors
-- State management complexity
-- Navigation stack issues
-
-🔧 Solutions:
-- Keep error logs
-- Use debugging tools (Flipper)
-- Break down complex problems
-- Ask for help when stuck 2+ hours
-```
-
-Bu roadmap ile 0 bilgiden başlayarak finallere kadar StreakUp uygulamasını başarıyla tamamlayabilirsin. Önemli olan düzenli çalışmak ve plana sadık kalmak! 🚀
+### Teknik İpuçları
+- Timer: CircularProgressIndicator + AnimatedBuilder
+- Flip clock: AnimatedSwitcher + RotationTransition
+- Focus session: Provider + Timer class
+- Görevler: basit CRUD, kompleks yapma

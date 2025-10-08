@@ -1,231 +1,384 @@
 # StreakUp - Design Document
 
-## 🎨 Design Philosophy
+## Design Philosophy
 
-### Main Theme: "Motivation and Achievement"
+### Main Theme: Motivation and Success
 - **Color Palette:** Energetic but eye-friendly colors
 - **Typography:** Modern, readable fonts
 - **Animations:** Smooth, motivation-enhancing transitions
 - **General Approach:** Minimalist but effective, user-friendly
 
-## 🌈 Color Palette
+## Color Palette (Professional and Eye-Friendly)
 
-### Primary Colors
+### Light Mode - Main Colors
 ```
-Primary (Main Blue): #4A90E2
-Primary Dark: #357ABD
-Primary Light: #6BA3E8
+Primary (Blue):    #5B9BD5
+  - Usage: Main buttons, active tabs, links
+  - Psychology: Trust, calmness, focus
+  - Feature: Soft tone, doesn't tire eyes, professional
+  - Contrast: 3.94:1 (WCAG AA - suitable for large text)
 
-Secondary (Success Green): #7ED321
-Secondary Dark: #6BB91C
-Secondary Light: #95DC4A
+Success (Green):   #66BB6A
+  - Usage: Streak card, success messages
+  - Psychology: Growth, success, positive energy
+  - Feature: Natural green, relaxing
+  - Contrast: 3.24:1
 
-Accent (Energy Orange): #F5A623
-Accent Dark: #E0941F
-Accent Light: #F7B84A
-```
-
-### Neutral Colors
-```
-Background Light: #FAFBFC
-Background Dark: #F5F7FA
-Card Background: #FFFFFF
-Text Primary: #2C3E50
-Text Secondary: #7F8C8D
-Text Light: #BDC3C7
-Border: #E1E8ED
-Error: #E74C3C
-Warning: #F39C12
+Accent (Orange):  #FFA726
+  - Usage: FAB, CTA buttons, attention elements
+  - Psychology: Energy, action, excitement
+  - Feature: Soft orange, gentle emphasis
+  - Contrast: 2.93:1
 ```
 
-### Gradient Combinations
+### Light Mode - Neutral Colors
 ```
-Success Gradient: #7ED321 → #6BB91C
-Energy Gradient: #F5A623 → #E0941F
-Cool Gradient: #4A90E2 → #357ABD
-Neutral Gradient: #F5F7FA → #E1E8ED
+Background:        #F8F9FA - Very light gray (doesn't tire eyes)
+Surface:           #FFFFFF - Cards
+Text Primary:      #2D3748 - Soft black (16.8:1 contrast)
+Text Secondary:    #718096 - Soft gray (4.64:1 contrast)
+Divider:           #E2E8F0 - Very light gray
+Error:             #EF5350 - Soft red
+Disabled:          #CBD5E0 - Light gray
 ```
 
-## 📱 UI Components
+### Dark Mode - Main Colors
+```
+Primary:           #7DAFEA - Light blue (night-friendly)
+Success:           #81C784 - Light green
+Accent:            #FFB74D - Light orange
+
+Background:        #121212 - Material Dark standard
+Surface:           #1E1E1E - Cards
+Card Elevated:     #2D2D2D - Elevated cards
+
+Text Primary:      #E2E8F0 - Soft white (readable at night)
+Text Secondary:    #A0AEC0 - Soft gray
+Divider:           #3A3A3A - Dark gray
+Error:             #EF5350 - Same (dark compatible)
+```
+
+### Leaderboard Badges (Both Themes)
+```
+1. Gold:           #FFD700
+2. Silver:         #C0C0C0
+3. Bronze:         #CD7F32
+Others:            #718096 (light) / #A0AEC0 (dark)
+```
+
+## UI Components
 
 ### 1. Buttons
 ```
-Primary Button:
-- Background: Primary color gradient
-- Text: White
+Primary Button (Light):
+- Background: #5B9BD5
+- Text: #FFFFFF
 - Border Radius: 12px
 - Padding: 16px 24px
-- Shadow: Soft drop shadow
+- Elevation: 2dp
 
-Secondary Button:
-- Background: Transparent
-- Border: 2px Primary
-- Text: Primary
-- Border Radius: 12px
+Primary Button (Dark):
+- Background: #7DAFEA
+- Text: #121212 (dark text for contrast)
+- Others same
 
-Floating Action Button:
-- Background: Accent color
-- Icon: White
+FAB (Light):
+- Background: #FFA726
+- Icon: #FFFFFF
 - Size: 56px
-- Shadow: Elevated
+
+FAB (Dark):
+- Background: #FFB74D
+- Icon: #121212
 ```
 
 ### 2. Cards
 ```
-Standard Card:
-- Background: White
+Standard Card (Light):
+- Background: #FFFFFF
 - Border Radius: 16px
-- Shadow: 0 2px 8px rgba(0,0,0,0.1)
+- Elevation: 2dp
 - Padding: 20px
-- Margin: 12px
 
-Streak Card:
-- Background: Success gradient
+Standard Card (Dark):
+- Background: #1E1E1E
+- Elevation: 4dp
+- Others same
+
+Streak Card (Light):
+- Background: #FFFFFF
+- Border: 2px solid #66BB6A
 - Border Radius: 20px
-- Text: White
-- Icon: Flame emoji or custom icon
+- Streak number: #66BB6A (green)
+- Icon: #66BB6A
+
+Streak Card (Dark):
+- Background: #1E1E1E
+- Border: 2px solid #81C784
+- Streak number: #81C784
+- Icon: #81C784
 ```
 
 ### 3. Input Fields
 ```
-Text Input:
-- Border: 2px #E1E8ED
-- Focus Border: 2px Primary
+Text Input (Light):
+- Border: 1px solid #E2E8F0
+- Focus Border: 2px solid #5B9BD5
 - Border Radius: 12px
 - Padding: 16px
-- Background: #FAFBFC
+- Background: #FFFFFF
+- Text: #2D3748
+- Placeholder: #718096
+
+Text Input (Dark):
+- Border: 1px solid #3A3A3A
+- Focus Border: 2px solid #7DAFEA
+- Background: #1E1E1E
+- Text: #E2E8F0
+- Placeholder: #A0AEC0
 ```
 
-## 📊 Icon System
+## Icon System
 
 ### Main Icons
-- **Streak:** 🔥 (Flame) - Red-orange gradient
-- **Study:** 📚 (Books) - Blue tone
-- **Group:** 👥 (People) - Green tone
-- **Timer:** ⏱️ (Stopwatch) - Orange tone
-- **Statistics:** 📈 (Chart) - Blue gradient
-- **Achievement:** 🏆 (Trophy) - Gold color
+- **Timer:** Circular timer - Blue (#5B9BD5)
+- **Streak:** Flame icon - Green (#66BB6A)
+- **Task:** Checkbox icon - Orange (#FFA726)
+- **Group:** People icon - Blue
+- **Leaderboard:** Trophy icon - Gold
 
-### Navigation Icons
-- Home: House outline
-- Stats: Bar chart outline
+### Navigation Icons (Bottom Nav - 4 Tabs)
+- Home: Timer outline (#5B9BD5 active, #718096 inactive)
+- Tasks: Checkbox outline
 - Groups: People outline  
 - Profile: Person outline
 
-## 🖼️ Screen Design Guide
+### Leaderboard Badge Colors
+- 1st Place: #FFD700 (Gold)
+- 2nd Place: #C0C0C0 (Silver)
+- 3rd Place: #CD7F32 (Bronze)
+- Others: #718096 (Light) / #A0AEC0 (Dark)
 
-### 1. Splash Screen
+## Screen Design Guide
+
+### 1. Login/Register Screen
 ```
 Layout:
-- Centered logo (StreakUp)
-- Subtitle: "Boost Your Motivation"
-- Background: Primary gradient
-- Logo animation: Fade in + scale
-```
-
-### 2. Login/Register Screen
-```
-Layout:
-- Top section: Logo and title
-- Middle section: Form fields
-- Bottom section: Social login options
-
-Design Elements:
-- Rounded input fields
-- Primary buttons
-- Google login button
-- "Don't have an account?" link
-```
-
-### 3. Home Screen
-```
-Header:
-- User name and profile photo
-- Notification icon
-- Current date
-
-Main Content:
-- Daily Streak Card (Large, centered)
-  - Streak number (large font)
-  - Animated flame icon
-  - "Daily goal" progress bar
-  
-- Quick Study Button (FAB style)
-- Recent sessions list (small cards)
-
-Bottom:
-- Weekly summary chart
-```
-
-### 4. Add Study Screen
-```
-Layout:
-- Timer/Manual selection (Toggle)
-- Subject selection (Dropdown/Tags)
-- Duration input (Number picker)
-- Notes (Text area)
-- Save button (Primary)
+- Header: Logo and title
+- Form: Email, Password inputs
+- Action: Login button (#5B9BD5)
+- Footer: "Don't have account? Sign Up" link
 
 Design:
-- Card-based layout
-- Smooth transitions
-- Validation feedback
+- Rounded inputs (12px radius)
+- Primary button (#5B9BD5)
 ```
 
-### 5. Statistics Screen
-```
-Content:
-- General summary cards (4 pieces)
-  - Total study time
-  - Longest streak
-  - This week
-  - This month
-  
-- Chart selection (Tabs)
-  - Daily
-  - Weekly  
-  - Monthly
-  
-- Interactive charts
-```
-
-### 6. Groups Screen
+### 2. Home Screen
 ```
 Header:
-- "My Groups" title
-- Create group button (+)
+- "Hello, [Name]"
+- Date
 
-Content:
-- Group cards list
-  - Group name and member count
-  - Last activity
-  - Group streak average
-  
-- Join group button (Bottom)
+Focus Session Selector:
+- Subject dropdown
+  * Saved subjects
+  * "Add New Subject"
+  * Last used (⭐ marked)
+- Timer preset (25/5, 45/15)
+
+Premium Timer Widget:
+Layout 1 - Flip Clock (Priority):
+- 4-part flip card: [00]:[25]:[00]
+- Flip animation every second
+- Smooth transitions (300ms cubic)
+- Shadow effects
+
+Layout 2 - Circular Progress:
+- Outer ring progress (0-100%)
+- Color: #5B9BD5 (work), #66BB6A (break)
+- Remaining time inside (25:00)
+- Glow effect (active)
+
+Status and Controls:
+- Status label: "Working" / "Break"
+- Start/Pause button (large)
+- Reset icon
+- Settings icon
+- Change session (change subject)
+
+Streak Card:
+- Border: 2px green
+- Streak number
+- Flame icon
+
+Recent Studies:
+- List
+- Each card:
+  * Badge: ⏱️ (timer) or 🖊️ (manual)
+  * Subject
+  * Duration
+  * Time (e.g., 14:30)
+- Swipe to delete
+
+Manual Entry FAB:
+- Orange (#FFA726)
+- Bottom right
+
+Bottom Nav: 4 tabs (Home, Tasks, Groups, Profile)
 ```
 
-### 7. Profile Screen
+### 3. Manual Entry Dialog
 ```
 Header:
-- Profile photo (large, circular)
-- User name
-- Edit button
+- "Manual Entry"
 
-Stats Section:
-- Achievement cards
-- Personal records
+Form:
+- Subject (TextField)
+- Duration (Number, minutes)
+- Date: Today (unchangeable)
+
+Actions:
+- Cancel
+- Save (#5B9BD5)
+
+Note: "Past dates cannot be added - cheat prevention"
+```
+
+### 4. Pomodoro Settings Dialog
+```
+Header:
+- "Pomodoro Settings"
+
+Preset Selection:
+- 25/5 (Classic Pomodoro) ← Chip button
+- 45/15 (Long Focus)
+- 50/10 (Balanced)
+- Custom
+
+Custom Settings (expandable):
+- Work (slider: 15-90 min)
+- Break (slider: 5-60 min)
+
+Timer View:
+- Flip Clock (default) ← Radio
+- Circular Progress
+- Minimal (numbers only)
+
+Saved Subjects:
+- List
+- Delete icon
+- Add new
+
+Actions:
+- Save
+```
+
+### 5. Tasks Screen
+```
+Tabs (2):
+- Personal Tasks
+- Group Tasks
+
+Personal Tab:
+- Task list
+  * Checkbox
+  * Title
+  * Deadline badge (optional)
+  * Edit/Delete
+- Completed section (collapsible)
+- Add FAB
+
+Group Tasks Tab:
+- Group tasks
+  * Task title
+  * Completion: 3/5
+  * Own checkbox
+  * Group name badge
+- Assigned tasks section
+  * Accept/Reject buttons
+  * Assigned by: [Name]
+```
+
+### 6. Groups List
+```
+Header:
+- "My Groups"
+- Create group (+)
+- Join group (code)
+
+Group Cards:
+- Group name
+- Member count
+- Completed tasks / Total tasks
+- Arrow
+
+Empty:
+- "You have no groups yet"
+- Buttons
+```
+
+### 7. Group Detail (Leaderboard + Stats + Tasks)
+```
+Tabs (3):
+- Leaderboard
+- Statistics
+- Group Tasks
+
+Leaderboard Tab:
+- Member cards (score sorted):
+  * Rank badge (1🥇 2🥈 3🥉)
+  * Name
+  * Total time
+  * Completed tasks
+  * Score (70% time + 30% tasks)
+
+Statistics Tab (4 cards):
+- Total study time
+- Average streak
+- Completed tasks
+- This week total
+
+Group Tasks Tab:
+- Group tasks list
+- Completion status for each task
+- Add task button (anyone can add)
+
+Footer:
+- Leave group
+```
+
+### 8. Profile Screen
+```
+Header:
+- Profile circle
+- Name
+- Email
+
+Statistics Summary (4 cards):
+- Total study time
+- Current streak
+- Completed tasks
+- This week
 
 Settings:
-- List format settings
-- Toggles and arrows
+- Pomodoro Settings
+  * Work duration: 25 min
+  * Break duration: 5 min
+  * Edit icon
+- Dark Mode Toggle
+
+Actions:
+- Edit profile
+- Logout
 ```
 
-## 🎭 Animations and Transitions
+## Animations and Transitions
 
 ### Page Transitions
 ```
 Stack Navigation:
-- Slide from right (iOS style)
+- Slide from right
 - Duration: 250ms
 - Easing: ease-out
 
@@ -234,7 +387,7 @@ Tab Navigation:
 - Duration: 150ms
 ```
 
-### Micro-Animations
+### Micro Animations
 ```
 Button Press:
 - Scale: 0.95
@@ -243,167 +396,51 @@ Button Press:
 Card Appear:
 - Fade in + Slide up
 - Duration: 300ms
-- Stagger: 50ms
 
 Streak Counter:
-- Number change: Count up animation
+- Count up animation
 - Duration: 500ms
-- Easing: bounce
 ```
 
-### Loading States
+### Timer Animations (Special)
 ```
-Skeleton Loading:
-- Shimmer effect
-- Gray placeholder shapes
-- Smooth fade to content
+Flip Clock Animation:
+- Top card flips down (180°)
+- Bottom card comes up
+- Duration: 300ms
+- Easing: cubic-bezier(0.4, 0.0, 0.2, 1)
+- Shadow effect (during flip)
 
-Pull to Refresh:
-- Custom streak flame indicator
-- Color: Primary
-```
+Circular Progress:
+- Smooth sweep (every second)
+- Duration: 1000ms
+- Linear animation
+- Glow pulse (working state)
 
-## 📐 Layout System
-
-### Grid System
-```
-Container Padding: 20px
-Card Margins: 12px
-Element Spacing: 8px, 16px, 24px
-Border Radius: 8px, 12px, 16px, 20px
-```
-
-### Typography Scale
-```
-Display Large: 32px, Bold
-Display Medium: 28px, Bold
-Headline: 24px, SemiBold
-Title: 20px, SemiBold
-Body Large: 16px, Regular
-Body Medium: 14px, Regular
-Caption: 12px, Regular
+Session Start:
+- Scale up: 0.8 → 1.0
+- Fade in
+- Duration: 400ms
+- Easing: ease-out-back
 ```
 
-## 🌙 Dark Mode Support
+## Design Priorities
 
-### Dark Theme Colors
-```
-Background: #1A1A1A
-Surface: #2D2D2D
-Card: #3A3A3A
-Text Primary: #FFFFFF
-Text Secondary: #B0B0B0
-Primary: #5BA3F5 (Lighter blue)
-Secondary: #90E33A (Lighter green)
-```
+### Timer UI (Most Important)
+- **Flip clock animation:** Project's showcase feature
+- **Smooth and premium:** Apple/Google quality
+- **User choice:** 3 different view modes
+- **Eye-catching but not tiring**
 
-## 📱 Responsive Design
+### Color Strategy
+- Soft tones (doesn't tire eyes)
+- Pastel-like (relaxing)
+- Professional appearance
+- Full Light + Dark mode support
 
-### Breakpoints
-```
-Small Phone: < 360px
-Medium Phone: 360px - 414px
-Large Phone: > 414px
-Tablet: > 768px
-```
-
-### Adaptation Rules
-- Reduce card padding on small screens
-- Use grid layout on large screens
-- Consider side navigation on tablet
-
-## 🎯 User Experience (UX) Principles
-
-### 1. Motivation-Focused
-- Visually emphasize streaks
-- Celebrate achievements (confetti animation)
-- Use progress bars
-- Give positive feedback
-
-### 2. Simplicity
-- One main action per screen
-- Reach goals with minimum clicks
-- Clear and distinct information hierarchy
-
-### 3. Social Motivation
-- Highlight group activities
-- Show friend achievements
-- Create healthy competition environment
-
-### 4. Habit Formation
-- Daily reminders
-- Easy access (widgets)
-- Streak protection warnings
-
-## 🔧 Flutter Implementation Notes
-
-### Material Design 3 Integration
-```dart
-// Theme configuration
-ThemeData(
-  useMaterial3: true,
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: Color(0xFF4A90E2),
-  ),
-  cardTheme: CardTheme(
-    elevation: 2,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(16),
-    ),
-  ),
-)
-```
-
-### Custom Widgets
-```dart
-// Streak Card Widget
-class StreakCard extends StatelessWidget {
-  final int streakCount;
-  final double progress;
-  
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFF7ED321), Color(0xFF6BB91C)],
-        ),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      // ... rest of implementation
-    );
-  }
-}
-```
-
-### Animation Implementation
-```dart
-// Streak counter animation
-AnimatedBuilder(
-  animation: _animationController,
-  builder: (context, child) {
-    return Text(
-      '${(_animation.value * streakCount).round()}',
-      style: Theme.of(context).textTheme.displayLarge,
-    );
-  },
-)
-```
-
-## 🎨 Figma Integration
-
-### Design Tokens
-- Export colors as Flutter color constants
-- Typography styles as TextTheme
-- Component variants for different states
-- Icon assets in multiple resolutions
-
-### Asset Export Settings
-```
-Flutter Assets:
-- @1x, @2x, @3x for different densities
-- SVG for vector icons
-- PNG for raster images
-```
-
-This design document provides a comprehensive guide for creating a modern, motivational, and user-friendly Flutter application that follows Material Design 3 principles while maintaining a unique brand identity focused on motivation and achievement.
+### User Experience
+- Focus session flow must be smooth
+- Subject selection quick (dropdown, 2 clicks)
+- Timer controls large and easy
+- Manual/Timer badges clearly visible
+- Group tasks must feel collaborative

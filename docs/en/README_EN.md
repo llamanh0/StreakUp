@@ -1,299 +1,346 @@
-# 🔥 StreakUp - Motivation Tracking Application
-
-> **Boost your motivation, reach your goals, succeed together with your friends!**
+# StreakUp - Motivation Tracking Application
 
 **Necmettin Erbakan University - Computer Engineering Department**  
 **Mobile Programming Course - Final Project (2025-2026)**  
 **Supervisor:** Prof. Dr. Mehmet Hacıbeyoğlu
 
-StreakUp is a modern mobile application that helps users increase their motivation by tracking their study hours and streaks, encouraging collaborative work through group support. This project is designed using the 2025-2026 technology stack with Flutter framework through a cross-platform mobile development approach.
+StreakUp is a productivity application that tracks study time with pomodoro timer and task management, provides competition and motivation through group leaderboard system. A cross-platform project developed with Flutter framework.
 
-## 📱 Application Overview
+## Project Overview
 
-### 🎯 Purpose
-- Track users' daily study habits
-- Maintain motivation through streak system
-- Provide social motivation through group support
-- Support personal development goals
+### Purpose
+Improve study productivity with pomodoro timer and task management, provide motivation through streak system, create healthy competition environment with group leaderboard.
 
-### 👥 Target Users
-- University students
-- Exam preparers
-- Personal goal trackers
-- Anyone who wants to work with group support
+### Target Users
+University students, exam preparers, those who want efficient studying and group support.
 
-## ✨ Key Features
+## Core Features
 
-### 🔐 User Management
-- Secure login with Firebase Authentication
-- Email/password and Google sign-in options
-- Personal profile management
+### 1. Study Tracking (Dual Mode)
+**Pomodoro Timer (Focus Session):**
+- Subject selection before starting timer
+- Saved subjects list (automatic)
+- Last used subjects
+- Customizable durations (25/5, 45/15, custom)
+- Start/Pause/Reset
+- Subject switching (session restart)
+- Auto-save when timer completes
+- Maximum break limit (60 min)
+- **Premium Timer UI:** Flip clock animation, circular progress
 
-### 📊 Study Tracking
-- Daily study time recording
-- Automatic streak calculation
-- Personal statistics and charts
-- Weekly/monthly progress tracking
+**Manual Entry:**
+- Backup method
+- Subject, duration input
+- Today only (cheat prevention)
+- Manual badge (🖊️) shown in list
 
-### 👥 Group System
-- Create groups with friends
-- Join groups with invite codes
-- View group members' streaks
-- Group motivation feed
+### 2. Task Management
+**Personal Tasks:**
+- Add/edit/delete tasks
+- Checkbox completion
+- Deadline dates
 
-### 🏆 Motivation System
-- Streak milestones
-- Achievement badges
-- Daily goal tracking
-- Motivational messages
+**Group Tasks:**
+- Group members can create shared tasks
+- Everyone completes their own checkbox
+- Task "completed" when all members finish
 
-## 🛠️ Technology Stack (2025/2026 Current)
+**Task Assignment:**
+- Assign tasks to group members
+- Assigned person accepts/rejects
+- Completion tracking
 
-### 📱 Frontend (Mobile)
-- **Flutter 3.24+** - Cross-platform mobile development
-- **Dart 3.5+** - Modern programming language
-- **Material Design 3** - Google's latest design system
-- **Riverpod 2.4+** - Advanced state management (more advanced than Provider)
-- **Go Router 14+** - Declarative routing
-- **Flutter Hooks** - React-style hooks for Flutter
+### 3. Group System and Competition
+- Create groups, invite code, join
+- **Leaderboard:** Ranking by total study time + Completed tasks
+- **Group statistics:** Total time, average, completed tasks
+- Member list and performance
 
-### ☁️ Backend & Database
-- **Firebase 10.x** - Google's BaaS platform
-  - **Firebase Auth** - Multi-provider authentication
-  - **Firestore** - NoSQL real-time database
-  - **Cloud Functions** - Serverless backend logic
-  - **FCM** - Push notifications
-  - **Firebase Analytics** - User behavior tracking
-  - **Crashlytics** - Crash reporting
+### 4. Streak and Statistics
+- Daily streak (pomodoro or manual)
+- Personal: Total time, streak, completed tasks
+- Group: Leaderboard, group performance
 
-### 🎨 Design & Development Tools
-- **Figma** - Collaborative UI/UX design
-- **VS Code** - Primary IDE with Flutter extensions
-- **Android Studio** - Android development & emulation
+### 5. Dark Mode
+- Light/Dark theme toggle
+- Full support across all screens
+
+## Technology Stack
+
+### Frontend
+- **Flutter 3.24+** - Cross-platform framework
+- **Dart 3.5+** - Programming language
+- **Material Design 3** - UI design system
+- **Provider** - State management
+- **Timer API** - Pomodoro implementation
+
+### Backend
+- **Firebase Authentication** - Email/password
+- **Cloud Firestore** - Users, Groups, WorkLogs, Tasks
+
+### Tools
+- **Figma** - Design (10 screens)
+- **VS Code / Android Studio** - IDE
 - **Git & GitHub** - Version control
-- **Flutter DevTools** - Performance monitoring
 
-## 📁 Project Documents
+## Project Documents
 
 | Document | Description | File |
 |----------|-------------|------|
-| **Technical Requirements** | Detailed technical specifications and data model | [`TECHNICAL_REQUIREMENTS_EN.md`](TECHNICAL_REQUIREMENTS_EN.md) |
+| **Technical Requirements** | Data model, algorithms, test strategy | [`TECHNICAL_REQUIREMENTS_EN.md`](TECHNICAL_REQUIREMENTS_EN.md) |
 | **Design Document** | UI/UX design guide and color palette | [`DESIGN_DOCUMENT_EN.md`](DESIGN_DOCUMENT_EN.md) |
-| **Figma Guide** | Wireframe and prototype creation guide | [`FIGMA_WIREFRAME_GUIDE_EN.md`](FIGMA_WIREFRAME_GUIDE_EN.md) |
-| **Development Plan** | 12-week detailed roadmap | [`DEVELOPMENT_ROADMAP_EN.md`](DEVELOPMENT_ROADMAP_EN.md) |
+| **Figma Guide** | Wireframe and design guide | [`FIGMA_WIREFRAME_GUIDE_EN.md`](FIGMA_WIREFRAME_GUIDE_EN.md) |
+| **Development Plan** | 10-week detailed roadmap | [`DEVELOPMENT_ROADMAP_EN.md`](DEVELOPMENT_ROADMAP_EN.md) |
 
-## 📄 Turkish Documents / Türkçe Belgeler
+## Project Timeline (10 Weeks)
 
-| Belge | Açıklama | Dosya |
-|-------|----------|-------|
-| **Teknik Gereksinimler** | Detaylı teknik spesifikasyonlar ve veri modeli | [`../tr/TECHNICAL_REQUIREMENTS.md`](../tr/TECHNICAL_REQUIREMENTS.md) |
-| **Tasarım Belgesi** | UI/UX tasarım rehberi ve renk paleti | [`../tr/DESIGN_DOCUMENT.md`](../tr/DESIGN_DOCUMENT.md) |
-| **Figma Rehberi** | Wireframe ve prototype oluşturma kılavuzu | [`../tr/FIGMA_WIREFRAME_GUIDE.md`](../tr/FIGMA_WIREFRAME_GUIDE.md) |
-| **Geliştirme Planı** | 12 haftalık detaylı roadmap | [`../tr/DEVELOPMENT_ROADMAP.md`](../tr/DEVELOPMENT_ROADMAP.md) |
-| **README Türkçe** | Proje genel bakış (Türkçe) | [`../tr/README.md`](../tr/README.md) |
+**Pre-Development (3-4 days):**
+- Figma wireframes (10 screens, light + dark = 20 designs)
+- Flip clock animation mockup (showcase)
+- Component library (timer widget, task card, leaderboard item)
 
-## 📅 Project Timeline (2025-2026 Academic Year)
+|   Week   |              Focus Area              |                  Output                  |
+|:--------:|:------------------------------------:|:----------------------------------------:|
+|  **1-2** |   Flutter Basics + Firebase Auth     |      Login/register system working       |
+|   **3**  | Firestore + Collections Setup        | Users, Groups, Tasks data structure      |
+|   **4**  | Pomodoro Timer + Manual Entry        | Dual mode study tracking                 |
+|   **5**  | Personal Task System                 | Task add/complete                        |
+|   **6**  | Streak + Group CRUD                  | Streak + Group create/join               |
+|   **7**  | Group Tasks + Assignment             | Group tasks, task assignment             |
+|   **8**  | Group Leaderboard + Statistics       | Competition system (time + tasks)        |
+|   **9**  | Statistics + Profile + Dark Mode     | Personal stats, profile, dark theme      |
+|  **10**  | Test + Deployment                    | APK ready                                |
 
-| Phase | Duration | Stage | Objectives | Deliverables |
-|-------|----------|-------|------------|--------------|
-| **I** | 2 weeks | Analysis & Design | Requirements analysis, system architecture, UI/UX design | Project proposal, technical specification, wireframes |
-| **II** | 3 weeks | Infrastructure Development | Flutter setup, Firebase integration, basic architecture | Project skeleton, authentication system |
-| **III** | 4 weeks | Core Features | Study tracking, streak calculation, data management | MVP application, basic functionality |
-| **IV** | 3 weeks | Social Features | Group system, real-time synchronization, notifications | Fully functional application |
-| **V** | 2 weeks | Testing & Optimization | Performance testing, bug fixing, UI polish | Beta version, test reports |
-| **VI** | 1 week | Finalization | Documentation, presentation preparation, deployment | Final delivery, presentation materials |
+## Color System
 
-### 📅 Critical Milestones
-- **Project Proposal Presentation:** Beginning of term (TBD)
-- **Mid-term Evaluation:** Mid-term (TBD)
-- **Beta Version Delivery:** 2 weeks before finals
-- **Final Project Presentation:** Finals period (TBD)
-
-## 🎨 Design System
-
-### Color Palette
+### Light Mode (Main Theme)
 ```
-🟦 Primary Color: #4A90E2 → Blue (trust, focus)
-🟧 Secondary Color: #FF9800 → Orange (energy, motivation)
-🟩 Accent Color: #43A047 → Green (success, approval, streak achievement)
-⚪ Background: #F5F5F5 → Light gray (clean appearance)
-⚫ Text: #212121 → Dark gray (for readability)
+Primary (Blue):    #5B9BD5 - Calm, professional, eye-friendly
+Success (Green):   #66BB6A - Soft, motivating
+Accent (Orange):   #FFA726 - Energetic but soft
+
+Background:        #F8F9FA - Very light gray
+Surface:           #FFFFFF - Cards
+Text Primary:      #2D3748 - Soft black
+Text Secondary:    #718096 - Soft gray
+Divider:           #E2E8F0
+
+Leaderboard:
+  1. Gold:         #FFD700
+  2. Silver:       #C0C0C0
+  3. Bronze:       #CD7F32
 ```
 
-### 🎨 Color Usage Guide
-- **Buttons:** Blue (#4A90E2) - Trust and focus
-- **Streak Indicator:** Green (#43A047) - Success and approval
-- **Alerts/Motivation Messages:** Orange (#FF9800) - Energy and motivation
-- **Combination:** Blue + Orange + Green = Energetic and motivating
+### Dark Mode
+```
+Primary:           #7DAFEA - Lighter blue (night friendly)
+Success:           #81C784 - Lighter green
+Accent:            #FFB74D - Lighter orange
+
+Background:        #121212 - Material dark standard
+Surface:           #1E1E1E - Cards
+Card Elevated:     #2D2D2D
+Text Primary:      #E2E8F0 - Soft white
+Text Secondary:    #A0AEC0 - Soft gray
+Divider:           #3A3A3A
+
+Leaderboard (Dark):
+  1. Gold:         #FFD700 (same)
+  2. Silver:       #C0C0C0 (same)
+  3. Bronze:       #CD7F32 (same)
+```
+
+### Color Psychology
+- **Blue (#5B9BD5):** Trust, focus, long-term use
+- **Green (#66BB6A):** Success, growth, positive feedback
+- **Orange (#FFA726):** Energy, action, attention
+- **All tones:** Pastel-like, eye-friendly, relaxing
 
 ### Core Components
-- **Cards**: Rounded corners, shadowed cards
-- **Buttons**: Gradient background, smooth animations
-- **Icons**: Modern, minimalist icons
-- **Typography**: SF Pro (iOS) / Roboto (Android)
+- **Cards**: 16px border radius, elevation shadows
+- **Buttons**: Solid color (#5B9BD5), 12px radius
+- **Icons**: Outline style, Material Icons
+- **Typography**: Roboto (Android) / SF Pro (iOS)
+- **Leaderboard**: Rank badges (gold/silver/bronze), colored highlights
 
-## 📱 Screen Structure
+## Screen Structure
 
-### Main Navigation
-1. **🏠 Home** - Daily streak and study tracking
-2. **📊 Statistics** - Personal data and charts  
-3. **👥 Groups** - Group list and activities
-4. **👤 Profile** - User settings and achievements
+### Main Navigation (Bottom Navigation Bar - 4 Tabs)
+1. **Home** - Pomodoro timer and streak
+2. **Tasks** - Personal and group tasks
+3. **Groups** - Group list and leaderboard
+4. **Profile** - Statistics, settings, dark mode
 
-### Basic Flow
+### Main Flow
 ```
-Splash → Login/Register → Home → Add Study → Groups → Profile
+Login → Home (Timer/Manual) → Tasks → Groups → Leaderboard → Profile → Stats
 ```
 
-## 🔥 MVP Features
+## MVP Scope (10 Weeks)
 
-### ✅ Core Functionality
-- [ ] **Authentication System** - Multi-provider secure login
-- [ ] **Study Tracking Module** - Daily activity recording and management
-- [ ] **Streak Calculation Algorithm** - Automatic continuity analysis and display
-- [ ] **User Profile Management** - Personal data management and statistics
-- [ ] **Group Management System** - Dynamic group creation and membership management
-- [ ] **Real-time Synchronization** - Live data sharing and updates
-- [ ] **Data Persistence** - NoSQL database integration
+### Core Features
 
-### 📈 Advanced Features
-- [ ] **Push Notification System** - Smart reminders and notifications
-- [ ] **Dynamic Theme System** - User-preferred interface customization
-- [ ] **Data Visualization** - Interactive charts and analytics panels
-- [ ] **Achievement Management System** - Gamification and milestone tracking
-- [ ] **Offline Support** - Local data synchronization
-- [ ] **Data Export** - Multi-format support
+**1. Study Tracking**
+- [ ] Pomodoro timer (customizable: 25/5, 45/15, custom)
+- [ ] Timer: Start/Pause/Reset
+- [ ] Auto-save when timer completes
+- [ ] Manual entry (backup, today only)
+- [ ] Study history listing
 
-### 🚀 Advanced Technology Integrations
-- [ ] **AI Integration** - Personalized recommendation system
-- [ ] **Voice Recognition System** - Voice-to-action functionality
-- [ ] **Native Widget Support** - Platform-specific widgets
-- [ ] **Social Media Integration** - Achievement sharing system
-- [ ] **Advanced Analytics** - User behavior analysis
-- [ ] **Multi-language Support** - Internationalization (i18n)
+**2. Task System**
+- [ ] Personal tasks (add, edit, delete)
+- [ ] Task completion (checkbox)
+- [ ] Deadline dates
+- [ ] Group tasks (shared task creation)
+- [ ] Task assignment (assign to group members)
+- [ ] Assignment accept/reject
 
-## 🎯 Success Criteria
+**3. Streak System**
+- [ ] Daily streak (if studied +1)
+- [ ] Longest streak tracking
+- [ ] Auto calculation
 
-### Technical Criteria
-- ✅ Application runs stably
-- ✅ Successful Firebase integration
-- ✅ Real-time data synchronization
-- ✅ Responsive and user-friendly UI
+**4. Group System**
+- [ ] Create group, invite code, join
+- [ ] Member list
+- [ ] Leave group
+
+**5. Group Leaderboard and Competition**
+- [ ] Ranking by total study time
+- [ ] Ranking by completed tasks
+- [ ] Combined ranking (time + tasks)
+- [ ] Colored badges (gold/silver/bronze)
+
+**6. Statistics**
+- [ ] Personal: Total time, streak, completed tasks
+- [ ] Group: Total time, average, completed tasks
+
+**7. Dark Mode**
+- [ ] Light/Dark theme toggle
+- [ ] Full support across all screens
+
+**8. Profile**
+- [ ] View/edit information
+- [ ] Statistics summary
+- [ ] Dark mode toggle
+- [ ] Logout
+
+### Out of Scope (To Save Time)
+- ~~Background app tracking (15-second check)~~ → Too complex
+- ~~Real-time activity feed~~ → Leaderboard only
+- ~~Chart visualization~~ → Numbers only
+- ~~Google Sign-In~~ → Email/password only
+- ~~Push notifications~~
+- ~~Profile photo upload~~
+- ~~Achievement badges~~
+- ~~Group chat~~
+
+### Future Versions
+- Background tracking and auto-pause
+- Real-time activity feed
+- Chart visualization
+- Push notifications
+- Pomodoro statistics (focus time analytics)
+- Task prioritization (high/medium/low)
+
+## Evaluation Criteria
+
+### Functional Requirements
+- Pomodoro timer working (flip clock, focus session, subject selection)
+- Manual entry today only
+- Timer/Manual badges displayed correctly (⏱️/🖊️)
+- Personal tasks CRUD working
+- Group tasks and assignment system working
+- Group leaderboard score calculation correct (70% time + 30% tasks)
+- Streak algorithm correct
+- Dark mode working on all screens
+- Data persistent in Firebase
+
+### Technical Requirements
+- Firebase integration (Auth, Firestore: 4 collections)
+- Security rules (users, workLogs, tasks, groups)
+- Timer animations smooth (flip clock 300ms)
+- Code organized and modular
+- APK build successful (< 25 MB)
 
 ### User Experience
-- ✅ Easy and intuitive interface
-- ✅ Smooth animations and transitions
-- ✅ Motivation-enhancing design
-- ✅ Fast and responsive performance
+- Timer UI premium and impressive
+- Focus session flow easy (quick subject selection)
+- Task system usable
+- Leaderboard motivating
+- Dark mode comfortable
+- Navigation logical
 
-## 📚 Current Learning Resources (2024-2025)
+## Technical References
 
-### 📹 Video Resources
-- [Flutter Official YouTube](https://youtube.com/flutterdev) - Official Flutter channel
-- [Firebase for Flutter](https://youtube.com/playlist?list=PLjxrf2q8roU0Net_g1NT5_vOO3s_FR02J) - Firebase integration
-- [Riverpod Complete Guide](https://codewithandrea.com/courses/flutter-riverpod-essential/) - State management
-- [Flutter Turkey YouTube](https://www.youtube.com/@FlutterTurkiye) - Turkish content
+- [Flutter Documentation](https://docs.flutter.dev)
+- [Firebase Documentation](https://firebase.google.com/docs)
+- [Material Design 3](https://m3.material.io)
 
-### 📖 Current Documentation
-- [Flutter 3.24 Documentation](https://docs.flutter.dev) - Official documentation
-- [Firebase 10.x Docs](https://firebase.google.com/docs/flutter/setup) - Firebase Flutter setup
-- [Material Design 3](https://m3.material.io) - Design system guidelines
-- [Riverpod Documentation](https://riverpod.dev) - State management
-- [Go Router Documentation](https://pub.dev/packages/go_router) - Navigation
+## System Requirements
 
-### 🎓 Academic Resources
-- **NEU Library** - IEEE, ACM databases
-- **Google Scholar** - Mobile application development papers
-- **ResearchGate** - Motivation tracking research
+**Development:**
+- Flutter SDK 3.24+
+- Android SDK (API 21+)
+- VS Code / Android Studio
 
-### 🛠️ Practical Development Steps
-1. **Hello World** - Basic Flutter app
-2. **Counter App** - State management learning
-3. **Todo App** - CRUD operations + local storage
-4. **Weather App** - API integration
-5. **Chat App** - Firebase real-time features
-6. **StreakUp MVP** - Final project implementation
+**Deployment:**
+- Platform: Android (API 21+)
+- Build: `flutter build apk --release`
 
-## ❓ FAQ (Frequently Asked Questions)
+**Required Packages:**
+- firebase_core, firebase_auth, cloud_firestore
+- provider (state management)
+- shared_preferences (dark mode, timer settings)
+- intl (date formatting)
+- flutter_local_notifications (timer notifications - optional)
 
-### Q: What are the technical requirements of the project?
-**A:** Minimum system requirements:
-- **Flutter SDK:** 3.24+ version
-- **Dart:** 3.5+ language support
-- **Android:** API Level 21+ (Android 5.0)
-- **iOS:** iOS 12.0+ (optional)
-- **Firebase:** 10.x service integration
+## Resources and Support
 
-### Q: Which development environments are supported?
-**A:** Recommended development tools:
-- **IDE:** VS Code (Flutter extensions) / Android Studio
-- **Version Control:** Git & GitHub
-- **Design Tools:** Figma (UI/UX prototyping)
-- **Testing:** Flutter Test Framework + Firebase Test Lab
+**Technical References:**
+- Flutter: https://docs.flutter.dev
+- Firebase: https://firebase.google.com/docs
+- Material Design 3: https://m3.material.io
 
-### Q: What is the project's deployment strategy?
-**A:** Multi-platform deployment approach:
-- **Android:** Google Play Console (internal testing)
-- **Web:** Firebase Hosting (demo purposes)
-- **Repository:** GitHub Pages (documentation)
-- **CI/CD:** GitHub Actions (automated builds)
+**Support:**
+- Stack Overflow (Flutter, Firebase)
+- Flutter Discord community
 
-### Q: How will data security be ensured?
-**A:** Comprehensive security approach:
-- **Authentication:** Firebase Auth (multi-provider)
-- **Data Encryption:** Firestore security rules
-- **API Security:** Cloud Functions authentication
-- **Privacy:** GDPR compliant data handling
-
-### Q: What is the project's scalability strategy?
-**A:** Enterprise-ready architecture:
-- **Microservices:** Firebase Cloud Functions
-- **Database:** Firestore (NoSQL, auto-scaling)
-- **Caching:** Local storage + cloud synchronization
-- **Performance:** Lazy loading, pagination, optimization
-
-## 🤝 Support and Contact
-
-### 🆘 Help Resources
-- **Stack Overflow**: Flutter and Firebase questions
-- **Discord**: Flutter Turkey community
-- **GitHub**: Open source projects and examples
-
-### 📞 Academic Mentorship
-- **Course Instructor:** Prof. Dr. Mehmet Hacıbeyoğlu
-
+**Supervisor:**
+- Prof. Dr. Mehmet Hacıbeyoğlu
 
 ---
 
-## 🎯 Project Goals and Scope
+## Project Goals
 
-### 📝 Academic Goals
-- Acquiring modern mobile application development skills
-- Learning cross-platform development approaches
-- Integrating cloud-based backend services
-- Applying real-time data synchronization techniques
-- Understanding user experience and interface design principles
+### Academic Goals
+- Mobile app development with Flutter framework
+- Using Firebase backend services
+- Real-time data management
+- UI/UX design principles
+- Project management and time planning
 
-### 📊 Technical Goals
-- Performant and scalable mobile application architecture
-- Secure authentication and data protection
-- Responsive and accessible user interface
-- Effective state management and data flow
-- Comprehensive test coverage and quality assurance
+### Technical Goals
+- Functional MVP application
+- Firebase integration
+- Secure authentication system
+- Responsive user interface
+- Clean code practices
 
 ---
 
-## 👨‍💻 Project Information
+## Project Information
 
-**🎓 Student:** Hasan Batuhan Kılıçkan  
-**🏫 University:** Necmettin Erbakan University  
-**🏢 Department:** Computer Engineering (3rd Year)  
-**📚 Course:** Mobile Programming  
-**👨‍🏫 Supervisor:** Prof. Dr. Mehmet Hacıbeyoğlu  
-**📅 Term:** 2025-2026 Academic Year  
-**🏷️ Project Type:** Final Project (Solo Development)
+**Student:** Hasan Batuhan Kılıçkan  
+**University:** Necmettin Erbakan University  
+**Department:** Computer Engineering (3rd Year)  
+**Course:** Mobile Programming  
+**Supervisor:** Prof. Dr. Mehmet Hacıbeyoğlu  
+**Period:** 2025-2026  
+**Duration:** 10 weeks  
+**Development Mode:** Solo
 
-### 📞 Contact & Support
-- **Email:** hbkilickan@gmail.com
-- **WhatsApp:** +905362096205
-- **GitHub Issues:** You can open issues for technical problems
+### Contact
+- Email: hbkilickan@gmail.com
+- Phone: +90 536 209 62 05
+- GitHub: This repository

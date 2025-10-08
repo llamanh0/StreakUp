@@ -1,8 +1,8 @@
 # StreakUp - Figma Design and Wireframe Guide
 
-## 🎨 Figma Project Setup
+## Figma Project Setup
 
-### 1. Creating New Project
+### 1. Create New Project
 ```
 Project Name: StreakUp Mobile App
 Team: Personal (or school team)
@@ -12,270 +12,306 @@ Description: Motivation and study tracking application
 ### 2. Artboard Organization
 ```
 📁 01 - Design System
-   - Colors
+   - Colors (Light + Dark)
    - Typography
    - Components
    - Icons
+   - Timer Widget (Flip Clock Mockup)
 
 📁 02 - Wireframes
-   - User Flow
+   - User Flow (Tasks screen included)
    - Low-fi Wireframes
 
-📁 03 - UI Screens
-   - Auth Screens
-   - Main Screens
-   - Secondary Screens
+📁 03 - UI Screens (Light + Dark)
+   - Auth Screens (Login, Register)
+   - Timer Screen (Home + Focus Session)
+   - Tasks Screen (Personal + Group)
+   - Groups Screen (List + Detail)
+   - Profile Screen (Stats + Settings)
 
 📁 04 - Prototypes
    - User Journey
+   - Flip Clock Animation
    - Interactions
 ```
 
-## 🎯 Design System Creation
+## Design System Creation
 
-### Step 1: Creating Color Palette
+### Step 1: Create Color Palette
 ```
-1. Create new frame: "Color Palette" (1200x800)
+1. Create two frames: "Light Theme" and "Dark Theme" (1200x800)
 2. Draw circle shapes for each color (80x80)
-3. Write color codes at the bottom
-4. Create Color Styles:
-   - Primary/Blue → #4A90E2
-   - Secondary/Green → #7ED321
-   - Accent/Orange → #F5A623
-   - Neutral/Gray-100 → #F5F7FA
-   - Text/Dark → #2C3E50
+3. Write color codes below
+
+Light Theme Color Styles:
+   - Primary → #5B9BD5
+   - Success → #66BB6A
+   - Accent → #FFA726
+   - Background → #F8F9FA
+   - Surface → #FFFFFF
+   - Text/Primary → #2D3748
+   - Text/Secondary → #718096
+   - Badge/Gold → #FFD700
+   - Badge/Silver → #C0C0C0
+   - Badge/Bronze → #CD7F32
+
+Dark Theme Color Styles:
+   - Primary/Dark → #7DAFEA
+   - Success/Dark → #81C784
+   - Accent/Dark → #FFB74D
+   - Background/Dark → #121212
+   - Surface/Dark → #1E1E1E
+   - Text/Primary/Dark → #E2E8F0
+   - Text/Secondary/Dark → #A0AEC0
+   - Badge colors same
 ```
 
 ### Step 2: Typography System
 ```
 1. Create "Typography" frame
 2. Create text styles:
-   - Display Large: Inter/Roboto, 32px, Bold
-   - Headline: Inter/Roboto, 24px, SemiBold
-   - Body Large: Inter/Roboto, 16px, Regular
-   - Caption: Inter/Roboto, 12px, Regular
-3. Write sample text for each style
+   - Display Large: SF Pro/Roboto, 32px, Bold
+   - Headline: SF Pro/Roboto, 24px, SemiBold
+   - Body Large: SF Pro/Roboto, 16px, Regular
+   - Caption: SF Pro/Roboto, 12px, Regular
+3. Write example text for each style
 4. Save as Text Styles
 ```
 
 ### Step 3: Component Library
 ```
-🔘 Buttons:
+Buttons:
 - Primary Button (160x48)
-- Secondary Button (160x48)
-- Icon Button (48x48)
+- Timer Start/Stop (200x56 - large)
 - FAB Button (56x56)
 
-📱 Cards:
+Cards:
 - Basic Card (320x120)
-- Streak Card (320x160)
+- Streak Card (320x140)
 - Group Card (320x100)
+- Task Card (320x80, checkbox)
+- Leaderboard Item (320x90)
 
-📝 Inputs:
+Timer Widgets (Special!):
+- Flip Clock Digit (60x80, 4 parts)
+  * Top half (30x80)
+  * Bottom half (30x80)
+  * Flip animation mockup
+- Circular Progress Ring (280x280)
+- Timer Control Panel (320x80)
+
+Inputs:
 - Text Input (280x48)
-- Search Input (280x48)
-- Number Input (120x48)
+- Subject Dropdown (280x56)
+- Number Slider (280x40)
 
-🧭 Navigation:
-- Bottom Tab Bar (390x80)
-- Top App Bar (390x56)
+Navigation:
+- Bottom Tab Bar (390x80, 4 tabs)
+
+Leaderboard:
+- Rank Badge (40x40)
+- Score Card (320x90)
 ```
 
-## 📱 Wireframe Design Process
+## Wireframe Design Process
 
 ### Step 1: User Flow Diagram
 ```
 Frame Size: 1920x1080 (Landscape)
 
 Flow Structure:
-[Splash] → [Login/Register] → [Home] → [Add Study] → [Groups] → [Profile]
+[Login/Register] → [Home/Timer] → [Tasks] → [Groups] → [Group Detail/Leaderboard] → [Profile]
 
 Connections:
-- Arrow signs for flow direction
-- Decision points (diamond shape)
-- Screens (rectangle shape)
-- Actions (oval shape)
+- Arrows for flow direction
+- Decision points (Timer vs Manual)
+- Screens (rectangle)
+- Actions (oval)
 ```
 
-### Step 2: Low-Fidelity Wireframes
+## Screen Designs
+
+### 1. Login Screen
 ```
-Artboard Size: iPhone 14 (390x844)
+Header:
+- Logo
+- "Welcome"
 
-Wireframe Elements:
-- Gray boxes (for content)
-- Lines (for text)
-- Circles (for profile photos)
-- Placeholders (for images)
-
-For each screen:
-1. Header area
-2. Main content area
-3. Navigation area
-4. Action buttons
-```
-
-## 🖼️ Screen Designs
-
-### 1. Splash Screen
-```
-Artboard: iPhone 14 (390x844)
-Background: Primary gradient (#4A90E2 → #357ABD)
-
-Elements:
-- Logo (centered, 120x120)
-- App name "StreakUp" (Display Large, white)
-- Tagline "Boost Your Motivation" (Body Large, white, 0.8 opacity)
-- Loading indicator (bottom)
-
-Figma Tips:
-- Gradient: Linear, 45° angle
-- Logo: Import SVG or draw vector
-- Use Smart Animate for animation
-```
-
-### 2. Login Screen
-```
-Layout Structure:
-Header (100px):
-- Logo (small, 60x60)
-- "Welcome Back" (Headline)
-
-Form Area (400px):
+Form:
 - Email input (280x48)
 - Password input (280x48)
-- "Forgot Password" link (Caption)
-- Login button (280x48, Primary)
+- "Forgot Password" link
+- Login button (280x48, #5B9BD5)
 
-Social Login (150px):
-- "or" divider
-- Google button (280x48, white bg)
+Footer:
+- "Don't have account? Sign Up"
 
-Footer (100px):
-- "Don't have an account? Sign Up" (Body Medium)
-
-Spacing: 24px between sections, 16px between elements
+Spacing: 24px sections, 16px elements
 ```
 
-### 3. Home Screen
+### 2. Home - Focus Session
 ```
-Header (120px):
-- Profile photo (40x40, left)
-- "Hello, [Name]" (Title)
-- Notification icon (24x24, right)
-- Date (Caption, gray)
+Header:
+- "Hello, [Name]"
+- Date
 
-Streak Card (200px):
-- Background: Success gradient
-- Flame icon (48x48)
-- Streak number (Display Large)
-- "day streak" text (Body Large)
-- Progress bar (daily goal)
+Subject Selector:
+- Dropdown (saved subjects)
+- Add new icon
 
-Quick Actions (80px):
-- "Add Study" FAB (56x56, Accent color)
+Flip Clock Timer:
+[00]:[25]:[00]
+- 4 flip cards (each 60x80)
+- Flip animation mockup:
+  * Top half flips down
+  * Bottom half comes up
+  * Shadow and depth
+- Below: "Working" label
 
-Recent Sessions (300px):
-- "Recent Sessions" title
-- Session cards (320x60 each)
-  - Subject icon
-  - Subject name
-  - Duration
-  - Date
+Timer Controls:
+- Start/Pause (#5B9BD5, large)
+- Reset, Settings (small)
 
-Bottom Navigation (80px):
-- 4 tabs (Home, Stats, Groups, Profile)
-```
+Streak Card:
+- Border: 2px #66BB6A (light) / #81C784 (dark)
+- Streak number
 
-### 4. Add Study Screen
-```
-Header (80px):
-- Back button
-- "Add Study" (Title)
-- Save button (text)
+Recent Studies:
+- List
+- Badge: ⏱️ or 🖊️
+- Subject, Duration, Time
 
-Form Content (600px):
-- Mode selector (Timer/Manual)
-- Subject input (dropdown)
-- Duration picker (number)
-- Notes textarea (optional)
-- Date picker (default today)
+FAB: Manual entry (#FFA726)
 
-Action Area (100px):
-- Cancel button (Secondary)
-- Save button (Primary)
-
-Design Notes:
-- Card-based layout
-- Input focus states
-- Validation messages
-- Loading states
+Bottom Nav: 4 tabs
 ```
 
-### 5. Statistics Screen
+### 3. Manual Entry Dialog
 ```
-Header (80px):
-- "Statistics" (Title)
-- Date range selector
+Header:
+- "Manual Entry"
 
-Stats Overview (200px):
-- 4 stat cards (2x2 grid)
-  - Total Hours
-  - Longest Streak
-  - This Week
-  - This Month
+Form:
+- Subject (TextField)
+- Duration (Number, minutes)
+- Date: Today (unchangeable)
 
-Chart Section (400px):
-- Tab selector (Daily/Weekly/Monthly)
-- Chart area (line/bar chart)
-- Legend
-
-Details (200px):
-- Subject breakdown
-- Time distribution
+Actions:
+- Cancel
+- Save (#5B9BD5)
 ```
 
-### 6. Groups Screen
+### 4. Pomodoro Settings Dialog
 ```
-Header (120px):
-- "My Groups" (Title)
-- Create group button (+)
-- Join group button
+Header:
+- "Pomodoro Settings"
 
-Group List (500px):
-- Group cards (320x100 each)
-  - Group name (Title)
-  - Member count (Caption)
-  - Group streak average
-  - Last activity
-  - Member avatars (overlap)
+Presets:
+- 25/5, 45/15, 50/10, Custom
 
-Empty State:
-- Illustration
-- "You don't have any groups yet"
-- "Create Group" button
-```
+Custom:
+- Work slider (15-90 min)
+- Break slider (5-60 min)
 
-### 7. Profile Screen
-```
-Header (200px):
-- Profile photo (100x100)
-- Name (Title)
-- Edit button
-- Stats summary (3 columns)
+Timer Mode:
+- Flip Clock, Circular, Minimal
 
-Achievements (150px):
-- "Achievements" section
-- Badge/trophy icons
-- Achievement titles
+Saved Subjects:
+- List + Delete
 
-Settings (300px):
-- List items with icons
-- Toggle switches
-- Arrow indicators
-- Logout button (danger color)
+Actions:
+- Save
 ```
 
-## 🎛️ Component Details
+### 5. Tasks Screen
+```
+Tabs (2):
+- Personal Tasks
+- Group Tasks
+
+Personal Tab:
+- Task list (checkbox, title, deadline)
+- Completed section
+- Add task FAB
+
+Group Tab:
+- Group tasks (completion: 3/5)
+- Assigned tasks (Accept/Reject)
+```
+
+### 6. Groups List
+```
+Header:
+- "My Groups"
+- Create group (+)
+- Join group (code)
+
+Group Cards:
+- Group name
+- Member count
+- Tasks: 5/10
+- Arrow
+
+Empty:
+- "You have no groups yet"
+```
+
+### 7. Group Detail
+```
+Tabs (3):
+- Leaderboard
+- Statistics
+- Tasks
+
+Leaderboard:
+- Sorted members
+  * Badge (🥇🥈🥉)
+  * Name
+  * Time
+  * Task count
+  * Score
+
+Statistics (4 cards):
+- Total study time
+- Avg. streak
+- Completed tasks
+- This week
+
+Tasks:
+- Group tasks list
+- Add task
+
+Footer:
+- Leave group
+```
+
+### 8. Profile Screen
+```
+Header:
+- Profile circle
+- Name
+- Email
+
+Statistics (4 cards):
+- Total study time
+- Current streak
+- Completed tasks
+- This week
+
+Settings:
+- Pomodoro Settings
+  * Work: 25 min
+  * Break: 5 min
+- Dark Mode Toggle
+
+Actions:
+- Edit profile
+- Logout
+```
+
+**Note:** Design both light and dark versions in Figma. Use variants.
+
+## Component Details
 
 ### Button Variants
 ```
@@ -285,12 +321,6 @@ Primary Button:
 - Padding: 16px 24px
 - Text: Body Large, White
 - Shadow: 0 2px 8px Primary/20%
-
-Secondary Button:
-- Stroke: 2px Primary
-- Fill: Transparent
-- Corner radius: 12px
-- Text: Body Large, Primary
 
 FAB:
 - Fill: Accent color
@@ -302,193 +332,67 @@ FAB:
 
 ### Card Components
 ```
-Basic Card:
-- Fill: White
+Basic Card (Light):
+- Fill: #FFFFFF
 - Corner radius: 16px
 - Padding: 20px
 - Shadow: 0 2px 8px Black/8%
 
-Streak Card:
-- Fill: Success gradient
+Basic Card (Dark):
+- Fill: #1E1E1E
+- Shadow: 0 2px 8px Black/12%
+
+Streak Card (Light):
+- Fill: #FFFFFF
+- Border: 2px solid #66BB6A
 - Corner radius: 20px
-- Padding: 24px
-- Text: White
-- Icon: Flame (animated)
+- Text: #66BB6A
+
+Streak Card (Dark):
+- Fill: #1E1E1E
+- Border: 2px solid #81C784
+- Text: #81C784
 ```
 
 ### Input Fields
 ```
-Text Input:
-- Stroke: 2px #E1E8ED
-- Fill: #FAFBFC
+Text Input (Light):
+- Stroke: 1px #E2E8F0
+- Fill: #FFFFFF
 - Corner radius: 12px
 - Padding: 16px
-- Placeholder: Text Secondary
-- Focus: Stroke Primary
+- Placeholder: #718096
+- Focus: 2px #5B9BD5
 
-States:
-- Default
-- Focused
-- Error
-- Disabled
+Text Input (Dark):
+- Stroke: 1px #3A3A3A
+- Fill: #1E1E1E
+- Placeholder: #A0AEC0
+- Focus: 2px #7DAFEA
+
+Leaderboard Item:
+- Height: 90px
+- Rank badge (40x40)
+- User name + Score
+- Background: #FFFFFF (light) / #1E1E1E (dark)
+- Border: 1px #E2E8F0 (light) / #3A3A3A (dark)
+- Top 3: Colored border (gold/silver/bronze)
 ```
 
-## 🔄 Prototyping Guide
+## Important Notes
 
-### Interaction Definitions
-```
-Button Tap:
-- Trigger: On Tap
-- Action: Smart Animate
-- Easing: Ease Out
-- Duration: 100ms
+### Timer Widget (Showcase)
+- Flip clock animation is the most important design
+- Create frame-by-frame mockup in Figma
+- Light and Dark versions
+- Show smooth transitions
 
-Screen Transition:
-- Trigger: On Tap
-- Action: Navigate to
-- Animation: Move In (Right)
-- Duration: 250ms
+### Color Consistency
+- Use same color codes across all screens
+- Light: #5B9BD5, #66BB6A, #FFA726
+- Dark: #7DAFEA, #81C784, #FFB74D
 
-Tab Navigation:
-- Trigger: On Tap
-- Action: Change to
-- Animation: Fade
-- Duration: 150ms
-```
-
-### Micro-Animations
-```
-Loading State:
-- Skeleton shimmer effect
-- Opacity 0.3 → 0.7 → 0.3
-- Duration: 1000ms, Loop
-
-Success Feedback:
-- Scale: 1.0 → 1.1 → 1.0
-- Duration: 300ms
-- Easing: Bounce
-```
-
-## 📋 Figma Tips and Shortcuts
-
-### Useful Shortcuts
-```
-R: Rectangle tool
-O: Oval tool
-T: Text tool
-F: Frame tool
-Shift + A: Auto Layout
-Ctrl/Cmd + D: Duplicate
-Ctrl/Cmd + G: Group
-Alt + Drag: Duplicate while moving
-```
-
-### Plugin Recommendations
-```
-Design:
-- Iconify (icons)
-- Unsplash (photos)
-- Content Reel (realistic content)
-
-Development:
-- Flutter Flow (Flutter code generation)
-- Design Tokens (style export)
-- Figma to Flutter (widget export)
-
-Accessibility:
-- Stark (contrast check)
-- Color Oracle (colorblind test)
-```
-
-### Best Practices
-```
-1. Consistent naming:
-   - Screens: "01_Home", "02_Login"
-   - Components: "Button/Primary"
-   - Colors: "Primary/Blue"
-
-2. Organization:
-   - Use frames for screens
-   - Group related elements
-   - Create component variants
-
-3. Responsive:
-   - Use constraints
-   - Auto Layout for flexibility
-   - Test on different sizes
-```
-
-## 🎯 Design Checklist
-
-### Before Development
-```
-✅ All screens designed
-✅ Component library complete
-✅ Colors and typography defined
-✅ Interactions prototyped
-✅ Responsive behavior tested
-✅ Accessibility checked
-✅ Developer handoff prepared
-```
-
-### Export Settings
-```
-Flutter Assets:
-- @1x, @2x, @3x for different densities
-- SVG for vector icons
-- PNG for raster images
-
-Assets:
-- Icons: SVG
-- Images: PNG/JPEG
-- Illustrations: SVG
-```
-
-## 🛠️ Flutter Integration
-
-### Design Token Export
-```dart
-// Colors
-class AppColors {
-  static const Color primary = Color(0xFF4A90E2);
-  static const Color secondary = Color(0xFF7ED321);
-  static const Color accent = Color(0xFFF5A623);
-  // ... other colors
-}
-
-// Typography
-class AppTextStyles {
-  static const TextStyle displayLarge = TextStyle(
-    fontSize: 32,
-    fontWeight: FontWeight.bold,
-  );
-  // ... other styles
-}
-```
-
-### Component Implementation
-```dart
-// Custom Button Widget
-class PrimaryButton extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
-  
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [AppColors.primary, AppColors.primaryDark],
-        ),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        child: Text(text),
-      ),
-    );
-  }
-}
-```
-
-This guide provides a comprehensive approach to designing StreakUp in Figma with a focus on Flutter implementation, ensuring a smooth transition from design to development.
+### Variant Usage
+- Create light/dark variants for components
+- Create variants for Button, Card, Input
+- Easy theme switching
