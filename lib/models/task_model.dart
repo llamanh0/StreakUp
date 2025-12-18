@@ -2,7 +2,7 @@ class Task {
   final String id;
   final String title;
   final bool isCompleted;
-  final String? groupId; 
+  final String? groupId;
   // If groupId is null, it's a personal task.
 
   Task({
@@ -36,10 +36,10 @@ class Task {
     };
   }
 
-  factory Task.fromMap(Map<String, dynamic> map) {
+  factory Task.fromMap(Map<String, dynamic> map, String id) {
     return Task(
-      id: map['id'],
-      title: map['title'],
+      id: id,
+      title: map['title'] ?? '',
       isCompleted: map['isCompleted'] ?? false,
       groupId: map['groupId'],
     );

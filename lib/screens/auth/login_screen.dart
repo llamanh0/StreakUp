@@ -20,19 +20,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _login() async {
     setState(() => _isLoading = true);
-    
-    final success = await Provider.of<AuthService>(context, listen: false)
-        .login(_emailController.text, _passwordController.text);
-        
+
+    final error = await Provider.of<AuthService>(
+      context,
+      listen: false,
+    ).login(_emailController.text, _passwordController.text);
+
     setState(() => _isLoading = false);
 
-    if (success && mounted) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const MainWrapper()),
-      );
+    if (error == null && mounted) {
+      Navigator.of(
+        context,
+      ).pushReplacement(MaterialPageRoute(builder: (_) => const MainWrapper()));
     } else if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Login failed. Try any email/pass for mock.")),
+        SnackBar(
+          content: Text(error ?? "Login failed. Check your credentials."),
+        ),
       );
     }
   }
@@ -47,9 +51,13 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Image.asset('assets/images/logo.png', height: 120),
+              const SizedBox(height: 24),
               Text(
                 "Welcome Back!",
-                style: AppTheme.headlineLarge.copyWith(color: AppTheme.primaryLight),
+                style: AppTheme.headlineLarge.copyWith(
+                  color: AppTheme.primaryLight,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
@@ -59,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: TextStyle(color: Colors.grey),
               ),
               const SizedBox(height: 48),
-              
+
               TextField(
                 controller: _emailController,
                 decoration: const InputDecoration(
@@ -77,14 +85,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              
+
               CustomButton(
                 text: "Login",
                 onPressed: _login,
                 isLoading: _isLoading,
               ),
               const SizedBox(height: 16),
-              
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -93,7 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const RegisterScreen()),
+                        MaterialPageRoute(
+                          builder: (_) => const RegisterScreen(),
+                        ),
                       );
                     },
                     child: const Text("Register"),

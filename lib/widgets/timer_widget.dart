@@ -3,6 +3,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import '../providers/timer_provider.dart';
 import '../config/theme.dart';
+import 'duration_picker_dialog.dart';
 
 class TimerWidget extends StatelessWidget {
   const TimerWidget({super.key});
@@ -10,37 +11,51 @@ class TimerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final timerProvider = Provider.of<TimerProvider>(context);
-    
+
     return CircularPercentIndicator(
       radius: 130.0,
       lineWidth: 15.0,
       percent: timerProvider.progress,
       animation: true,
       animateFromLastPercent: true,
-      center: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            timerProvider.isBreak ? "BREAK" : "FOCUS",
-            style: AppTheme.bodyLarge.copyWith(
-              color: Colors.grey,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1.5,
+      center: GestureDetector(
+        onTap: () {
+          if (!timerProvider.isActive) {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (context) => const DurationPickerDialog(),
+            );
+          }
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              timerProvider.isBreak ? "BREAK" : "FOCUS",
+              style: AppTheme.bodyLarge.copyWith(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.5,
+              ),
             ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            timerProvider.timerString,
-            style: AppTheme.headlineLarge.copyWith(
-              fontSize: 48,
-              color: AppTheme.primaryLight,
+            const SizedBox(height: 10),
+            Text(
+              timerProvider.timerString,
+              style: AppTheme.headlineLarge.copyWith(
+                fontSize: 48,
+                color: AppTheme.primaryLight,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       circularStrokeCap: CircularStrokeCap.round,
       backgroundColor: Colors.grey.withOpacity(0.2),
-      progressColor: timerProvider.isBreak ? AppTheme.successLight : AppTheme.primaryLight,
+      progressColor: timerProvider.isBreak
+          ? AppTheme.successLight
+          : AppTheme.primaryLight,
     );
   }
 }

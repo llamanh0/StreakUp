@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 import 'home_screen.dart';
 import '../tasks/tasks_screen.dart';
+import '../profile/profile_screen.dart';
+import 'leaderboard_screen.dart';
 
 class MainWrapper extends StatefulWidget {
   const MainWrapper({super.key});
@@ -12,11 +14,12 @@ class MainWrapper extends StatefulWidget {
 
 class _MainWrapperState extends State<MainWrapper> {
   int _currentIndex = 0;
-  
-  final List<Widget> _pages = const [
+
+  final List<Widget> _pages = [
     HomeScreen(),
     TasksScreen(),
-    Scaffold(body: Center(child: Text("Profile (Coming Soon)"))),
+    LeaderboardScreen(),
+    ProfileScreen(),
   ];
 
   @override
@@ -32,14 +35,22 @@ class _MainWrapperState extends State<MainWrapper> {
         },
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.timer_outlined), 
+            icon: Icon(Icons.timer_outlined),
             selectedIcon: Icon(Icons.timer, color: AppTheme.primaryLight),
             label: 'Timer',
           ),
           NavigationDestination(
             icon: Icon(Icons.check_circle_outline),
-            selectedIcon: Icon(Icons.check_circle, color: AppTheme.primaryLight),
-             label: 'Tasks',
+            selectedIcon: Icon(
+              Icons.check_circle,
+              color: AppTheme.primaryLight,
+            ),
+            label: 'Tasks',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.groups_outlined),
+            selectedIcon: Icon(Icons.groups, color: AppTheme.primaryLight),
+            label: 'Groups',
           ),
           NavigationDestination(
             icon: Icon(Icons.person_outline),

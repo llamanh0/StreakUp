@@ -19,24 +19,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void _register() async {
     setState(() => _isLoading = true);
-    
-    final success = await Provider.of<AuthService>(context, listen: false)
-        .register(_emailController.text, _passwordController.text);
-        
+
+    final error = await Provider.of<AuthService>(
+      context,
+      listen: false,
+    ).register(_emailController.text, _passwordController.text);
+
     setState(() => _isLoading = false);
 
-    if (success && mounted) {
+    if (error == null && mounted) {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const MainWrapper()),
         (route) => false,
       );
+    } else if (mounted) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(error ?? "Registration failed")));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent, foregroundColor: Colors.black),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -45,7 +54,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               Text(
                 "Create Account",
-                style: AppTheme.headlineLarge.copyWith(color: AppTheme.primaryLight),
+                style: AppTheme.headlineLarge.copyWith(
+                  color: AppTheme.primaryLight,
+                ),
               ),
               const SizedBox(height: 8),
               const Text(
@@ -53,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 style: TextStyle(color: Colors.grey),
               ),
               const SizedBox(height: 48),
-              
+
               TextField(
                 controller: _emailController,
                 decoration: const InputDecoration(
@@ -71,7 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              
+
               CustomButton(
                 text: "Sign Up",
                 onPressed: _register,

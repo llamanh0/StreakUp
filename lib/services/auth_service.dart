@@ -1,52 +1,45 @@
 import 'package:flutter/material.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService with ChangeNotifier {
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
-  
-  // Mock User for MVP without Firebase active
-  bool _isLoggedIn = false;
-  String? _userEmail;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  bool get isLoggedIn => _isLoggedIn;
-  String? get userEmail => _userEmail;
+  User? get currentUser => _auth.currentUser;
+  bool get isLoggedIn => _auth.currentUser != null;
+  String? get userEmail => _auth.currentUser?.email;
 
-  Future<bool> login(String email, String password) async {
-    try {
-      // await _auth.signInWithEmailAndPassword(email: email, password: password);
-      
-      // Mock delay
-      await Future.delayed(const Duration(seconds: 1));
-      
-      _isLoggedIn = true;
-      _userEmail = email;
+  AuthService() {
+    _auth.authStateChanges().listen((User? user) {
       notifyListeners();
-      return true;
+    });
+  }
+
+  Future<String?> login(String email, String password) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      return null; // Success
+    } on FirebaseAuthException catch (e) {
+      return e.message ?? "An unknown error occurred.";
     } catch (e) {
-      debugPrint("Login Error: $e");
-      return false;
+      return e.toString();
     }
   }
 
-  Future<bool> register(String email, String password) async {
+  Future<String?> register(String email, String password) async {
     try {
-      // await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      
-      await Future.delayed(const Duration(seconds: 1));
-      _isLoggedIn = true;
-      _userEmail = email;
-      notifyListeners();
-      return true;
+      await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return null; // Success
+    } on FirebaseAuthException catch (e) {
+      return e.message ?? "An unknown error occurred.";
     } catch (e) {
-      debugPrint("Register Error: $e");
-      return false;
+      return e.toString();
     }
   }
 
   Future<void> logout() async {
-    // await _auth.signOut();
-    _isLoggedIn = false;
-    _userEmail = null;
-    notifyListeners();
+    await _auth.signOut();
   }
 }

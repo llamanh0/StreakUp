@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1038186379046",
+    "project_id": "streakup-0001",
+    "storage_bucket": "streakup-0001.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038186379046:android:b8e872fda2710a06bd33e7",
+        "android_client_info": {
+          "package_name": "com.neubatu.streakup.streakup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArjWkrEfn3_WSo6yCzWwbXRIdmzjxHim0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
