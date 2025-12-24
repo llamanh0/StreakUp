@@ -83,12 +83,14 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     final group = groupProvider.currentGroup!;
     final members = groupProvider.groupMembers;
 
-    // Sort by minutes descending
-    members.sort((a, b) => b['minutes'].compareTo(a['minutes']));
+    // Sort by totalSeconds descending
+    members.sort(
+      (a, b) => (b['totalSeconds'] ?? 0).compareTo(a['totalSeconds'] ?? 0),
+    );
 
     return Consumer2<AuthService, TimerProvider>(
       builder: (context, authService, timerProvider, _) {
-        final currentUser = authService.currentUser;
+        // final currentUser = authService.currentUser; // Removed unused variable
         return Scaffold(
           appBar: AppBar(
             title: Text(group['name']),
@@ -173,24 +175,18 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                   itemCount: members.length,
                   itemBuilder: (context, index) {
                     final member = members[index];
-                    final bool isMe =
-                        currentUser != null && member['uid'] == currentUser.uid;
-
-                    int? localSessionSeconds;
-                    if (isMe &&
-                        timerProvider.isActive &&
-                        !timerProvider.isBreak) {
-                      localSessionSeconds =
-                          timerProvider.currentTotalSeconds -
-                          timerProvider.secondsRemaining;
-                    }
+                    // Calculate live effective seconds via GroupProvider helper
+                    // Since we are in a Consumer, this rebuilds every second if ticker is running
+                    final int liveSeconds = groupProvider.getMemberLiveSeconds(
+                      member,
+                    );
 
                     return LiveMemberCard(
-                      user: members[index],
+                      user: member,
                       rank: index + 1,
                       borderColor: _getBorder(index + 1),
                       rankColor: _getRankColor(index + 1),
-                      localSessionSeconds: localSessionSeconds,
+                      displaySeconds: liveSeconds,
                     );
                   },
                 ),
@@ -223,12 +219,12 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
   }
 }
 
-class LiveMemberCard extends StatefulWidget {
+class LiveMemberCard extends StatelessWidget {
   final Map<String, dynamic> user;
   final int rank;
   final BorderSide borderColor;
   final Color rankColor;
-  final int? localSessionSeconds;
+  final int displaySeconds;
 
   const LiveMemberCard({
     super.key,
@@ -236,44 +232,33 @@ class LiveMemberCard extends StatefulWidget {
     required this.rank,
     required this.borderColor,
     required this.rankColor,
-    this.localSessionSeconds,
+    required this.displaySeconds,
   });
 
-  @override
-  State<LiveMemberCard> createState() => _LiveMemberCardState();
-}
+  String _formatDuration(int totalSeconds) {
+    if (totalSeconds <= 0) return "0s";
 
-class _LiveMemberCardState extends State<LiveMemberCard> {
-  // Update UI every second if user is focusing
-  Stream<int>? _timerStream;
+    // If > 1 hour, show HH:MM:SS
+    // If < 1 hour, show MM:SS
+    final h = totalSeconds ~/ 3600;
+    final m = (totalSeconds % 3600) ~/ 60;
+    final s = totalSeconds % 60;
 
-  @override
-  void initState() {
-    super.initState();
-    // Always run timer if focusing
-    if (widget.user['isFocusing'] == true) {
-      _timerStream = Stream.periodic(const Duration(seconds: 1), (i) => i);
+    if (h > 0) {
+      return "${h}h ${m}m ${s}s";
     }
-  }
-
-  @override
-  void didUpdateWidget(covariant LiveMemberCard oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    // Re-evaluate stream creation on update
-    if (widget.user['isFocusing'] == true && _timerStream == null) {
-      setState(() {
-        _timerStream = Stream.periodic(const Duration(seconds: 1), (i) => i);
-      });
-    } else if (widget.user['isFocusing'] != true && _timerStream != null) {
-      setState(() {
-        _timerStream = null;
-      });
-    }
+    return "${m}m ${s}s";
   }
 
   String _getDailyDurationString() {
-    final data = widget.user;
-    num storedMinutes = data['dailyStudyMinutes'] ?? 0;
+    final data = user;
+    int storedSeconds = 0;
+
+    if (data.containsKey('dailyStudySeconds')) {
+      storedSeconds = data['dailyStudySeconds'];
+    } else {
+      storedSeconds = ((data['dailyStudyMinutes'] ?? 0) * 60).round();
+    }
 
     // Check date match
     final Timestamp? lastDate = data['lastStudyDate'];
@@ -283,38 +268,18 @@ class _LiveMemberCardState extends State<LiveMemberCard> {
       if (last.year != now.year ||
           last.month != now.month ||
           last.day != now.day) {
-        storedMinutes = 0;
+        storedSeconds = 0;
       }
     } else {
-      storedMinutes = 0;
+      storedSeconds = 0;
     }
 
-    int totalSeconds = (storedMinutes * 60).round();
-
-    if (widget.user['isFocusing'] == true) {
-      if (widget.localSessionSeconds != null) {
-        totalSeconds += widget.localSessionSeconds!;
-      } else {
-        final Timestamp? start = widget.user['currentSessionStart'];
-        if (start != null) {
-          final duration = DateTime.now().difference(start.toDate());
-          final addedSeconds = duration.inSeconds < 0 ? 0 : duration.inSeconds;
-          totalSeconds += addedSeconds;
-        }
-      }
-    }
-
-    if (totalSeconds <= 0) return "Today: 00:00:00";
-
-    final h = totalSeconds ~/ 3600;
-    final m = (totalSeconds % 3600) ~/ 60;
-    final s = totalSeconds % 60;
-
-    return "Today: ${h.toString().padLeft(2, '0')}:${m.toString().padLeft(2, '0')}:${s.toString().padLeft(2, '0')}";
+    int totalSeconds = storedSeconds;
+    return _formatDuration(totalSeconds);
   }
 
   bool _isOnline() {
-    final Timestamp? last = widget.user['lastStatusUpdate'];
+    final Timestamp? last = user['lastStatusUpdate'];
     if (last == null) return false;
 
     final diff = DateTime.now().difference(last.toDate());
@@ -323,7 +288,7 @@ class _LiveMemberCardState extends State<LiveMemberCard> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isFocusing = widget.user['isFocusing'] == true;
+    final bool isFocusing = user['isFocusing'] == true;
     final bool isOnline = _isOnline();
 
     return Card(
@@ -333,7 +298,7 @@ class _LiveMemberCardState extends State<LiveMemberCard> {
         borderRadius: BorderRadius.circular(12),
         side: isFocusing
             ? const BorderSide(color: Colors.orange, width: 2)
-            : widget.borderColor,
+            : borderColor,
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -347,15 +312,15 @@ class _LiveMemberCardState extends State<LiveMemberCard> {
                   height: 40,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: widget.rankColor.withOpacity(0.1),
+                    color: rankColor.withOpacity(0.1),
                     shape: BoxShape.circle,
                   ),
                   child: Text(
-                    "#${widget.rank}",
+                    "#$rank",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: widget.rankColor,
+                      color: rankColor,
                     ),
                   ),
                 ),
@@ -383,56 +348,40 @@ class _LiveMemberCardState extends State<LiveMemberCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.user['name'],
+                    user['name'],
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   if (isFocusing)
-                    StreamBuilder(
-                      stream: _timerStream,
-                      builder: (context, snapshot) {
-                        final text = _getDailyDurationString();
-                        if (text.isEmpty) return const SizedBox.shrink();
-
-                        return Text(
-                          text,
-                          style: const TextStyle(
-                            color: Colors.orange,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                          ),
-                        );
-                      },
+                    const Text(
+                      "Focusing now...",
+                      style: TextStyle(
+                        color: Colors.orange,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
                     )
-                  else ...[
-                    // Static text if not focusing
-                    Builder(
-                      builder: (context) {
-                        final text = _getDailyDurationString();
-                        if (text.isEmpty) return const SizedBox.shrink();
-                        return Text(
-                          text,
-                          style: const TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        );
-                      },
+                  else
+                    // Show daily summary if not focusing? Or just "Resting"
+                    // The previous code showed daily duration. Let's restore it using _getDailyDurationString
+                    Text(
+                      _getDailyDurationString(),
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ],
                 ],
               ),
-            ),
-
-            // Total Duration or Status
+            ), // Total Duration
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "${(widget.user['minutes'] as num).toInt()}m",
+                  _formatDuration(displaySeconds),
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

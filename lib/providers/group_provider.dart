@@ -57,22 +57,39 @@ class GroupProvider with ChangeNotifier {
     }
   }
 
+  Timer? _ticker;
+
   void _cleanupListeners() {
     _groupSubscription?.cancel();
     _membersSubscription?.cancel();
+    _ticker?.cancel();
     _groupSubscription = null;
     _membersSubscription = null;
+    _ticker = null;
+  }
+
+  // Optimized Real-time: Start a local ticker if anyone is focusing
+  void _checkAndStartTicker() {
+    bool anyoneFocusing = _groupMembers.any((m) => m['isFocusing'] == true);
+
+    if (anyoneFocusing && _ticker == null) {
+      _ticker = Timer.periodic(const Duration(seconds: 1), (timer) {
+        notifyListeners(); // Force UI rebuild to update 'live' seconds
+      });
+    } else if (!anyoneFocusing && _ticker != null) {
+      _ticker?.cancel();
+      _ticker = null;
+    }
   }
 
   Future<void> _fetchMemberDetails(List<dynamic> memberIds) async {
     _membersSubscription?.cancel();
     if (memberIds.isEmpty) {
       _groupMembers = [];
+      _checkAndStartTicker(); // Stop ticker
       notifyListeners();
       return;
     }
-
-    // final Completer<void> completer = Completer<void>(); // Removing completer to simplify real-time stream flow
 
     try {
       // Listen to real-time updates for members
@@ -86,33 +103,56 @@ class GroupProvider with ChangeNotifier {
 
               for (var doc in snapshot.docs) {
                 final data = doc.data();
+
+                // Handle seconds/minutes migration reading
+                int totalSeconds = 0;
+                if (data.containsKey('totalStudySeconds')) {
+                  totalSeconds = data['totalStudySeconds'];
+                } else {
+                  totalSeconds = (data['totalStudyMinutes'] ?? 0) * 60;
+                }
+
                 members.add({
                   'name': data['displayName'] ?? 'User',
                   'uid': doc.id,
-                  'minutes': data['totalStudyMinutes'] ?? 0,
-                  'dailyStudyMinutes': data['dailyStudyMinutes'] ?? 0,
+                  'totalSeconds': totalSeconds, // Base seconds from DB
+                  'dailyStudySeconds': data['dailyStudySeconds'] ?? 0,
                   'lastStudyDate': data['lastStudyDate'],
                   'isFocusing': data['isFocusing'] ?? false,
-                  'currentSessionStart': data['currentSessionStart'],
+                  'currentSessionStart':
+                      data['currentSessionStart'], // Key for live calc
                   'lastStatusUpdate': data['lastStatusUpdate'],
                 });
               }
 
               _groupMembers = members;
+              _checkAndStartTicker(); // Start/Stop ticker based on new data
               notifyListeners();
-
-              // if (!completer.isCompleted) completer.complete();
             },
             onError: (e) {
               debugPrint("Error listening to members: $e");
-              // if (!completer.isCompleted) completer.completeError(e);
             },
           );
-
-      // await completer.future;
     } catch (e) {
       debugPrint("Error setting up member stream: $e");
     }
+  }
+
+  // Helper to get effective live seconds for a member
+  int getMemberLiveSeconds(Map<String, dynamic> member) {
+    int base = member['totalSeconds'] ?? 0;
+
+    if (member['isFocusing'] == true && member['currentSessionStart'] != null) {
+      final Timestamp startTs = member['currentSessionStart'];
+      final DateTime start = startTs.toDate();
+      final DateTime now = DateTime.now();
+      final int diff = now.difference(start).inSeconds;
+
+      if (diff > 0) {
+        return base + diff;
+      }
+    }
+    return base;
   }
 
   /// Checks if the current user is already in a group and listens for updates.
@@ -191,7 +231,7 @@ class GroupProvider with ChangeNotifier {
 
       // Initialize members list locally
       _groupMembers = [
-        {'name': _userName ?? 'You', 'minutes': 0, 'uid': _userId},
+        {'name': _userName ?? 'You', 'totalSeconds': 0, 'uid': _userId},
       ];
     } catch (e) {
       debugPrint("Error creating group: $e");

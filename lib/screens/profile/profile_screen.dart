@@ -6,7 +6,8 @@ import '../../providers/task_provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../config/theme.dart';
 import '../../widgets/custom_button.dart';
-import '../../utils/seed_data.dart';
+
+import '../../widgets/edit_profile_sheet.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -135,29 +136,20 @@ class ProfileScreen extends StatelessWidget {
                   trailing: Icon(Icons.chevron_right),
                 ),
 
-                // DEV: Seed Data Button
-                const Divider(height: 1),
-                ListTile(
-                  leading: const Icon(Icons.storage, color: Colors.orange),
-                  title: const Text("DEV: Populate Mock Data"),
-                  onTap: () async {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Seeding Database...")),
-                    );
-                    await SeedDataService().populateMockData();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Done! Group Code: 123456")),
-                    );
-                  },
-                ),
-
                 const SizedBox(height: 32),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: CustomButton(
                     text: "Edit Profile",
                     isOutlined: true,
-                    onPressed: () {},
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (ctx) => const EditProfileSheet(),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: 32),

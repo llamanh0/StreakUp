@@ -98,32 +98,42 @@ class _SubjectDialogState extends State<SubjectDialog> {
           const SizedBox(height: 24),
 
           Expanded(
-            child: ListView.separated(
-              itemCount: subjects.length,
-              separatorBuilder: (ctx, i) => const Divider(height: 1),
-              itemBuilder: (context, index) {
-                final subject = subjects[index];
-                final isSelected = subject == selectedSubject;
-
-                return ListTile(
-                  title: Text(
-                    subject,
-                    style: TextStyle(
-                      fontWeight: isSelected
-                          ? FontWeight.bold
-                          : FontWeight.normal,
-                      color: isSelected ? AppTheme.primaryLight : null,
-                    ),
+            child: ListView(
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.block, color: Colors.grey),
+                  title: const Text(
+                    "None (General)",
+                    style: TextStyle(color: Colors.grey),
                   ),
-                  trailing: isSelected
-                      ? const Icon(Icons.check, color: AppTheme.primaryLight)
-                      : null,
                   onTap: () {
-                    timerProvider.setSubject(subject);
+                    timerProvider.setSubject(null);
                     Navigator.pop(context);
                   },
-                );
-              },
+                ),
+                const Divider(),
+                ...subjects.map((subject) {
+                  final isSelected = subject == selectedSubject;
+                  return ListTile(
+                    title: Text(
+                      subject,
+                      style: TextStyle(
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                        color: isSelected ? AppTheme.primaryLight : null,
+                      ),
+                    ),
+                    trailing: isSelected
+                        ? const Icon(Icons.check, color: AppTheme.primaryLight)
+                        : null,
+                    onTap: () {
+                      timerProvider.setSubject(subject);
+                      Navigator.pop(context);
+                    },
+                  );
+                }).toList(),
+              ],
             ),
           ),
         ],

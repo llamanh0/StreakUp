@@ -39,15 +39,11 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
   DateTime? _endTime;
 
   // User Data State
-  List<String> _subjects = [
-    "Mobil Programlama",
-    "Veri Yapıları",
-    "Algoritmalar",
-  ];
+  List<String> _subjects = [];
   String? _selectedSubject;
   bool _userDataLoaded = false;
   int _currentStreak = 0;
-  int _totalStudyMinutes = 0;
+  int _totalStudySeconds = 0; // Changed from minutes to seconds
   DateTime? _lastStudyDate; // Track last study date for streak logic
 
   // -- Getters --
@@ -55,11 +51,16 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
   bool get isActive => _isActive;
   bool get isBreak => _isBreak;
   int get currentStreak => _currentStreak;
-  int get totalStudyMinutes => _totalStudyMinutes;
+
+  // Return minutes for backward compatibility or UI that needs minutes
+  int get totalStudyMinutes => _totalStudySeconds ~/ 60;
+
+  // New getter for raw seconds
+  int get totalStudySeconds => _totalStudySeconds;
+
   List<String> get subjects => _subjects;
 
-  String? get selectedSubject =>
-      _selectedSubject ?? (_subjects.isNotEmpty ? _subjects.first : null);
+  String? get selectedSubject => _selectedSubject;
 
   int get currentTotalSeconds => _isBreak ? _breakDuration : _focusDuration;
 
@@ -109,10 +110,10 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
   }
 
   void _clearUserData() {
-    _subjects = ["Mobil Programlama", "Veri Yapıları", "Algoritmalar"];
-    // _selectedSubject = null; // Maybe keep default?
+    _subjects = [];
+    _selectedSubject = null;
     _currentStreak = 0;
-    _totalStudyMinutes = 0;
+    _totalStudySeconds = 0;
     _lastStudyDate = null;
     _userDataLoaded = false;
     // Stop any active timer on logout
@@ -191,7 +192,15 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
             if (_subjects.isNotEmpty) _selectedSubject = _subjects.first;
           }
           _currentStreak = data['currentStreak'] ?? 0;
-          _totalStudyMinutes = data['totalStudyMinutes'] ?? 0;
+
+          // MIGRATION Logic: Check for seconds, fallback to minutes
+          if (data.containsKey('totalStudySeconds')) {
+            _totalStudySeconds = data['totalStudySeconds'];
+          } else {
+            // Backward compatibility
+            int minutes = data['totalStudyMinutes'] ?? 0;
+            _totalStudySeconds = minutes * 60;
+          }
 
           if (data['lastStudyDate'] != null) {
             _lastStudyDate = (data['lastStudyDate'] as Timestamp).toDate();
@@ -208,7 +217,8 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
           await _firestore.collection('users').doc(_userId).set({
             'displayName': user.displayName ?? user.email!.split('@')[0],
             'email': user.email,
-            'totalStudyMinutes': 0,
+            'totalStudySeconds': 0, // Initialize with seconds
+            'totalStudyMinutes': 0, // Keep for legacy check (optional)
             'currentStreak': 0,
             'savedSubjects': _subjects,
             'createdAt': FieldValue.serverTimestamp(),
@@ -222,7 +232,7 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
     }
   }
 
-  void setSubject(String subject) {
+  void setSubject(String? subject) {
     _selectedSubject = subject;
     notifyListeners();
   }
@@ -445,15 +455,22 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
     if (_userId == null) return;
 
     try {
+      // NOTE: We now save Seconds directly.
+      // We still keep 'duration' in workLogs as minutes for readability? Or change to seconds?
+      // Let's keep workLogs 'duration' as Minutes for backward compat or change to a float.
+      // Better: add 'durationSeconds'.
+
       final double minutesToAdd = elapsedSeconds / 60.0;
       final DateTime now = DateTime.now();
 
       // 1. Add Work Log
-      if (minutesToAdd > 0) {
+      if (elapsedSeconds > 0) {
         await _firestore.collection('workLogs').add({
           'userId': _userId,
-          'subject': selectedSubject ?? 'Unknown',
-          'duration': minutesToAdd,
+          'subject': selectedSubject ?? 'General',
+          'duration':
+              minutesToAdd, // Keep this for existing charts if they rely on it
+          'durationSeconds': elapsedSeconds, // New field
           'date': FieldValue.serverTimestamp(),
           'type': 'partial_session',
         });
@@ -487,11 +504,18 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
       // Update local state immediately
       _currentStreak = newStreak;
       _lastStudyDate = now;
-      _totalStudyMinutes += minutesToAdd.toInt();
+      _totalStudySeconds += elapsedSeconds;
 
       // 3. Update User Doc
       await _firestore.collection('users').doc(_userId).update({
-        'totalStudyMinutes': FieldValue.increment(minutesToAdd),
+        'totalStudySeconds': FieldValue.increment(elapsedSeconds),
+        'dailyStudySeconds': FieldValue.increment(elapsedSeconds), // New Field
+        // We can also update minutes for backward compatibility if needed, but 'totalStudyMinutes'
+        // might become inaccurate if we only increment by integer minutes.
+        // Let's rely on seconds going forward.
+        'totalStudyMinutes': FieldValue.increment(
+          minutesToAdd,
+        ), // Update minutes as float or int
         'dailyStudyMinutes': FieldValue.increment(minutesToAdd),
         'lastStudyDate': FieldValue.serverTimestamp(),
         'currentStreak': newStreak,

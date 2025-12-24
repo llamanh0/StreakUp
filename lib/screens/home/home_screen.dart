@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../providers/timer_provider.dart';
 import '../../widgets/timer_widget.dart';
 import '../../config/theme.dart';
+import '../../services/auth_service.dart';
 
 import 'subject_dialog.dart';
 
@@ -26,6 +27,10 @@ class HomeScreen extends StatelessWidget {
     // I will write this file, then update main.dart.
 
     final timerProvider = Provider.of<TimerProvider>(context);
+    final authService = Provider.of<AuthService>(context);
+    final String displayName = authService.currentUser?.displayName ?? "User";
+    // If displayName is full name, take first part
+    final String firstName = displayName.split(' ')[0];
 
     return Scaffold(
       appBar: AppBar(title: const Text("StreakUp"), actions: []),
@@ -40,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Hello, Batu", style: AppTheme.headlineMedium),
+                    Text("Hello, $firstName", style: AppTheme.headlineMedium),
                     const SizedBox(height: 4),
                     Text(
                       "Let's stay productive today.",
@@ -124,9 +129,12 @@ class HomeScreen extends StatelessWidget {
                   const Icon(Icons.book, size: 16, color: Colors.grey),
                   const SizedBox(width: 8),
                   Text(
-                    timerProvider.selectedSubject ?? "Select Subject",
-                    style: const TextStyle(
-                      color: Colors.black87,
+                    timerProvider.selectedSubject ??
+                        "Select Subject (Optional)",
+                    style: TextStyle(
+                      color: timerProvider.selectedSubject == null
+                          ? Colors.grey
+                          : Colors.black87,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthService with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -41,5 +42,26 @@ class AuthService with ChangeNotifier {
 
   Future<void> logout() async {
     await _auth.signOut();
+  }
+
+  Future<void> updateDisplayName(String name) async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+
+    try {
+      // 1. Update Firebase Auth Profile
+      await user.updateDisplayName(name);
+
+      // 2. Update Firestore User Document
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).update(
+        {'displayName': name},
+      );
+
+      // 3. Notify listeners to update UI immediately
+      notifyListeners();
+    } catch (e) {
+      debugPrint("Error updating display name: $e");
+      rethrow;
+    }
   }
 }
