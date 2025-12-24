@@ -5,6 +5,10 @@ import '../tasks/tasks_screen.dart';
 import '../profile/profile_screen.dart';
 import 'leaderboard_screen.dart';
 
+/// The primary navigation wrapper for the application.
+///
+/// This widget manages the bottom navigation bar and preserves the state of the
+/// main screens ([HomeScreen], [TasksScreen], [LeaderboardScreen], [ProfileScreen]).
 class MainWrapper extends StatefulWidget {
   const MainWrapper({super.key});
 
@@ -13,13 +17,16 @@ class MainWrapper extends StatefulWidget {
 }
 
 class _MainWrapperState extends State<MainWrapper> {
+  // Current index for the bottom navigation bar.
   int _currentIndex = 0;
 
+  // List of pages to be displayed.
+  // Using `const` where possible to optimize rebuilds.
   final List<Widget> _pages = [
-    HomeScreen(),
-    TasksScreen(),
-    LeaderboardScreen(),
-    ProfileScreen(),
+    const HomeScreen(),
+    const TasksScreen(),
+    const LeaderboardScreen(),
+    const ProfileScreen(),
   ];
 
   @override
@@ -29,9 +36,12 @@ class _MainWrapperState extends State<MainWrapper> {
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
         onDestinationSelected: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
+          // Update state only if the index changes to prevent unnecessary rebuilds.
+          if (_currentIndex != index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          }
         },
         destinations: const [
           NavigationDestination(

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../../providers/timer_provider.dart';
 import '../../widgets/timer_widget.dart';
 import '../../config/theme.dart';
-import '../../widgets/settings_bottom_sheet.dart';
+
 import 'subject_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -28,22 +28,7 @@ class HomeScreen extends StatelessWidget {
     final timerProvider = Provider.of<TimerProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("StreakUp"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                backgroundColor: Colors.transparent,
-                builder: (ctx) => const SettingsBottomSheet(),
-              );
-            },
-          ),
-        ],
-      ),
+      appBar: AppBar(title: const Text("StreakUp"), actions: []),
       body: Column(
         children: [
           const SizedBox(height: 24),

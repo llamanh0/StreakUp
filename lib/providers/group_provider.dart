@@ -1,18 +1,68 @@
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../services/auth_service.dart';
+
+/// Manages the user's group membership and real-time group data.
+///
+/// This provider handles:
+/// - Creating and joining groups.
+/// - Listening to real-time updates for the user's current group.
+/// - Listening to real-time updates for group members' stats (study minutes, status).
 class GroupProvider with ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // Auth State from ProxyProvider
+  String? _userId;
+  String? _userName; // We might need this for creating groups
 
   Map<String, dynamic>? _currentGroup;
   List<Map<String, dynamic>> _groupMembers = [];
   bool _isLoading = false;
+
   StreamSubscription<QuerySnapshot>? _groupSubscription;
   StreamSubscription<QuerySnapshot>? _membersSubscription;
+
+  // -- Getters --
+  Map<String, dynamic>? get currentGroup => _currentGroup;
+  List<Map<String, dynamic>> get groupMembers => _groupMembers;
+  bool get hasGroup => _currentGroup != null;
+  bool get isLoading => _isLoading;
+
+  // -- Update Method for ProxyProvider --
+  void update(AuthService auth) {
+    bool hasChanged = false;
+    if (_userId != auth.currentUser?.uid) {
+      _userId = auth.currentUser?.uid;
+      hasChanged = true;
+    }
+
+    // Also update display name if available since we use it
+    if (_userName != auth.currentUser?.displayName) {
+      _userName = auth.currentUser?.displayName;
+    }
+
+    if (hasChanged) {
+      _cleanupListeners();
+      _currentGroup = null;
+      _groupMembers = [];
+
+      if (_userId != null) {
+        fetchUserGroup();
+      } else {
+        notifyListeners();
+      }
+    }
+  }
+
+  void _cleanupListeners() {
+    _groupSubscription?.cancel();
+    _membersSubscription?.cancel();
+    _groupSubscription = null;
+    _membersSubscription = null;
+  }
 
   Future<void> _fetchMemberDetails(List<dynamic> memberIds) async {
     _membersSubscription?.cancel();
@@ -22,7 +72,7 @@ class GroupProvider with ChangeNotifier {
       return;
     }
 
-    final Completer<void> completer = Completer<void>();
+    // final Completer<void> completer = Completer<void>(); // Removing completer to simplify real-time stream flow
 
     try {
       // Listen to real-time updates for members
@@ -41,54 +91,34 @@ class GroupProvider with ChangeNotifier {
                   'uid': doc.id,
                   'minutes': data['totalStudyMinutes'] ?? 0,
                   'dailyStudyMinutes': data['dailyStudyMinutes'] ?? 0,
-                  'lastStudyDate': data['lastStudyDate'], // Timestamp
+                  'lastStudyDate': data['lastStudyDate'],
                   'isFocusing': data['isFocusing'] ?? false,
-                  'currentSessionStart':
-                      data['currentSessionStart'], // Timestamp
-                  'lastStatusUpdate': data['lastStatusUpdate'], // Timestamp
+                  'currentSessionStart': data['currentSessionStart'],
+                  'lastStatusUpdate': data['lastStatusUpdate'],
                 });
               }
 
               _groupMembers = members;
               notifyListeners();
 
-              // Complete the future only once (initial load)
-              if (!completer.isCompleted) {
-                completer.complete();
-              }
+              // if (!completer.isCompleted) completer.complete();
             },
             onError: (e) {
               debugPrint("Error listening to members: $e");
-              if (!completer.isCompleted) completer.completeError(e);
+              // if (!completer.isCompleted) completer.completeError(e);
             },
           );
 
-      // Wait for the first snapshot
-      await completer.future;
+      // await completer.future;
     } catch (e) {
       debugPrint("Error setting up member stream: $e");
     }
   }
 
-  @override
-  void dispose() {
-    _membersSubscription?.cancel();
-    _groupSubscription?.cancel();
-    super.dispose();
-  }
-
-  Map<String, dynamic>? get currentGroup => _currentGroup;
-  List<Map<String, dynamic>> get groupMembers => _groupMembers;
-  bool get hasGroup => _currentGroup != null;
-  bool get isLoading => _isLoading;
-
-  // Initialize: Check if user is already in a group
+  /// Checks if the current user is already in a group and listens for updates.
   Future<void> fetchUserGroup() async {
-    final user = _auth.currentUser;
-    if (user == null) return;
+    if (_userId == null) return;
 
-    // Avoid setting loading to true if we are just setting up a listener
-    // allowing background updates. But for first load, it helps.
     if (_groupSubscription == null) {
       _isLoading = true;
       notifyListeners();
@@ -100,7 +130,7 @@ class GroupProvider with ChangeNotifier {
       // Listen to the group document where the user is a member
       _groupSubscription = _firestore
           .collection('groups')
-          .where('memberIds', arrayContains: user.uid)
+          .where('memberIds', arrayContains: _userId)
           .limit(1)
           .snapshots()
           .listen(
@@ -110,11 +140,9 @@ class GroupProvider with ChangeNotifier {
                 final data = doc.data();
                 data['id'] = doc.id;
 
-                // Only update if critical data changed to avoid loops?
-                // Actually _fetchMemberDetails handles its own stream cancellation.
                 _currentGroup = data;
 
-                // Fetch/Update detailed member info
+                // Sync members real-time
                 await _fetchMemberDetails(data['memberIds']);
               } else {
                 _currentGroup = null;
@@ -138,9 +166,9 @@ class GroupProvider with ChangeNotifier {
     }
   }
 
+  /// Creates a new group with the given name.
   Future<void> createGroup(String groupName) async {
-    final user = _auth.currentUser;
-    if (user == null) return;
+    if (_userId == null) return;
 
     _isLoading = true;
     notifyListeners();
@@ -148,13 +176,11 @@ class GroupProvider with ChangeNotifier {
     try {
       String code = _generateRandomCode();
 
-      // Ensure code unqiueness (skip for MVP simplicity, just random)
-
       final newGroup = {
         'name': groupName,
         'code': code,
-        'createdBy': user.uid,
-        'memberIds': [user.uid],
+        'createdBy': _userId,
+        'memberIds': [_userId],
         'createdAt': FieldValue.serverTimestamp(),
       };
 
@@ -165,7 +191,7 @@ class GroupProvider with ChangeNotifier {
 
       // Initialize members list locally
       _groupMembers = [
-        {'name': user.displayName ?? 'You', 'minutes': 0, 'uid': user.uid},
+        {'name': _userName ?? 'You', 'minutes': 0, 'uid': _userId},
       ];
     } catch (e) {
       debugPrint("Error creating group: $e");
@@ -175,9 +201,9 @@ class GroupProvider with ChangeNotifier {
     }
   }
 
+  /// Attempts to join a group using a unique code.
   Future<bool> joinGroup(String code) async {
-    final user = _auth.currentUser;
-    if (user == null) return false;
+    if (_userId == null) return false;
 
     _isLoading = true;
     notifyListeners();
@@ -190,9 +216,7 @@ class GroupProvider with ChangeNotifier {
           .get();
 
       if (snapshot.docs.isEmpty) {
-        _isLoading = false;
-        notifyListeners();
-        return false; // Code invalid
+        return false;
       }
 
       final doc = snapshot.docs.first;
@@ -201,8 +225,8 @@ class GroupProvider with ChangeNotifier {
         groupData['memberIds'] ?? [],
       );
 
-      if (!currentMembers.contains(user.uid)) {
-        currentMembers.add(user.uid);
+      if (!currentMembers.contains(_userId)) {
+        currentMembers.add(_userId);
         await _firestore.collection('groups').doc(doc.id).update({
           'memberIds': currentMembers,
         });
@@ -211,6 +235,8 @@ class GroupProvider with ChangeNotifier {
       _currentGroup = groupData;
       _currentGroup!['id'] = doc.id;
 
+      // The listener in fetchUserGroup (if active) or a direct call will handle updates,
+      // but let's be safe and fetch details now.
       await _fetchMemberDetails(currentMembers);
 
       return true;
@@ -223,9 +249,9 @@ class GroupProvider with ChangeNotifier {
     }
   }
 
+  /// Leaves the current group.
   Future<bool> leaveGroup() async {
-    final user = _auth.currentUser;
-    if (user == null || _currentGroup == null) return false;
+    if (_userId == null || _currentGroup == null) return false;
 
     _isLoading = true;
     notifyListeners();
@@ -233,7 +259,7 @@ class GroupProvider with ChangeNotifier {
     try {
       final groupId = _currentGroup!['id'];
       await _firestore.collection('groups').doc(groupId).update({
-        'memberIds': FieldValue.arrayRemove([user.uid]),
+        'memberIds': FieldValue.arrayRemove([_userId]),
       });
 
       _currentGroup = null;
@@ -251,5 +277,11 @@ class GroupProvider with ChangeNotifier {
 
   String _generateRandomCode() {
     return (100000 + Random().nextInt(900000)).toString();
+  }
+
+  @override
+  void dispose() {
+    _cleanupListeners();
+    super.dispose();
   }
 }
