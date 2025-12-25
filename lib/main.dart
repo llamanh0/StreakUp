@@ -9,6 +9,8 @@ import 'providers/group_provider.dart';
 import 'services/auth_service.dart';
 import 'screens/auth/login_screen.dart';
 import 'providers/theme_provider.dart';
+import 'screens/home/main_wrapper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 /// Entry point of the application.
 /// Initializes bindings, Firebase, and runs the root [MyApp] widget.
@@ -55,15 +57,17 @@ class MyApp extends StatelessWidget {
           update: (_, auth, group) => group!..update(auth),
         ),
       ],
-      child: Consumer<ThemeProvider>(
-        builder: (context, themeProvider, child) {
+      child: Consumer2<ThemeProvider, AuthService>(
+        builder: (context, themeProvider, authService, child) {
           return MaterialApp(
             title: 'StreakUp',
             debugShowCheckedModeBanner: false, // Clean UI for production feel
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: themeProvider.themeMode,
-            home: const LoginScreen(),
+            home: authService.isLoggedIn
+                ? const MainWrapper()
+                : const LoginScreen(),
           );
         },
       ),

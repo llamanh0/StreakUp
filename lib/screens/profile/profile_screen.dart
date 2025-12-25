@@ -13,7 +13,6 @@ class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Consumer3<TimerProvider, TaskProvider, AuthService>(
       builder: (context, timerProvider, taskProvider, authService, _) {
@@ -42,14 +41,7 @@ class ProfileScreen extends StatelessWidget {
                 icon: const Icon(Icons.logout),
                 onPressed: () {
                   authService.logout();
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (_) => const Material(
-                        child: Center(child: Text("Logged Out")),
-                      ),
-                    ),
-                  );
+                  // No need to manually navigate; main.dart StreamBuilder handles it.
                 },
               ),
             ],
@@ -121,19 +113,10 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const Divider(height: 1),
                 ListTile(
-                  leading: const Icon(Icons.notifications),
-                  title: const Text("Notifications"),
-                  trailing: Switch(
-                    value: true,
-                    activeColor: AppTheme.primaryLight,
-                    onChanged: (val) {},
-                  ),
-                ),
-                const Divider(height: 1),
-                const ListTile(
-                  leading: Icon(Icons.info),
-                  title: Text("About App"),
-                  trailing: Icon(Icons.chevron_right),
+                  leading: const Icon(Icons.info),
+                  title: const Text("About App"),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => _showAboutApp(context),
                 ),
 
                 const SizedBox(height: 32),
@@ -175,6 +158,53 @@ class ProfileScreen extends StatelessWidget {
         const SizedBox(height: 4),
         Text(label, style: const TextStyle(color: Colors.grey)),
       ],
+    );
+  }
+
+  void _showAboutApp(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Row(
+          children: [
+            Image.asset('assets/images/logo.png', width: 40, height: 40),
+            const SizedBox(width: 12),
+            const Text("StreakUp"),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Version 1.0.0",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              "StreakUp helps you stay productive by tracking your focus sessions and streaks.",
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              "© 2025 Hasan Batuhan Kılıçkan.",
+              style: TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text("Close"),
+          ),
+          TextButton(
+            onPressed: () {
+              showLicensePage(context: context);
+            },
+            child: const Text("Licenses"),
+          ),
+        ],
+      ),
     );
   }
 }

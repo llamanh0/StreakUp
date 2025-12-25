@@ -206,6 +206,13 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
             _lastStudyDate = (data['lastStudyDate'] as Timestamp).toDate();
           }
 
+          // ZOMBIE CLEANUP: Reset isFocusing to false on startup
+          if (data['isFocusing'] == true) {
+            await _firestore.collection('users').doc(_userId).update({
+              'isFocusing': false,
+            });
+          }
+
           notifyListeners();
         }
       } else {
@@ -424,10 +431,15 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
     await _notificationsPlugin.cancel(1);
   }
 
+  // Audio Player instance
+  final AudioPlayer _audioPlayer = AudioPlayer();
+
   Future<void> _playSound() async {
     try {
-      final player = AudioPlayer();
-      await player.play(AssetSource('sounds/notification_sound.wav'));
+      if (_audioPlayer.state == PlayerState.playing) {
+        await _audioPlayer.stop();
+      }
+      await _audioPlayer.play(AssetSource('sounds/notification_sound.wav'));
     } catch (e) {
       debugPrint("Error playing sound: $e");
     }
@@ -501,25 +513,43 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
         newStreak = 1;
       }
 
+      // 3. Update User Doc
+
+      // Check if it's a new day for Daily Stats reset
+      bool isNewDay = true;
+      if (_lastStudyDate != null) {
+        final last = DateTime(
+          _lastStudyDate!.year,
+          _lastStudyDate!.month,
+          _lastStudyDate!.day,
+        );
+        final current = DateTime(now.year, now.month, now.day);
+        if (last.isAtSameMomentAs(current)) {
+          isNewDay = false;
+        }
+      }
+
+      await _firestore.collection('users').doc(_userId).update({
+        'totalStudySeconds': FieldValue.increment(elapsedSeconds),
+
+        // If it's a new day, reset daily counters to the current session's value.
+        // Otherwise, increment them.
+        'dailyStudySeconds': isNewDay
+            ? elapsedSeconds
+            : FieldValue.increment(elapsedSeconds),
+        'dailyStudyMinutes': isNewDay
+            ? minutesToAdd
+            : FieldValue.increment(minutesToAdd),
+
+        'totalStudyMinutes': FieldValue.increment(minutesToAdd),
+        'lastStudyDate': FieldValue.serverTimestamp(),
+        'currentStreak': newStreak,
+      });
+
       // Update local state immediately
       _currentStreak = newStreak;
       _lastStudyDate = now;
       _totalStudySeconds += elapsedSeconds;
-
-      // 3. Update User Doc
-      await _firestore.collection('users').doc(_userId).update({
-        'totalStudySeconds': FieldValue.increment(elapsedSeconds),
-        'dailyStudySeconds': FieldValue.increment(elapsedSeconds), // New Field
-        // We can also update minutes for backward compatibility if needed, but 'totalStudyMinutes'
-        // might become inaccurate if we only increment by integer minutes.
-        // Let's rely on seconds going forward.
-        'totalStudyMinutes': FieldValue.increment(
-          minutesToAdd,
-        ), // Update minutes as float or int
-        'dailyStudyMinutes': FieldValue.increment(minutesToAdd),
-        'lastStudyDate': FieldValue.serverTimestamp(),
-        'currentStreak': newStreak,
-      });
 
       notifyListeners();
     } catch (e) {
@@ -531,6 +561,7 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _timer?.cancel();
+    _audioPlayer.dispose();
     super.dispose();
   }
 }

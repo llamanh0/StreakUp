@@ -148,7 +148,8 @@ class GroupProvider with ChangeNotifier {
       final DateTime now = DateTime.now();
       final int diff = now.difference(start).inSeconds;
 
-      if (diff > 0) {
+      // ZOMBIE CHECK: If session is longer than 24 hours, ignore it (likely a bug)
+      if (diff > 0 && diff < 86400) {
         return base + diff;
       }
     }
