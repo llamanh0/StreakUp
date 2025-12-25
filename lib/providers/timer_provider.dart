@@ -132,15 +132,19 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
     }
   }
 
+  // This function runs when the app comes back to the foreground (resumes).
+  // We need to check if the timer finished while the app was in the background.
   void _syncTimerOnResume() {
     if (_isActive && _endTime != null) {
       final now = DateTime.now();
+      // Check if the current time is PAST the expected end time.
       if (now.isAfter(_endTime!)) {
-        // Timer finished while in background
+        // The timer should have finished already.
         _secondsRemaining = 0;
         _completeSession();
       } else {
-        // Sync remaining seconds
+        // The timer is still running. Calculate how much time is left.
+        // We do this by finding the difference between the End Time and Now.
         _secondsRemaining = _endTime!.difference(now).inSeconds;
         notifyListeners();
       }
@@ -280,7 +284,8 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
     _isActive = true;
     _sessionSecondsRemainingAtStart = _secondsRemaining;
 
-    // Calculate End Time based on remaining seconds
+    // Calculate when the timer will finish.
+    // We add the remaining seconds to the current time to get the "End Time".
     _endTime = DateTime.now().add(Duration(seconds: _secondsRemaining));
 
     notifyListeners();
@@ -288,17 +293,24 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
     _updateFocusStatus(true);
     _updateRunningNotification();
 
+    // Start a repeating timer that runs every 1 second.
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final now = DateTime.now();
 
+      // Check if we haven't reached the end time yet.
       if (_endTime != null && now.isBefore(_endTime!)) {
+        // Recalculate remaining seconds every tick to stay accurate.
+        // We use the difference between End Time and Now, rather than just subtracting 1.
+        // This prevents the timer from drifting if the app lags.
         _secondsRemaining = _endTime!.difference(now).inSeconds;
-        // Correction: ensure it doesn't show negative or incorrect 0 briefly
+
+        // Correction: Ensure we don't show negative numbers.
         if (_secondsRemaining < 0) _secondsRemaining = 0;
 
         notifyListeners();
         _updateRunningNotification();
       } else {
+        // Time is up!
         _completeSession();
       }
     });
@@ -489,8 +501,13 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
       }
 
       // 2. Calculate New Streak (Optimized O(1))
+      // Logic: compare "Today" with the "Last Study Day".
       int newStreak = _currentStreak;
+
+      // Normalize "Now" to just the date (year, month, day) at midnight.
       DateTime today = DateTime(now.year, now.month, now.day);
+
+      // Normalize "Last Study Date" to midnight as well.
       DateTime? lastStudyDay = _lastStudyDate != null
           ? DateTime(
               _lastStudyDate!.year,
@@ -500,16 +517,20 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
           : null;
 
       if (lastStudyDay == null) {
-        // First time studying
+        // Case 1: This is the user's very first session.
+        // Start streak at 1.
         newStreak = 1;
       } else if (today.isAtSameMomentAs(lastStudyDay)) {
-        // Already studied today, streak keeps same
+        // Case 2: The user already studied today.
+        // Keep the streak the same (don't increase it twice for the same day).
         newStreak = _currentStreak > 0 ? _currentStreak : 1;
       } else if (today.difference(lastStudyDay).inDays == 1) {
-        // Consecutive day
+        // Case 3: The user studied yesterday (difference is exactly 1 day).
+        // This keeps the streak alive! Increment by 1.
         newStreak++;
       } else {
-        // Missed a day or more
+        // Case 4: The user missed one or more days.
+        // Streak is broken. Reset to 1 (since they studied today).
         newStreak = 1;
       }
 
@@ -518,6 +539,8 @@ class TimerProvider with ChangeNotifier, WidgetsBindingObserver {
       // Check if it's a new day for Daily Stats reset
       bool isNewDay = true;
       if (_lastStudyDate != null) {
+        // We compare dates again to see if we should reset daily counters.
+
         final last = DateTime(
           _lastStudyDate!.year,
           _lastStudyDate!.month,

@@ -4,7 +4,7 @@ import '../../services/auth_service.dart';
 import '../../widgets/custom_button.dart';
 import '../../config/theme.dart';
 import 'register_screen.dart';
-import '../../screens/home/main_wrapper.dart'; // We'll create this
+import '../../screens/home/main_wrapper.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,25 +14,38 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // We use controllers to get the text from the Input fields.
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  // Controls whether to show the loading spinner on the button.
   bool _isLoading = false;
 
+  // This function is called when the user clicks "Login".
   void _login() async {
+    // 1. Show a loading spinner so the user knows something is happening.
     setState(() => _isLoading = true);
 
+    // 2. Ask AuthService to try logging in.
+    // listen: false because we just want to CALL a function, not listen to updates here.
     final error = await Provider.of<AuthService>(
       context,
       listen: false,
     ).login(_emailController.text, _passwordController.text);
 
+    // 3. Login is done (success or fail), stop the spinner.
     setState(() => _isLoading = false);
 
+    // 4. Check the result.
     if (error == null && mounted) {
+      // Success! (error is null)
+      // Go to the Main App Screen.
+      // pushReplacement means user can't go "back" to login screen.
       Navigator.of(
         context,
       ).pushReplacement(MaterialPageRoute(builder: (_) => const MainWrapper()));
     } else if (mounted) {
+      // Failure! Show the error message at the bottom of the screen.
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(error ?? "Login failed. Check your credentials."),

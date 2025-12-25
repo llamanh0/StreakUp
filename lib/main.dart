@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
         builder: (context, themeProvider, authService, child) {
           return MaterialApp(
             title: 'StreakUp',
-            debugShowCheckedModeBanner: false, // Clean UI for production feel
+            debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: themeProvider.themeMode,
