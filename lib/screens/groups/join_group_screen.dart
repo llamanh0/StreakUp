@@ -59,25 +59,18 @@ class _JoinGroupScreenState extends State<JoinGroupScreen> {
               onPressed: () {
                 final code = _codeController.text;
                 if (code.length == 6) {
-                  if (code.length == 6) {
-                    Provider.of<GroupProvider>(
-                      context,
-                      listen: false,
-                    ).joinGroup(code).then((success) {
-                      if (success) {
-                        Navigator.pop(context);
-                      } else {
-                        setState(() {
-                          _errorText = "Invalid code. Please try again.";
-                        });
-                      }
-                    });
-                    Navigator.pop(context);
-                  } else {
-                    setState(() {
-                      _errorText = "Invalid code. Please try again.";
-                    });
-                  }
+                  Provider.of<GroupProvider>(
+                    context,
+                    listen: false,
+                  ).joinGroup(code).then((success) {
+                    if (success) {
+                      Navigator.pop(context);
+                    } else {
+                      setState(() {
+                        _errorText = "Invalid code. Please try again.";
+                      });
+                    }
+                  });
                 } else {
                   setState(() {
                     _errorText = "Code must be 6 digits.";

@@ -66,18 +66,45 @@ class TaskProvider with ChangeNotifier {
               for (var doc in snapshot.docs) {
                 loadedTasks.add(Task.fromMap(doc.data(), doc.id));
               }
-              _tasks = loadedTasks;
+              // Combine personal + existing group tasks
+              final groupTasksBackup = _tasks.where((t) => t.groupId != null).toList();
+              _tasks = [...loadedTasks, ...groupTasksBackup];
+              
               _isLoading = false;
               notifyListeners();
             },
             onError: (e) {
-              debugPrint("Error listening to tasks: $e");
+              debugPrint("Error listening to personal tasks: $e");
               _isLoading = false;
               notifyListeners();
             },
           );
 
-      // TODO: Add listeners for Group Tasks if needed separately.
+      // 2. Fetch Group Tasks
+      _firestore
+          .collection('tasks')
+          .where('groupId', isNotEqualTo: null)
+          .snapshots()
+          .listen(
+            (snapshot) {
+              final List<Task> groupTasks = [];
+              for (var doc in snapshot.docs) {
+                groupTasks.add(Task.fromMap(doc.data(), doc.id));
+              }
+              
+              // Combine existing personal tasks + new group tasks
+              final personalTasksBackup = _tasks.where((t) => t.groupId == null).toList();
+              _tasks = [...personalTasksBackup, ...groupTasks];
+              
+              _isLoading = false;
+              notifyListeners();
+            },
+            onError: (e) {
+              debugPrint("Error listening to group tasks: $e");
+              _isLoading = false;
+              notifyListeners();
+            },
+          );
     } catch (e) {
       debugPrint("Error fetching tasks: $e");
       _isLoading = false;

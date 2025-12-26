@@ -40,7 +40,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
               controller: _nameController,
               decoration: const InputDecoration(
                 labelText: "Group Name",
-                hintText: "e.g. Calculus Survivors",
+                hintText: "e.g. YKS Study Buddies",
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.edit),
               ),

@@ -276,9 +276,12 @@ class GroupProvider with ChangeNotifier {
       _currentGroup = groupData;
       _currentGroup!['id'] = doc.id;
 
-      // The listener in fetchUserGroup (if active) or a direct call will handle updates,
-      // but let's be safe and fetch details now.
+      // Fetch member details AND start listening to the group for real-time updates
       await _fetchMemberDetails(currentMembers);
+      
+      // IMPORTANT: Start listening to the group in real-time
+      // This ensures the UI updates when group data changes
+      await fetchUserGroup();
 
       return true;
     } catch (e) {

@@ -42,6 +42,11 @@ class _TasksScreenState extends State<TasksScreen> {
         ),
         body: Consumer<GroupProvider>(
           builder: (context, groupProvider, child) {
+                        // Refresh tasks when group membership changes
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          Provider.of<TaskProvider>(context, listen: false).fetchTasks();
+                        });
+            
             return TabBarView(
               children: [
                 const _TaskList(isGroup: false),
